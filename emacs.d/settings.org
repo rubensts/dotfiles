@@ -1,0 +1,97 @@
+* Emacs Settings
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook (lambda()
+                           (set (make-local-variable 'electric-indent-functions)
+                                (list (lambda(arg) 'no-indent)))))
+
+(setq org-src-fontify-natively t)
+#+end_src
+
+* General Configuration
+** Backups
+   Set backup directory to avoid files cluttering ~/.emacs.d
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+end_src
+
+* Smartparens
+#+begin_src emacs-lisp
+(require 'smartparens-config)
+(require 'smartparens-ruby)
+(smartparens-global-mode)
+(show-smartparens-global-mode t)
+(sp-with-modes '(rhtml-mode)
+(sp-local-pair "<" ">")
+(sp-local-pair "<%" "%>"))
+#+end_src
+
+* Robe (Completion for Ruby)
+#+begin_src emacs-lisp
+  (add-hook 'ruby-mode-hook 'robe-mode)
+#+end_src
+
+* Highlight Indentation
+#+begin_src emacs-lisp
+  ;;(require 'highlight-indentation)
+  ;; (add-hook 'enh-ruby-mode-hook
+  ;; (lambda () (highlight-indentation-current-column-mode)))
+
+  ;; (add-hook 'coffee-mode-hook
+  ;; (lambda () (highlight-indentation-current-column-mode)))
+
+#+end_src
+
+* Web Mode
+#+begin_src emacs-lisp
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)) 
+
+#+end_src
+
+* Languages Documentation Using Dash (only for OSX)
+#+begin_src emacs-lisp
+(autoload 'dash-at-point "dash-at-point"
+          "Search the word at point with Dash." t nil)
+(global-set-key "\C-cd" 'dash-at-point)
+(global-set-key "\C-ce" 'dash-at-point-with-docset)
+#+end_src
+
+* Rest
+#+begin_src emacs-lisp
+ (yas-global-mode t)
+
+
+
+
+
+ (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)  ;; old M-x
+
+ (global-set-key (kbd "C-x C-b") 'ibuffer)
+ (global-set-key (kbd "M-/") 'hippie-expand)
+
+ (global-set-key "\C-cl" 'org-store-link)
+ (global-set-key "\C-cc" 'org-capture)
+ (global-set-key "\C-ca" 'org-agenda)
+ (global-set-key "\C-cb" 'org-iswitchb)
+
+ (ido-mode 1)
+ (ido-everywhere 1)
+ (flx-ido-mode 1)
+ (setq ido-use-faces nil)
+
+ (define-minor-mode my-keys-minor-mode
+   "A minor mode for my custom keys"
+   t " my-keys" 'my-keys-minor-mode-map)
+
+ (my-keys-minor-mode t)
+
+#+end_src
+

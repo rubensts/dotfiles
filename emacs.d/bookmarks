@@ -1,0 +1,41 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("emacs-init.org" 0 14
+      (bmkp-full-record #1#))
+    (filename . "~/Projects/git/dotfiles/emacs.d/emacs-init.org")
+    (buffer-name . "emacs-init.org")
+    (front-context-string . "* Gui\n** Turn of")
+    (rear-context-string)
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 1)
+    (time 21695 64717 957828 0)
+    (created 21695 64538 45550 0)
+    (position . 1))
+#1=(#("notes.org" 0 9
+      (bmkp-full-record #1#))
+    (filename . "~/Copy/Org/notes.org")
+    (front-context-string . "* Bancos\n** HSBC")
+    (rear-context-string . "erence # 70800\n\n")
+    (position . 446))
+#1=(#("Cask" 0 4
+      (bmkp-full-record #1#))
+    (filename . "~/.emacs.d/Cask")
+    (front-context-string)
+    (rear-context-string . "ds-on \"yasnippet")
+    (position . 206))
+#1=(#("init.el" 0 7
+      (bmkp-full-record #1#))
+    (filename . "~/Projects/git/dotfiles/emacs.d/init.el")
+    (buffer-name . "init.el")
+    (front-context-string . ";;; init.el --- ")
+    (rear-context-string)
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(21695 64579 726432 0))
+    (created . #2#)
+    (position . 1))
+)

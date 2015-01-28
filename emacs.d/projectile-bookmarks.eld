@@ -1,0 +1,1 @@
+("~/Projects/git/dotfiles/" "~/Projects/git/karel-the-robot-learns-java/")

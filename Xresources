@@ -1,0 +1,78 @@
+!-----------------------------------------------------------------------------
+! file:     ~/.Xresources
+! author:   Rubens TS - from many places over the Internet
+! modified: September 2014
+!-----------------------------------------------------------------------------
+
+! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
+!-----------------------------------------------------------------------------
+URxvt*.geometry:	125x24
+URxvt*.font:		xft:Ubuntu Mono derivative Powerline:size=10:antialias=false
+!URxvt*.font:        xft:Meslo for Powerline:size=10:antialias=false
+!URxvt*.font:		xft:DejaVuSansMono:size=9:antialias=false
+URxvt*.letterSpace:	-1
+URxvt*.scrollBar:	false   !! scrollbar style (rxvt, plain, next, xterm or false)
+!URxvt.borderLess:      false
+URxvt*.saveLines:       10000   !! Scrollback buffer is essential
+URxvt*.visualBell:      true    !! No audible bell
+URxvt*.cursorBlink:     true    !! Blinking cursor
+URxvt*.utmpInhibit:	true
+URxvt*.print-pipe:	cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
+URxvt*.urgentOnBell:	true	!! Highlights the appropriate tag when an app sends a bell to the terminal
+URxvt*.scrollTtyOutput:		false	!! do not scroll with output
+URxvt*.scrollWithBuffer:	true	!! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*.scrollTtyKeypress:	true	!! scroll back to the bottom on keypress
+
+!! True Transparency - compositing required (as xcompmgr or Compiz)
+URxvt*.depth: 32
+URxvt*.background: rgba:1111/1111/1111/dddd
+
+!! Clickable links and tabbing
+URxvt*.perl-ext-common:   default,matcher
+URxvt*.keysym.C-Insert:   perl:matcher
+URxvt*.urlLauncher:       /usr/bin/xdg-open
+URxvt*.matcher.button:    1
+URxvt*.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*.colorUL: 	  #4682B4	  !! set a blue color for web links
+
+! Xft Settings
+!-----------------------------------------------------------------------------
+Xft.dpi:        96      !! 220 for Retina Display
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+! Xcursor
+!-----------------------------------------------------------------------------
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+! Color Theme
+!-----------------------------------------------------------------------------
+*background: #0f0f0f
+*foreground: #c8c8c8
+!black
+*color0:  #251f1f
+*color8:  #5e5e5e
+!red
+*color1:  #eb4509
+*color9:  #eb4509
+!green
+*color2:  #94e76b
+*color10: #95e76b
+!yellow
+*color3:  #ffac18
+*color11: #ffac18
+!blue
+*color4:  #46aede
+*color12: #46aede
+!magenta
+*color5:  #e32c57
+*color13: #e32c57
+!cyan
+*color6:  #d6dbac
+*color14: #d6dbac
+!white
+*color7:  #efefef
+*color15: #efefef
