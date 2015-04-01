@@ -1,0 +1,50 @@
+IMAPAccount gmail
+# Address to connect to
+Host imap.gmail.com
+User rubensts@gmail.com
+# To store the password in an encrypted file use PassCmd instead of Pass
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mbsyncpass.gpg"
+#
+# Use SSL
+UseIMAPS yes
+CertificateFile ~/.cert/imap.gmail.com.pem
+CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+# The trailing "/" is important
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/Inbox
+
+# Channel gmail
+# Master :gmail-remote:
+# Slave :gmail-local:
+## Select only the desired folders
+# Patterns "INBOX" "[Gmail]/Sent Mail" "[Gmail]/Drafts"
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Permanently remove all messages [on the Master/Slave] marked for deletion
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+
+Channel gmail-default
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns "INBOX" "Classes" "Personal\*"
+
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:sent-mail
+
+Channel gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:drafts
+
+# Get all the channels together into a group.
+Group gmail
+Channel gmail-default
+Channel gmail-sent
+Channel gmail-drafts
