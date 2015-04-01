@@ -54,6 +54,9 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:$HOME/.cask/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Python
+export PYTHONPATH=/usr/local/bin
+
 # Android Developmet
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
@@ -94,4 +97,6 @@ export ARCHFLAGS="-arch x86_64"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias emacs="/usr/local/Cellar/emacs/24.4/Emacs.app/Contents/MacOS/Emacs -nw"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pipold="pip list --outdated"

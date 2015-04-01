@@ -1,36 +1,45 @@
-(source gnu)
-(source melpa)
-
-(depends-on "ace-jump-mode")
-(depends-on "aggressive-indent")
 (depends-on "android-mode")
-(depends-on "bookmark+")
+
+(depends-on "auctex-latexmk")
+
 (depends-on "browse-kill-ring")
-(depends-on "cask")
-(depends-on "company")
-(depends-on "dash")
-(depends-on "dired+")
-(depends-on "epl")
-(depends-on "expand-region")
+
+(depends-on "company-auctex")
+(depends-on "company-ess")
+
+(depends-on "evil")
+(depends-on "evil-exchange")
+(depends-on "evil-indent-textobject")
+(depends-on "evil-jumper")
+(depends-on "evil-leader")
+(depends-on "evil-matchit")
+(depends-on "evil-nerd-commenter")
+(depends-on "evil-numbers")
+(depends-on "evil-org")
+(depends-on "evil-smartparens")
+(depends-on "evil-surround")
+(depends-on "evil-tutor")
+(depends-on "evil-visualstar")
+
 (depends-on "f")
-(depends-on "flatui-theme")
-(depends-on "flycheck")
+
 (depends-on "flycheck-tip")
-(depends-on "helm")
-(depends-on "helm-projectile")
-(depends-on "key-chord")
-(depends-on "leuven-theme")
-(depends-on "magit")
-(depends-on "org")
-(depends-on "org-bullets")
+
+(depends-on "iedit")
+
+(depends-on "json-mode")
+(depends-on "json-reformat")
+
+(depends-on "markdown-mode+")
+
+(depends-on "ox-pandoc")
 (depends-on "package-build")
-(depends-on "pallet")
+
 (depends-on "powerline")
-(depends-on "projectile")
+
+(depends-on "py-autopep8")
+
 (depends-on "s")
 (depends-on "shut-up")
-(depends-on "smart-mode-line")
-(depends-on "smart-mode-line-powerline-theme")
-(depends-on "smartparens")
-(depends-on "solarized-theme")
-(depends-on "yasnippet")
+
+(depends-on "stripe-buffer")
