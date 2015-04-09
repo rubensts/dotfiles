@@ -7,18 +7,21 @@
 ! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
 !-----------------------------------------------------------------------------
 URxvt*.geometry:	125x24
-URxvt*.font:		xft:Ubuntu Mono derivative Powerline:size=10:antialias=false
-!URxvt*.font:        xft:Meslo for Powerline:size=10:antialias=false
-!URxvt*.font:		xft:DejaVuSansMono:size=9:antialias=false
-URxvt*.letterSpace:	-1
-URxvt*.scrollBar:	false   !! scrollbar style (rxvt, plain, next, xterm or false)
+URxvt*font:		xft:Sauce Code Powerline:size=10:antialias=true:hinting=true, \
+                xft:Sauce Code Powerline:size=7:antialias=true
+
+URxvt.boldFont:	xft:Sauce Code Powerline:bold:size=10:antialias=true:hinting=true, \
+                xft:Sauce Code Powerline:bold:size=7:antialias=true
+
+URxvt*.letterSpace:	    -1
+URxvt*.scrollBar:       false   !! scrollbar style (rxvt, plain, next, xterm or false)
 !URxvt.borderLess:      false
 URxvt*.saveLines:       10000   !! Scrollback buffer is essential
 URxvt*.visualBell:      true    !! No audible bell
 URxvt*.cursorBlink:     true    !! Blinking cursor
-URxvt*.utmpInhibit:	true
-URxvt*.print-pipe:	cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
-URxvt*.urgentOnBell:	true	!! Highlights the appropriate tag when an app sends a bell to the terminal
+URxvt*.utmpInhibit:	    true
+URxvt*.print-pipe:	    cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
+URxvt*.urgentOnBell:	    true	!! Highlights the appropriate tag when an app sends a bell to the terminal
 URxvt*.scrollTtyOutput:		false	!! do not scroll with output
 URxvt*.scrollWithBuffer:	true	!! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
 URxvt*.scrollTtyKeypress:	true	!! scroll back to the bottom on keypress

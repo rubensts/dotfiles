@@ -8,13 +8,13 @@
       initial-scratch-message nil
       initial-major-mode 'python-mode)
 
-(set-frame-font "Source Code Pro-13")
+(set-frame-font "Source Code Pro-10")
 (load-theme 'solarized-dark t)
 ;(load-theme 'zenburn)
 ;(load-theme 'naquadah t)
 ;(load-theme 'misterioso t)
 
-(toggle-frame-fullscreen)
+;  (toggle-frame-fullscreen)
 
 ;; Check if system is Mac or Linux for keeping compatibility
 (defun system-is-mac ()
@@ -457,29 +457,29 @@
 (when (require 'elpy nil t)
   (elpy-enable))
 
-(require 'jedi)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
+;; (require 'jedi)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook 'jedi:ac-setup)
 
-;(autoload 'jedi:setup "jedi" nil t)
+;; ;(autoload 'jedi:setup "jedi" nil t)
 
-;; Default keyboard shortcuts
-(setq jedi:setup-keys t)
+;; ;; Default keyboard shortcuts
+;; (setq jedi:setup-keys t)
 
-;; To complete on the “.” (when type some object or module name and a “.” it gives all the possible attributes/submodules/methods/etc)
-(setq jedi:complete-on-dot t)
+;; ;; To complete on the “.” (when type some object or module name and a “.” it gives all the possible attributes/submodules/methods/etc)
+;; (setq jedi:complete-on-dot t)
 
-;; Setting Jedi as elpy backend
-(setq elpy-rpc-backend "jedi")
+;; ;; Setting Jedi as elpy backend
+;; (setq elpy-rpc-backend "jedi")
 
-;; Fixing a key binding bug in elpy
-(define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
+;; ;; Fixing a key binding bug in elpy
+;; (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
 
-;; Type:
-;;     M-x package-install RET jedi RET
-;;     M-x jedi:install-server RET
-;; Then open Python file.
+;; ;; Type:
+;; ;;     M-x package-install RET jedi RET
+;; ;;     M-x jedi:install-server RET
+;; ;; Then open Python file.
 
 ;(elpy-use-ipython)
 

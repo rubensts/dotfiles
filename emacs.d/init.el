@@ -39,6 +39,7 @@
     jedi
     julia-mode
     leuven-theme
+    lua-mode
     magit
     markdown-mode
     naquadah-theme
@@ -81,8 +82,8 @@
 
 ;; exec-path-from-shell
 ;; Library to ensure environment variables inside Emacs look the same as in the user's shell.
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;(when (memq window-system '(mac ns))
+;  (exec-path-from-shell-initialize))
 
 ;; Set org-babel to load the rest of the config
 (org-babel-load-file
@@ -96,3 +97,17 @@
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("e80932ca56b0f109f8545576531d3fc79487ca35a9a9693b62bf30d6d08c9aaf" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

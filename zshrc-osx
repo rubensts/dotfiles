@@ -45,19 +45,36 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git emacs history history-substring-search python autopep8 git git-extras github gitignore sudo vagrant archlinux)
-
-# User configuration
-
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
+plugins=(git osx emacs brew brew-cask history history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
-DEFAULT_USER='rubens'
+# User configuration
+
+export PATH=/usr/local/bin:$HOME/.cask/bin:$PATH
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# Python
+export PYTHONPATH=/usr/local/bin
+
+# Android Developmet
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+export ANT_HOME=/usr/local/opt/ant
+export MAVEN_HOME=/usr/local/opt/maven
+export GRADLE_HOME=/usr/local/opt/gradle
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
+
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$PATH
+export PATH=$GRADLE_HOME/bin:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/build-tools/21.1.2:$PATH
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -67,7 +84,7 @@ DEFAULT_USER='rubens'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -80,22 +97,6 @@ DEFAULT_USER='rubens'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipold="pip list --outdated"
-
-alias e='emacsclient -t'
-alias ec='emacsclient -c'
-alias xs='startx ~/.xinitrc stumpwm'
-alias xx='startx ~/.xinitrc xmonad'
-alias xa='startx ~/.xinitrc awesome'
-alias x3='startx ~/.xinitrc i3'
-alias xg='startx ~/.xinitrc gnome'
-alias xf='startx ~/.xinitrc xfce'
-alias xo='startx ~/.xinitrc openbox'
-alias xk='startx ~/.xinitrc kde'
-alias reiniciar='sudo shutdown -r now'
-alias desligar='sudo shutdown -h now'
-#alias tail='sudo tail -f /var/log/emerge-fetch.log''
-#alias uzbl='uzbl-tabbed'
-alias dmenu_run='dmenu_run -i -fn Source Code for Powerline-9 -nb #303030 -nf #909090 -sb #909090 -sf #303030'
-alias mkdir='mkdir -p'
