@@ -7,11 +7,8 @@
 ! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
 !-----------------------------------------------------------------------------
 URxvt*.geometry:	125x24
-URxvt*font:		xft:Sauce Code Powerline:size=10:antialias=true:hinting=true, \
-                xft:Sauce Code Powerline:size=7:antialias=true
-
-URxvt.boldFont:	xft:Sauce Code Powerline:bold:size=10:antialias=true:hinting=true, \
-                xft:Sauce Code Powerline:bold:size=7:antialias=true
+URxvt*font:		xft:Inconsolata-dz for Powerline:size=10:antialias=true:hinting=true 
+URxvt*.boldFont:	xft:Inconsolata-dz for Powerline:bold:size=10:antialias=true:hinting=true
 
 URxvt*.letterSpace:	    -1
 URxvt*.scrollBar:       false   !! scrollbar style (rxvt, plain, next, xterm or false)
@@ -40,11 +37,13 @@ URxvt*.colorUL: 	  #4682B4	  !! set a blue color for web links
 
 ! Xft Settings
 !-----------------------------------------------------------------------------
-Xft.dpi:        96      !! 220 for Retina Display
-Xft.antialias:  true
-Xft.rgba:       rgb
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
+Xft.antialias: 1
+Xft.autohint: 0
+Xft.dpi: 96          !! 220 for Retina Display
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
 
 ! Xcursor
 !-----------------------------------------------------------------------------

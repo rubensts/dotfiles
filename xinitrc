@@ -18,7 +18,7 @@ if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
 fi
 
-if [ -f "$usermodmap" ]; then
+if [ -s "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 

@@ -49,8 +49,14 @@ plugins=(git emacs history history-substring-search python autopep8 git git-extr
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# Python settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Projects
+#source /usr/bin/virtualenvwrapper.sh
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,5 +103,6 @@ alias reiniciar='sudo shutdown -r now'
 alias desligar='sudo shutdown -h now'
 #alias tail='sudo tail -f /var/log/emerge-fetch.log''
 #alias uzbl='uzbl-tabbed'
-alias dmenu_run='dmenu_run -i -fn Source Code for Powerline-9 -nb #303030 -nf #909090 -sb #909090 -sf #303030'
+#alias dmenu_run='dmenu_run -i -fn Source Code for Powerline-9 -nb #303030 -nf #909090 -sb #909090 -sf #303030'
+alias dmenu='dmenu_run -i -p "Run command:" -fn Inconsolata-10 -sf orange'
 alias mkdir='mkdir -p'
