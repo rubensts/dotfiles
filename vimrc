@@ -116,6 +116,10 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 
+" Disable toolbar and menu on GUI
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+
 " Color theme
 syntax enable
 set background=dark

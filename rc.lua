@@ -41,10 +41,10 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -74,10 +74,13 @@ local layouts =
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
+-- configuration - edit to your liking
+wp_path = "~/.config/wallpapers/"
+wp_file = "4.png"
+ 
+-- set wallpaper to current index for all screens
+for s = 1, screen.count() do
+  gears.wallpaper.maximized(wp_path .. wp_file, s, true)
 end
 -- }}}
 
@@ -278,7 +281,7 @@ globalkeys = awful.util.table.join(
 
     -- Dmenu (instead of the default Menubar)
     awful.key({ modkey },            "p",     function ()
-        awful.util.spawn_with_shell( "dmenu_run -i -p 'Run command:' -fn Inconsolata-10 -sf orange" )
+		awful.util.spawn_with_shell( "dmenu_run -i -p 'Run command:' -fn Ubuntu-10 -sf orange" )
     end)
 )
 
@@ -460,13 +463,13 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- {{{ Startup programs
 awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
-awful.util.spawn_with_shell("setxkbmap us -variant intl -option ctrl:nocaps")
+--awful.util.spawn_with_shell("setxkbmap us -variant intl -option ctrl:nocaps")
 awful.util.spawn_with_shell("numlockx")
 awful.util.spawn_with_shell("compton --config ~/.compton.conf -b")
-awful.util.spawn_with_shell("xscreensaver -no-splash")
+--awful.util.spawn_with_shell("xscreensaver -no-splash")
 awful.util.spawn_with_shell("nm-applet")
-awful.util.spawn_with_shell("pasystray")
-awful.util.spawn_with_shell("variety")
+--awful.util.spawn_with_shell("pasystray")
+--awful.util.spawn_with_shell("variety")
 awful.util.spawn_with_shell("urxvtd --quiet --opendisplay --fork")
 --awful.util.spawn_with_shell("thunar --daemon")
 --awful.util.spawn_with_shell("thunar-volman")
