@@ -14,6 +14,16 @@ local naughty = require("naughty")
 -- My alterations
 vicious = require("vicious")
 
+-- Override awesome.quit when we're using GNOME
+_awesome_quit = awesome.quit
+awesome.quit = function()
+    if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
+        os.execute("/usr/bin/gnome-session-quit")
+    else
+        _awesome_quit()
+    end
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -38,6 +48,7 @@ do
     end)
 end
 -- }}}
+
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -377,11 +388,13 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "Firefox" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[1][2] } },
     { rule = { class = "urxvtc" },
       properties = { tag = tags[1][1] } },
     { rule = { class = "Emacs" },
-      properties = { tag = tags[1][2] } },
+      properties = { tag = tags[2][1] } },
+    { rule = { class = "Skype" },
+      properties = { tag = tags[2][2] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -462,12 +475,14 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Startup programs
-awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
---awful.util.spawn_with_shell("setxkbmap us -variant intl -option ctrl:nocaps")
-awful.util.spawn_with_shell("numlockx")
-awful.util.spawn_with_shell("compton --config ~/.compton.conf -b")
+--awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
+awful.util.spawn_with_shell("xrandr --output DVI-I-1 --mode 1920x1080 --right-of VGA-0")
+awful.util.spawn_with_shell("setxkbmap us -variant intl -option ctrl:nocaps")
+--awful.util.spawn_with_shell("numlockx")
+--awful.util.spawn_with_shell("compton --config ~/.compton.conf -b")
 --awful.util.spawn_with_shell("xscreensaver -no-splash")
-awful.util.spawn_with_shell("nm-applet")
+--awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("gnome-sound-applet")
 --awful.util.spawn_with_shell("pasystray")
 --awful.util.spawn_with_shell("variety")
 awful.util.spawn_with_shell("urxvtd --quiet --opendisplay --fork")

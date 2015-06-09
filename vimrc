@@ -32,8 +32,9 @@ Plugin 'Valloric/YouCompleteMe'
 " Using the jedi autocompletion library
 Plugin 'davidhalter/jedi-vim'
 
-" Solarized color theme
-Plugin 'altercation/vim-colors-solarized'
+" Color themes
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -123,7 +124,7 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color theme
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme darktango
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
