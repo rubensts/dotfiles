@@ -1,1 +1,0 @@
-("~/Projects/git/dotfiles/" "~/Projects/git/6.00.1x/")
