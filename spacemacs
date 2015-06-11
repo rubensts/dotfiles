@@ -30,6 +30,7 @@
      lua
      emacs-lisp
      shell
+     asciidoc
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -146,6 +147,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (evil-leader/set-key "oc" 'org-capture)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
