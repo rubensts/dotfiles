@@ -20,8 +20,9 @@
      better-defaults
      (git :variables
           git-gutter-use-fringe t)
+     (org :variables
+       org-enable-github-support t)
      markdown
-     org
      syntax-checking
      python
      ruby
