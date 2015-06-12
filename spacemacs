@@ -148,6 +148,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (evil-leader/set-key "oc" 'org-capture)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
