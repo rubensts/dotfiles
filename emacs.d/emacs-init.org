@@ -44,7 +44,7 @@
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-splash-screen t
         initial-scratch-message nil
-        initial-major-mode 'python-mode)
+        initial-major-mode 'org-mode)
 #+END_SRC
 
 ** Themes and Fonts
@@ -116,7 +116,8 @@
   (add-hook 'before-save-hook 'whitespace-cleanup) ;; remove trailing whitespace before saving file
 
   ;; set browser as the default browser on the system (for mac)
-  (setq browse-url-browser-function 'browse-url-default-macosx-browser)
+  (if (system-is-mac)
+     (setq browse-url-browser-function 'browse-url-default-macosx-browser))
 #+end_src
 
 * General Packages Installed
@@ -346,13 +347,13 @@ command, making it more reliable than electric-indent-mode.
                               (conkeror-minor-mode 1))))
 #+END_SRC
 * Org
-
 ** Loading additional org modules
 
 #+begin_src emacs-lisp
   (require 'org-protocol)
   (require 'org-bullets)
   (require 'org-notmuch)
+  (require 'ob-ipython)
   (require 'ox-latex)
   (require 'ox-beamer)
   (require 'ox-odt)
@@ -451,7 +452,7 @@ window organization isn’t broken when switching.
    Where archived projects and tasks go.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-archive-location "~/Copy/Org/archive.org::From %s")
+(setq org-archive-location "~/prj/org/archive.org::From %s")
 #+END_SRC
 
 ** Mobile Settings
@@ -783,7 +784,8 @@ exists as well).
 
 * Programming
 ** Python
-   For setting a correct Python environment, first install these Python programs from the shell through pip:
+   For setting a correct Python environment, first install these Python programs
+   from the shell through pip:
    > pip install elpy epc jedi rope ipython (and maybe virtualenv)
 
 *** Elpy
@@ -804,8 +806,10 @@ exists as well).
 #+END_SRC
 
 *** Jedi
-   Jedi offers very nice auto completion for python-mode. It aims at helping Python coding in a non-destructive way.
-   It also helps to find information about Python objects, such as docstring, function arguments and code location.
+   Jedi offers very nice auto completion for python-mode. It aims at helping
+   Python coding in a non-destructive way. It also helps to find information
+   about Python objects, such as docstring, function arguments and code
+   location.
 
 #+BEGIN_SRC emacs-lisp
   ;; (require 'jedi)
@@ -847,27 +851,27 @@ exists as well).
   ;; http://lists.gnu.org/archive/html/emacs-orgmode/2013-12/msg00063.html
   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2015-01/msg00578.html
 
-  (setq org-babel-python-command "ipython --pylab=osx --pdb --nosep
-                        --classic --no-banner --no-confirm-exit")
-
-  (defadvice org-babel-python-evaluate
-      (around org-python-use-cpaste
-              (session body &optional result-type result-params preamble) activate)
-      "Add a %cpaste and '--' to the body, so that ipython does the right thing."
-      (setq body (concat "%cpaste -q\n" body "\n--\n"))
-      ad-do-it
-      (if (stringp ad-return-value)
-          (setq ad-return-value (replace-regexp-in-string "\\(^Pasting code; enter '--' alone on the line to stop or use Ctrl-D\.[\r\n]:*\\)" ""
-                                                          ad-return-value))))
-
-  (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "--pylab=osx --pdb --nosep --classic --no-banner"
-        python-shell-prompt-regexp ">>> "
-        python-shell-prompt-output-regexp ""
-        python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
-        python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
-        python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
-        )
+;;  (setq org-babel-python-command "ipython --pylab=osx --pdb --nosep
+;;                        --classic --no-banner --no-confirm-exit")
+;;
+;;  (defadvice org-babel-python-evaluate
+;;      (around org-python-use-cpaste
+;;              (session body &optional result-type result-params preamble) activate)
+;;      "Add a %cpaste and '--' to the body, so that ipython does the right thing."
+;;      (setq body (concat "%cpaste -q\n" body "\n--\n"))
+;;      ad-do-it
+;;      (if (stringp ad-return-value)
+;;          (setq ad-return-value (replace-regexp-in-string "\\(^Pasting code; enter '--' alone on the line to stop or use Ctrl-D\.[\r\n]:*\\)" ""
+;;                                                          ad-return-value))))
+;;
+;;  (setq python-shell-interpreter "ipython"
+;;        python-shell-interpreter-args "--pylab=osx --pdb --nosep --classic --no-banner"
+;;        python-shell-prompt-regexp ">>> "
+;;        python-shell-prompt-output-regexp ""
+;;        python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
+;;        python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
+;;        python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
+;;        )
 #+END_SRC
 
 ** ESS

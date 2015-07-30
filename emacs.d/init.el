@@ -17,15 +17,16 @@
 
 ;; List of packages to be installed
 (defvar required-packages
-  '(aggressive-indent
+  '(ace-window
+    aggressive-indent
     anzu
     auctex
+    avy
     bookmark+
     company
     conkeror-minor-mode
     diminish
     dired+
-    ein
     elfeed
     elfeed-org
     elpy
@@ -48,6 +49,7 @@
     org-bullets
     org-magit
     org-plus-contrib
+    ob-ipython
     ox-reveal
     pandoc-mode
     projectile
@@ -57,7 +59,6 @@
     smartparens
     stripe-buffer
     twittering-mode
-    virtualenv
     volatile-highlights
     yasnippet
     zenburn-theme)
