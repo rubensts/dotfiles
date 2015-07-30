@@ -877,6 +877,11 @@ exists as well).
 #+BEGIN_SRC emacs-lisp
   (require 'ob-ipython)
 
+;; ob-ipython configuration for work with org-mode
+
+;; display/update images in the buffer after I evaluate
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
   ;(elpy-use-ipython)
 
   ;; Make Elpy work well with org-mode

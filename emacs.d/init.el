@@ -78,19 +78,19 @@
 
 ;; If not all packages are installed, check one by one and install the missing ones.
 (unless (packages-installed-p)
-  ; check for new packages (package versions)
+                                        ; check for new packages (package versions)
   (message "%s" "Emacs is now refreshing its package database...")
   (package-refresh-contents)
   (message "%s" " done.")
-  ; install the missing packages
+                                        ; install the missing packages
   (dolist (p required-packages)
     (when (not (package-installed-p p))
       (package-install p))))
 
 ;; exec-path-from-shell
 ;; Library to ensure environment variables inside Emacs look the same as in the user's shell.
-;(when (memq window-system '(mac ns))
-;  (exec-path-from-shell-initialize))
+                                        ;(when (memq window-system '(mac ns))
+(exec-path-from-shell-initialize)
 
 ;; Set org-babel to load the rest of the config
 (org-babel-load-file
