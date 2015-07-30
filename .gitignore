@@ -38,3 +38,7 @@ server/
 /*.zip
 *.db
 python-*-docs-html
+emacs.d/emacs-init.el
+emacs.d/recentf
+emacs.d/saveplace.el
+

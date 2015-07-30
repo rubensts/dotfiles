@@ -50,7 +50,7 @@
 ** Themes and Fonts
 
 #+begin_src emacs-lisp
-  (set-frame-font "Source Code Pro-10")
+  (set-frame-font "Source Code Pro-12")
   (load-theme 'solarized-dark t)
   ;(load-theme 'zenburn)
   ;(load-theme 'naquadah t)
@@ -139,7 +139,7 @@
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "anzu" '(diminish 'anzu-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
+;; (eval-after-load "magit" '(diminish 'magit-auto-revert-mode))
 #+END_SRC
 
 ** Anzu
@@ -315,6 +315,21 @@ command, making it more reliable than electric-indent-mode.
   (global-set-key (kbd "C-x g t") 'magit-tag)
 #+end_src
 
+** Smooth scrolling
+   Using the combination of smooth-scrolling(used in Spacemacs) and smooth-scrooll.
+   check: https://github.com/syl20bnr/spacemacs/issues/1781
+
+#+BEGIN_SRC emacs-lisp
+;; smooth-scrolling config
+(setq scroll-margin 5
+scroll-conservatively 9999
+scroll-step 1)
+
+;; smooth-scroll config
+(require 'smooth-scroll) ;; Smooth scroll
+(smooth-scroll-mode 1) ;; Enable it
+(setq smooth-scroll/vscroll-step-size 5) ;; Set the speed right
+#+END_SRC
 ** Volatile Highlights
    This library provides minor mode `volatile-highlights-mode’, which
    brings visual feedback to some operations by highlighting portions
@@ -353,7 +368,6 @@ command, making it more reliable than electric-indent-mode.
   (require 'org-protocol)
   (require 'org-bullets)
   (require 'org-notmuch)
-  (require 'ob-ipython)
   (require 'ox-latex)
   (require 'ox-beamer)
   (require 'ox-odt)
@@ -537,6 +551,21 @@ window organization isn’t broken when switching.
                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
+
+* Evil
+
+#+begin_src emacs-lisp
+(require 'evil)
+(evil-mode 1)
+
+;; Change cursor color depending on mode
+(setq evil-emacs-state-cursor '("red" box))
+(setq evil-normal-state-cursor '("green" box))
+(setq evil-visual-state-cursor '("orange" box))
+(setq evil-insert-state-cursor '("red" bar))
+(setq evil-replace-state-cursor '("red" bar))
+(setq evil-operator-state-cursor '("red" hollow))
+#+end_src
 
 * Helm
    All the Helm configuration present here are originated from:
@@ -842,7 +871,12 @@ exists as well).
    Interactive Python shell.
    site: ipython.org
 
+   Using also ob-ipython that is the org-babel integration with IPython for evaluation.
+   source: https://github.com/gregsexton/ob-ipython
+
 #+BEGIN_SRC emacs-lisp
+  (require 'ob-ipython)
+
   ;(elpy-use-ipython)
 
   ;; Make Elpy work well with org-mode
