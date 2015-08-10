@@ -25,7 +25,7 @@
      markdown
      latex
      pandoc
-     asciidoc
+;     asciidoc
      (org :variables
           org-enable-github-support t)
      my-org
