@@ -28,7 +28,7 @@
 ;     asciidoc
      (org :variables
           org-enable-github-support t)
-;     my-org
+     my-org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -170,6 +170,33 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; Org-babel configuration
+  ;; It has to be loaded here to avoid mismatch version problems with org
+  (org-babel-do-load-languages
+   (quote org-babel-load-languages)
+   (quote (
+           (calc . t)
+           (clojure . t)
+           (ditaa . t)
+           (dot . t)
+           (emacs-lisp . t)
+           (gnuplot . t)
+           (latex . t)
+           (ledger . t)
+           (octave . t)
+           (org . t)
+           (makefile . t)
+           (plantuml . t)
+           (python . t)
+           (R . t)
+           (ruby . t)
+           (sh . t)
+           (sqlite . t)
+           (sql . nil))))
+
+  ;;(setq org-babel-python-command "python2")
+  (setq org-confirm-babel-evaluate nil)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

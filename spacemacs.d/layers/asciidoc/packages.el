@@ -15,7 +15,6 @@
 (setq asciidoc-packages
     '(
       adoc-mode
-      ox-asciidoc
       ))
 
 ;; List of packages to exclude.
@@ -28,10 +27,6 @@
   (use-package adoc-mode)
   )
 
-(defun asciidoc/init-ox-asciidoc ()
-  "Initialize ox-asciidoc"
-  (use-package ox-asciidoc)
-  )
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:

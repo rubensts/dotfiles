@@ -23,6 +23,7 @@
         org-notmuch
         org-drill
         ox-latex
+        ox-ascii
         ox-beamer
         ox-odt
         ox-html
@@ -56,6 +57,12 @@
 (defun my-org/init-ox-latex ()
   "Initialize ox-latex"
   (use-package ox-latex
+    :defer t)
+  )
+
+(defun my-org/init-ox-ascii ()
+  "Initialize ox-ascii"
+  (use-package ox-ascii
     :defer t)
   )
 
