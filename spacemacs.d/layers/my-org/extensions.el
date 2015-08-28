@@ -38,74 +38,62 @@
 
 (defun my-org/init-org-protocol ()
   "Initialize org-protocol"
-  (use-package org-protocol
-    :defer t)
+  (use-package org-protocol)
   )
 
 (defun my-org/init-org-notmuch ()
   "Initialize org-notmuch"
-  (use-package org-notmuch
-    :defer t)
+  (use-package org-notmuch)
   )
 
 (defun my-org/init-org-drill ()
   "Initialize org-drill"
-  (use-package org-drill
-    :defer t)
+  (use-package org-drill)
   )
 
 (defun my-org/init-ox-latex ()
   "Initialize ox-latex"
-  (use-package ox-latex
-    :defer t)
+  (use-package ox-latex)
   )
 
 (defun my-org/init-ox-ascii ()
   "Initialize ox-ascii"
-  (use-package ox-ascii
-    :defer t)
+  (use-package ox-ascii)
   )
 
 (defun my-org/init-ox-beamer ()
   "Initialize ox-beamer"
-  (use-package ox-beamer
-    :defer t)
+  (use-package ox-beamer)
   )
 
 (defun my-org/init-ox-odt ()
   "Initialize ox-odt"
-  (use-package ox-odt
-    :defer t)
+  (use-package ox-odt)
   )
 
 (defun my-org/init-ox-html ()
   "Initialize ox-html"
-  (use-package ox-html
-    :defer t)
+  (use-package ox-html)
   )
 
 (defun my-org/init-ox-deck ()
   "Initialize ox-deck"
-  (use-package ox-deck
-    :defer t)
+  (use-package ox-deck)
   )
 
 (defun my-org/init-ox-publish ()
   "Initialize ox-publish"
-  (use-package ox-publish
-    :defer t)
+  (use-package ox-publish)
   )
 
 (defun my-org/init-ox-bibtex ()
   "Initialize ox-bibtex"
-  (use-package ox-bibtex
-    :defer t)
+  (use-package ox-bibtex)
   )
 
 (defun my-org/init-ox-koma-letter ()
   "Initialize ox-koma-letter"
-  (use-package ox-koma-letter
-    :defer t)
+  (use-package ox-koma-letter)
   )
 
 ;;
