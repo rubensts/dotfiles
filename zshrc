@@ -1,6 +1,13 @@
 ## PATHS
 # Enter any necessary PATH alteration here
 
+# rbenv PATH config
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+  export PATH="${RBENV_ROOT}/bin:${PATH}"
+  eval "$(rbenv init -)"
+fi
+
 ## Antigen - plugin manager
 source ~/prj/dotfiles/antigen/antigen.zsh
 
