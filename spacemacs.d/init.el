@@ -37,11 +37,7 @@
      ansible
      puppet
      python
-<<<<<<< afa35fd177e5c3ea29650cd326325d472e265dd5
      ipython-notebook
-=======
-;     ipython-notebook
->>>>>>> Alter spacemacs.d/init.el
      ruby
      )
    ;; List of additional packages that will be installed without being
