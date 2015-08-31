@@ -32,7 +32,8 @@
 
 (defun my-org/init-org-plus-contrib ()
   "Initialize org-plus-contrib"
-  (use-package org-plus-contrib)
+  (use-package org-plus-contrib
+    :defer t)
   )
 
 (defun my-org/init-ox-pandoc ()
