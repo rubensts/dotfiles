@@ -36,15 +36,12 @@
      ansible
      puppet
      python
-<<<<<<< HEAD
 ;     ipython-notebook
      ruby
-=======
      ipython-notebook
      ruby
      vagrant
      my-org
->>>>>>> 78cfb8cf1a95b17210600005200708577cbf5fad
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
