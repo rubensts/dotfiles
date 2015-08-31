@@ -37,9 +37,15 @@
 ;; Defines org-capture templates
 ;(setq org-protocol-default-template-key "l")
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/prj/org/todo.org" "Tasks")
-             "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/prj/org/journal.org")
-             "* %?\nEntered on %U\n  %i\n  %a")
-        ("f" "Firefox" entry (file+headline "~/prj/org/www.org" "Bookmarks")
-             "* %u %?%c %^g\n %i")))
+      '(("t" "Todo"
+         entry (file+headline "~/prj/org/todo.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+
+        ("j" "Journal"
+         entry (file+datetree "~/prj/org/journal.org")
+         "* %U %^{Title}\n  %?%i\n  %a")
+
+        ("f" "Firefox"
+         entry (file+headline "~/prj/org/www.org" "Bookmarks")
+         "* %u %?%c %^g\n %i")
+        ))
