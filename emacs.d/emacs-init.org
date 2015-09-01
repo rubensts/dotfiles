@@ -163,7 +163,7 @@
  (sml/apply-theme 'automatic)
  ;; abbreviate folder names
  (add-to-list 'sml/replacer-regexp-list '("^~/Projects" ":Proj:") t)
- (add-to-list 'sml/replacer-regexp-list '("^:Proj:/git" ":Git:") t)
+ (add-to-list 'sml/replacer-regexp-list '("^:proj:/git" ":Git:") t)
  (add-to-list 'sml/replacer-regexp-list '("^:Git:/dotfiles" ":Dot:") t)
  (add-to-list 'sml/replacer-regexp-list '("^:Dot:/emacs.d" ":ED:") t)
  (add-to-list 'sml/replacer-regexp-list '("^~/Copy" ":CP:") t)
@@ -389,8 +389,9 @@ scroll-step 1)
 #+end_src
 
 ** Global keybindings
-   The four Org commands org-store-link, org-capture, org-agenda, and org-iswitchb
-   should be accessible through global keys (i.e., anywhere in Emacs, not just in Org buffers).
+   The four Org commands org-store-link, org-capture, org-agenda, and
+   org-iswitchb should be accessible through global keys (i.e., anywhere in
+   Emacs, not just in Org buffers).
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key "\C-cl" 'org-store-link)
@@ -403,83 +404,106 @@ scroll-step 1)
    It puts a nice symbol instead of the usual asterisk on org-lists
 
 #+BEGIN_SRC emacs-lisp
-(setq org-hide-leading-stars t)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (setq org-hide-leading-stars t)
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+END_SRC
 
-** Code blocks
+** Org-babel (code blocks)
    Babel is Org-mode’s ability to execute source code within Org-mode documents.
 
 #+begin_src emacs-lisp
-;; languages supported
-(org-babel-do-load-languages
- (quote org-babel-load-languages)
- (quote (
-         (calc . t)
-         (clojure . t)
-         (ditaa . t)
-         (dot . t)
-         (emacs-lisp . t)
-         (gnuplot . t)
-         (latex . t)
-         (ledger . t)
-         (octave . t)
-         (org . t)
-         (makefile . t)
-         (plantuml . t)
-         (python . t)
-         (R . t)
-         (ruby . t)
-         (sh . t)
-         (sqlite . t)
-         (sql . nil))))
-;(setq org-babel-python-command "python2")
+  ;; languages supported
+  (org-babel-do-load-languages
+   (quote org-babel-load-languages)
+   (quote (
+           (calc . t)
+           (clojure . t)
+           (ditaa . t)
+           (dot . t)
+           (emacs-lisp . t)
+           (gnuplot . t)
+           (latex . t)
+           (ledger . t)
+           (octave . t)
+           (org . t)
+           (makefile . t)
+           (plantuml . t)
+           (python . t)
+           (R . t)
+           (ruby . t)
+           (sh . t)
+           (sqlite . t)
+           (sql . nil))))
+  ;(setq org-babel-python-command "python2")
 #+end_src
 
-** Code block fontification
-The following displays the contents of code blocks in Org-mode files using
-the major-mode of the code. It also changes the behavior of TAB to as if it
-were used in the appropriate major mode. This means that reading and editing
-code form inside of your Org-mode files is much more like reading and editing
-of code using its major mode.
+*** Code block fontification
+    The following displays the contents of code blocks in Org-mode files using
+    the major-mode of the code. It also changes the behavior of TAB to as if it
+    were used in the appropriate major mode. This means that reading and editing
+    code form inside of your Org-mode files is much more like reading and editing
+    of code using its major mode.
+
+ #+BEGIN_SRC emacs-lisp
+   (setq org-src-fontify-natively t)
+   (setq org-src-tab-acts-natively t)
+ #+END_SRC
+
+    Don’t ask for confirmation on every C-c C-c code-block compile.
+
+ #+BEGIN_SRC emacs-lisp
+   (setq org-confirm-babel-evaluate nil)
+ #+END_SRC
+
+*** Open code buffer on current window
+    Configure org-mode so that when you edit source code in an indirect buffer
+    (with C-c ‘), the buffer is opened in the current window. That way, your
+    window organization isn’t broken when switching.
+
+ #+BEGIN_SRC emacs-lisp
+   (setq org-src-window-setup 'current-window)
+ #+END_SRC
+
+** Org-capture
 
 #+BEGIN_SRC emacs-lisp
-(setq org-src-fontify-natively t)
-(setq org-src-tab-acts-natively t)
-#+END_SRC
+  ;; Defines a default target file for notes
+  (setq org-default-notes-file (concat org-directory "~/prj/org/notes.org"))
 
-   Don’t ask for confirmation on every C-c C-c code-block compile.
+  ;; Defines org-capture templates
+  ;(setq org-protocol-default-template-key "l")
+  (setq org-capture-templates
+        '(("t" "Todo"
+           entry (file+headline "~/prj/org/todo.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
 
-#+BEGIN_SRC emacs-lisp
-(setq org-confirm-babel-evaluate nil)
-#+END_SRC
+          ("j" "Journal"
+           entry (file+datetree "~/prj/org/journal.org")
+           "* %U %^{Title}\n  %?%i\n  %a")
 
-** Babel Settings
-Configure org-mode so that when you edit source code in an indirect buffer
-(with C-c ‘), the buffer is opened in the current window. That way, your
-window organization isn’t broken when switching.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-window-setup 'current-window)
+          ("f" "Firefox"
+           entry (file+headline "~/prj/org/www.org" "Bookmarks")
+           "* %u %?%c %^g\n %i")
+          ))
 #+END_SRC
 
 ** Archive Settings
    Where archived projects and tasks go.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-archive-location "~/prj/org/archive.org::From %s")
+  (setq org-archive-location "~/prj/org/archive.org::From %s")
 #+END_SRC
 
 ** Mobile Settings
    Sync orgmode files with Copy/Dropbox and iPhone. #+src-name: orgmode-mobile
 
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "~/Copy/Org")
-(setq org-mobile-directory "~/Copy/MobileOrg")
-;; Set to the files (or directory of files) you want sync'd
-(setq org-agenda-files (quote ("~/Copy/Org")))
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "~/Copy/Org/from-mobile.org")
+  (setq org-directory "~/Copy/Org")
+  (setq org-mobile-directory "~/Copy/MobileOrg")
+  ;; Set to the files (or directory of files) you want sync'd
+  (setq org-agenda-files (quote ("~/Copy/Org")))
+  ;; Set to the name of the file where new notes will be stored
+  (setq org-mobile-inbox-for-pull "~/Copy/Org/from-mobile.org")
 #+END_SRC
 
 ** Org-latex-preview
@@ -645,6 +669,7 @@ exists as well).
 (setq projectile-switch-project-action 'helm-projectile)
 (setq projectile-enable-caching t)
 #+end_src
+
 * Latex
 ** In-text Smart Quotes (XeLaTeX only)
    Redefine TeX-open-quote and TeX-close-quote to be smart quotes by

@@ -90,7 +90,6 @@
 
 ;; exec-path-from-shell
 ;; Library to ensure environment variables inside Emacs look the same as in the user's shell.
-                                        ;(when (memq window-system '(mac ns))
 (exec-path-from-shell-initialize)
 
 ;; Set org-babel to load the rest of the config
@@ -110,9 +109,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "eafda598b275a9d68cc1fbe1689925f503cab719ee16be23b10a9f2cc5872069" "3b24f986084001ae46aa29ca791d2bc7f005c5c939646d2b800143526ab4d323" "3a9249d4c34f75776e130efd7e02c4a0a7c90ad7723b50acc5806112394ec2dd" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default))))
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
