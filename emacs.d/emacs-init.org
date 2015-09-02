@@ -51,8 +51,8 @@
 
 #+begin_src emacs-lisp
   (set-frame-font "Source Code Pro-12")
-  (load-theme 'solarized-dark t)
-  ;(load-theme 'zenburn)
+  ;(load-theme 'solarized-dark t)
+  (load-theme 'zenburn)
   ;(load-theme 'naquadah t)
   ;(load-theme 'misterioso t)
 #+end_src
@@ -761,7 +761,7 @@ exists as well).
   http://notmuchmail.org/emacstips/
   http://chrisdone.com/posts/emacs-mail
   http://foivos.zakkak.net/tutorials/using_emacs_and_notmuch_mail_client.html
-  https://www.bostonenginerd.com/posts/notmuch-of-a-mail-setup-part-1-mbsync-msmtp-and-systemd/
+   https://www.bostonenginerd.com/posts/notmuch-of-a-mail-setup-part-1-mbsync-msmtp-and-systemd/
   http://dbp.io/essays/2013-06-29-hackers-replacement-for-gmail.html
   http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
   https://wiki.archlinux.org/index.php/Msmtp
@@ -778,16 +778,18 @@ exists as well).
 #+BEGIN_SRC emacs-lisp
   (require 'notmuch)     ; loads notmuch package
   (setq message-kill-buffer-on-exit t) ; kill buffer after sending mail)
-  (setq mail-specify-envelope-from t) ; Settings to work with msmtp
-                                          ;  (setq message-sendmail-envelope-from header)
-                                          ;  (setq mail-envelope-from header)
-  (setq notmuch-fcc-dirs "sent-mail") ; stores sent mail to the specified directory
-  (setq message-directory "drafts") ; stores postponed messages to the specified directory
+  (setq mail-specify-envelope-from t)  ; Settings to work with msmtp
+  ;  (setq message-sendmail-envelope-from header)
+  ;  (setq mail-envelope-from header)
+  (setq notmuch-fcc-dirs "sent-mail")  ; stores sent mail to the specified directory
+  (setq message-directory "drafts")    ; stores postponed messages to the specified directory
 
   ;; Completion selection with helm
   (setq notmuch-address-selection-function
         (lambda (prompt collection initial-input)
-          (completing-read prompt (cons initial-input collection) nil t nil 'notmuch-address-history)))
+          (completing-read prompt
+                           (cons initial-input collection)
+                           nil t nil 'notmuch-address-history)))
 
   ;; Customized searches
   (setq notmuch-saved-searches '((:name "inbox"
@@ -802,9 +804,8 @@ exists as well).
 * Elfeed
   Elfeed is an extensible web feed reader for Emacs, supporting both Atom and
   RSS. Elfeed was inspired by notmuch.
-
-  info: http://nullprogram.com/blog/2013/09/04/
-  tips&tricks: http://nullprogram.com/blog/2013/11/26/
+  - info: http://nullprogram.com/blog/2013/09/04/
+  - tips&tricks: http://nullprogram.com/blog/2013/11/26/
 
   | g   | refresh view of the feed listing                     |
   | G   | fetch feed updates from the servers                  |
@@ -818,23 +819,23 @@ exists as well).
   | -   | remove a specific tag from selected entries          |
 
 #+BEGIN_SRC emacs-lisp
-;; Set a global binding to call elfeed
-(global-set-key (kbd "C-x w") 'elfeed)
+  ;; Set a global binding to call elfeed
+  (global-set-key (kbd "C-x w") 'elfeed)
 
-;; Using elfeed-org to manage the feeds instead of the default from elfeed.
-;; Elfeed-org is more flexible and easy to use.
-;; Load elfeed-org
-(require 'elfeed-org)
+  ;; Using elfeed-org to manage the feeds instead of the default from elfeed.
+  ;; Elfeed-org is more flexible and easy to use.
+  ;; Load elfeed-org
+  (require 'elfeed-org)
 
-;; Initialize elfeed-org
-;; This hooks up elfeed-org to read the configuration when elfeed
-;; is started with =M-x elfeed=
-(elfeed-org)
+  ;; Initialize elfeed-org
+  ;; This hooks up elfeed-org to read the configuration when elfeed
+  ;; is started with =M-x elfeed=
+  (elfeed-org)
 
-;; Optionally specify a number of files containing elfeed
-;; configuration. If not set then the location below is used.
-;; Note: The customize interface is also supported.
-(setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+  ;; Optionally specify a number of files containing elfeed
+  ;; configuration. If not set then the location below is used.
+  ;; Note: The customize interface is also supported.
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 #+END_SRC
 
 * Programming

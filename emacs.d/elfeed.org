@@ -1,7 +1,4 @@
-* Blogs
- :PROPERTIES:
- :ID: elfeed
- :END:
+* Blogs                                                              :elfeed:
 ** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)                  :linux:
 ** Software Development                                                 :dev:
 *** General
