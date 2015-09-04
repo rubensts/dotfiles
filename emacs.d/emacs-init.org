@@ -103,12 +103,14 @@
   (setq x-select-enable-clipboard t)    ;; kill-ring accepts system clipboard
 
   (setq echo-keystrokes 0.1
-      use-dialog-box nil
-      visible-bell t)
+        use-dialog-box nil
+        visible-bell t)
 
   ;; Temporary files management
-  (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
-  (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+  (setq backup-directory-alist `((".*" .
+                                  ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms `((".*"
+                                          ,temporary-file-directory t)))
 
   (which-function-mode t)               ;; show the current function
   (global-prettify-symbols-mode t)       ;; use mathematical Unicode symbols instead of expressions
@@ -117,9 +119,23 @@
 
   ;; set browser as the default browser on the system (for mac)
   (if (system-is-mac)
-     (setq browse-url-browser-function 'browse-url-default-macosx-browser))
+      (setq browse-url-browser-function 'browse-url-default-macosx-browser))
 #+end_src
 
+** 80 column rule
+   Any caracter going further the 80th column will be highlighted. It is set to
+   work globally. To work only on programming mode, comment
+   ~(global-whitespace-mode +1)~ and comment out the line before that.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'whitespace)
+  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-style '(face lines-tail))
+
+  ;(add-hook 'prog-mode-hook 'whitespace-mode)
+  (global-whitespace-mode +1)
+
+#+END_SRC
 * General Packages Installed
 ** Diminish
    A diminished mode is a minor mode that has had its mode line
