@@ -32,6 +32,9 @@ Plugin 'Valloric/YouCompleteMe'
 " Using the jedi autocompletion library
 Plugin 'davidhalter/jedi-vim'
 
+" Powerline plugin
+Plugin 'Lokaltog/vim-powerline'
+
 " Color themes
 "Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'

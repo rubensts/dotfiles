@@ -65,6 +65,8 @@
     smooth-scrolling
     stripe-buffer
     twittering-mode
+    vagrant
+    vagrant-tramp
     volatile-highlights
     yasnippet
     yaml-mode
@@ -112,7 +114,7 @@
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default))))
+    ("26614652a4b3515b4bbbb9828d71e206cc249b67c9142c06239ed3418eff95e2" "44f015a4c080c3943bc1d9428ccd70caa7c54eceeb68b7f53e7adef961880ad8" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "f77b66fa762568d66fc00a5e2013aae76d78f0142669c55b7eb3c8e5d4d41e7d" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

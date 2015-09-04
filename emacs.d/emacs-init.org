@@ -51,10 +51,10 @@
 
 #+begin_src emacs-lisp
   (set-frame-font "Source Code Pro-12" nil t)
-  ;(load-theme 'solarized-dark t)
+  ;;(load-theme 'solarized-dark t)
   (load-theme 'zenburn)
-  ;(load-theme 'naquadah t)
-  ;(load-theme 'misterioso t)
+  ;;(load-theme 'naquadah t)
+  ;;(load-theme 'misterioso t)
 #+end_src
 
 ** Fullscreen
@@ -171,18 +171,20 @@
 #+END_SRC
 
 ** Smart-mode-line
-   Smart Mode Line is a sexy mode-line for Emacs.
-   It aims to be easy to read from small to large monitors by using colors, a prefix feature, and smart truncation.
+   Smart Mode Line is a sexy mode-line for Emacs. It aims to be easy to read
+   from small to large monitors by using colors, a prefix feature, and smart
+   truncation.
 
 #+begin_src emacs-lisp
- (sml/setup)
- (sml/apply-theme 'automatic)
- ;; abbreviate folder names
- (add-to-list 'sml/replacer-regexp-list '("^~/Projects" ":Proj:") t)
- (add-to-list 'sml/replacer-regexp-list '("^:proj:/git" ":Git:") t)
- (add-to-list 'sml/replacer-regexp-list '("^:Git:/dotfiles" ":Dot:") t)
- (add-to-list 'sml/replacer-regexp-list '("^:Dot:/emacs.d" ":ED:") t)
- (add-to-list 'sml/replacer-regexp-list '("^~/Copy" ":CP:") t)
+;  (setq powerline-arrow-shape 'curve)
+;  (setq powerline-default-separator-dir '(right . left))
+(setq sml/theme 'powerline)
+(sml/setup)
+;; abbreviate folder names
+(add-to-list 'sml/replacer-regexp-list '("^~/prj/org" ":Org:") t)
+(add-to-list 'sml/replacer-regexp-list '("^~/prj/dotfiles" ":Dot:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:Dot:/emacs.d" ":ED:") t)
+(add-to-list 'sml/replacer-regexp-list '("^~/Copy" ":CP:") t)
 #+end_src
 
 ** Aggresssive-indent
@@ -336,15 +338,26 @@ command, making it more reliable than electric-indent-mode.
    check: https://github.com/syl20bnr/spacemacs/issues/1781
 
 #+BEGIN_SRC emacs-lisp
-;; smooth-scrolling config
-(setq scroll-margin 5
-scroll-conservatively 9999
-scroll-step 1)
+  ;; smooth-scrolling config
+  (setq scroll-margin 5
+  scroll-conservatively 9999
+  scroll-step 1)
 
-;; smooth-scroll config
-(require 'smooth-scroll) ;; Smooth scroll
-(smooth-scroll-mode 1) ;; Enable it
-(setq smooth-scroll/vscroll-step-size 5) ;; Set the speed right
+  ;; smooth-scroll config
+  (require 'smooth-scroll) ;; Smooth scroll
+  (smooth-scroll-mode 1) ;; Enable it
+  (setq smooth-scroll/vscroll-step-size 5) ;; Set the speed right
+#+END_SRC
+
+** Vagrant
+   
+   Vagrant on Emacs works through the packages vagrant and vagrant-tramp.  Check
+   their documentation. Here is the configuration for vagrant-tramp, the only
+   needed apparently.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'tramp
+    '(vagrant-tramp-enable))
 #+END_SRC
 
 ** Volatile Highlights
@@ -1251,3 +1264,4 @@ exists as well).
 | C-c k       | yas-expand | Offer Yasnippet's completion         |
 | C-c o       | iedit-mode | Edit multiple regions simultaneously |
 |             |            |                                      |
+
