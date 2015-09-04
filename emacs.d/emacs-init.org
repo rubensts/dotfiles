@@ -50,7 +50,7 @@
 ** Themes and Fonts
 
 #+begin_src emacs-lisp
-  (set-frame-font "Source Code Pro-12")
+  (set-frame-font "Source Code Pro-12" nil t)
   ;(load-theme 'solarized-dark t)
   (load-theme 'zenburn)
   ;(load-theme 'naquadah t)
