@@ -112,7 +112,7 @@
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-safe-themes
    (quote
-    ("19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default))))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
