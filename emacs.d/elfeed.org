@@ -14,6 +14,7 @@
 **** http://planet.emacsen.org/atom.xml
 **** http://killring.org/atom.xml
 **** http://blog.binchen.org/rss.xml
+**** https://truongtx.me/atom.xml
 *** Python                                                           :python:
 **** http://jhamrick.mit.edu/feed
 **** http://pyvideo.org/video/rss

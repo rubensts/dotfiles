@@ -176,20 +176,20 @@
    truncation.
 
 #+begin_src emacs-lisp
-;  (setq powerline-arrow-shape 'curve)
-;  (setq powerline-default-separator-dir '(right . left))
-(setq sml/theme 'powerline)
-(sml/setup)
-;; abbreviate folder names
-(add-to-list 'sml/replacer-regexp-list '("^~/prj/org" ":Org:") t)
-(add-to-list 'sml/replacer-regexp-list '("^~/prj/dotfiles" ":Dot:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:Dot:/emacs.d" ":ED:") t)
-(add-to-list 'sml/replacer-regexp-list '("^~/Copy" ":CP:") t)
+  ;;  (setq powerline-arrow-shape 'curve)
+  ;;  (setq powerline-default-separator-dir '(right . left))
+  (setq sml/theme 'powerline)
+  (sml/setup)
+  ;; abbreviate folder names
+  (add-to-list 'sml/replacer-regexp-list '("^~/prj/org" ":Org:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^~/prj/dotfiles" ":Dot:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:Dot:/emacs.d" ":ED:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^~/Copy" ":CP:") t)
 #+end_src
 
 ** Aggresssive-indent
-Minor mode that keeps your code always indented. It reindents after every
-command, making it more reliable than electric-indent-mode.
+   Minor mode that keeps your code always indented. It reindents after every
+   command, making it more reliable than electric-indent-mode.
 
 #+begin_src emacs-lisp
 (global-aggressive-indent-mode 1)
@@ -198,16 +198,16 @@ command, making it more reliable than electric-indent-mode.
 ** Smartparens
 
 #+begin_src emacs-lisp
-(require 'smartparens-config)
-(smartparens-global-mode t)
-(show-smartparens-global-mode t)
-(setq sp-base-key-bindings 'paredit)
-(setq sp-autoskip-closing-pair 'always)
-(setq sp-hybrid-kill-entire-symbol nil)
-(sp-use-paredit-bindings)
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+  (setq sp-base-key-bindings 'paredit)
+  (setq sp-autoskip-closing-pair 'always)
+  (setq sp-hybrid-kill-entire-symbol nil)
+  (sp-use-paredit-bindings)
 
-;; evil-smartparens makes smartparens and evil-mode play nicely together
-;;(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  ;; evil-smartparens makes smartparens and evil-mode play nicely together
+  ;;(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 #+end_src
 
 ** YAsnippet
@@ -217,34 +217,109 @@ command, making it more reliable than electric-indent-mode.
 #+end_src
 
 *** Org-mode fix
-    The way Org mode binds the <TAB> key (binding to [tab] instead of "\t") overrules YASnippet's access to this key.
-    The following code fixed this problem:
+    The way Org mode binds the <TAB> key (binding to [tab] instead of "\t")
+    overrules YASnippet's access to this key.  The following code fixed this
+    problem:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
               (org-set-local 'yas/trigger-key [tab])
-              (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)))
+              (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)
+              ))
 #+END_SRC
 
 ** Company
-   Company is a text completion framework for Emacs. The name stands for "complete
-   anything". It uses pluggable back-ends and front-ends to retrieve and display
-   completion candidates.  It comes with several back-ends such as Elisp, Clang,
-   Semantic, Eclim, Ropemacs, Ispell, CMake, BBDB, Yasnippet, dabbrev, etags,
-   gtags, files, keywords and a few others.
+
+   Company is a text completion framework for Emacs. The name stands for
+   "complete anything". It uses pluggable back-ends and front-ends to retrieve
+   and display completion candidates.  It comes with several back-ends such as
+   Elisp, Clang, Semantic, Eclim, Ropemacs, Ispell, CMake, BBDB, Yasnippet,
+   dabbrev, etags, gtags, files, keywords and a few others.
 
 #+begin_src emacs-lisp
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
+** Flyspell (spell-checking)
+   
+   Flyspell comes with Emacs. It check the spelling on the fly. Here it is
+   configured to work using Hunspell, which is the modern spell-checking used by
+   many open source softwares, as Libreoffice and Firefox.
+
+   The configuration used here is adapted from
+   http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default ispell-program-name    "hunspell"
+                ispell-really-hunspell t
+                ispell-check-comments  t
+                ispell-extra-args      '("-i" "utf-8") ;; produce a lot of noise, disable?
+                ispell-dictionary      "en_GB")
+
+  (setq ispell-local-dictionary-alist '(
+                                        ("en_GB"
+                                         "[[:alpha:]]"
+                                         "[^[:alpha:]]"
+                                         "[']"
+                                         nil nil nil utf-8)))
+
+;; switch between the most used dictionaries in my case
+(defun rts-switch-dictionary ()
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+         (change (if (string= dic "en_GB") "es_ES" "en_GB")))
+    (ispell-change-dictionary change)
+    (message "Dictionary switched from %s to %s" dic change)))
+
+(defun rts-turn-on-spell-check ()
+  (flyspell-mode 1))
+
+;; enable spell-check in certain modes
+(add-hook 'markdown-mode-hook 'rts-turn-on-spell-check)
+(add-hook 'text-mode-hook     'rts-turn-on-spell-check)
+(add-hook 'org-mode-hook      'rts-turn-on-spell-check)
+(add-hook 'prog-mode-hook     'flyspell-prog-mode)
+#+END_SRC
+
+*** [[https://www.languagetool.org/][LanguageTool]]
+    
+    LanguageTool is an Open Source proof­reading program for English, French,
+    German, Polish, and more than 20 other languages.
+
+ #+BEGIN_SRC emacs-lisp
+   (require 'langtool)
+   (setq langtool-java-classpath
+         "/usr/share/languagetool:/usr/share/java/languagetool/*")
+   (setq langtool-java-bin "/usr/bin/java")
+   (setq langtool-mother-tongue "en")
+   (setq langtool-disabled-rules '("WHITESPACE_RULE"
+                                   "EN_UNPAIRED_BRACKETS"
+                                   "COMMA_PARENTHESIS_WHITESPACE"
+                                   "EN_QUOTES"))
+
+   ;;;; Key bindings
+   (global-set-key "\C-x4w"
+                   'langtool-check) ;check buffer and show warnings
+   (global-set-key "\C-x4W"
+                   'langtool-check-done) ;Finish checking and remove markers
+   (global-set-key "\C-x4l"
+                   'langtool-switch-default-language) ;swicth languages
+   (global-set-key "\C-x44"
+                   'langtool-show-message-at-point) ;go to warning point 
+   (global-set-key "\C-x4c"
+                   'langtool-correct-buffer) ;correct markers
+
+ #+END_SRC
+
 ** Flycheck
-   Flycheck is a modern on-the-fly syntax checking extension for GNU Emacs 24,
-   intended as replacement for the older Flymake extension which is part of GNU
-   Emacs.  It uses various syntax checking and linting tools to automatically check
-   the contents of buffers while you type, and reports warnings and errors directly
-   in the buffer, or in an optional error list.
+
+   Flycheck is a modern on-the-fly syntax checking extension for programming
+   languages, intended as replacement for the older Flymake extension which is
+   part of GNU Emacs.  It uses various syntax checking and linting tools to
+   automatically check the contents of buffers while you type, and reports
+   warnings and errors directly in the buffer, or in an optional error list.
 
 #+begin_src emacs-lisp
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -393,6 +468,131 @@ command, making it more reliable than electric-indent-mode.
                               (conkeror-minor-mode 1))))
 #+END_SRC
 
+** ERC (Internet Relay Chat)
+   IRC is a great way to hang out with other Emacs geeks.
+   Configuration here it is adapted from
+   https://github.com/bbatsov/prelude/blob/master/modules/prelude-erc.el
+
+#+BEGIN_SRC emacs-lisp
+  (require 'erc)
+  (require 'erc-log)
+  (require 'erc-notify)
+  (require 'erc-spelling)
+  (require 'erc-autoaway)
+
+  ;; Interpret mIRC-style color commands in IRC chats
+  (setq erc-interpret-mirc-color t)
+
+  ;; The following are commented out by default, but users of other
+  ;; non-Emacs IRC clients might find them useful.
+  ;; Kill buffers for channels after /part
+  (setq erc-kill-buffer-on-part t)
+  ;; Kill buffers for private queries after quitting the server
+  (setq erc-kill-queries-on-quit t)
+  ;; Kill buffers for server messages after quitting the server
+  (setq erc-kill-server-buffer-on-quit t)
+
+  ;; open query buffers in the current window
+  (setq erc-query-display 'buffer)
+
+  ;; exclude boring stuff from tracking
+  (erc-track-mode t)
+  (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                  "324" "329" "332" "333" "353" "477"))
+
+  ;; logging
+  (setq erc-log-channels-directory "~/.erc/logs/")
+
+  (if (not (file-exists-p erc-log-channels-directory))
+      (mkdir erc-log-channels-directory t))
+
+  (setq erc-save-buffer-on-part t)
+  ;; FIXME - this advice is wrong and is causing problems on Emacs exit
+  ;; (defadvice save-buffers-kill-emacs (before save-logs (arg) activate)
+  ;;   (save-some-buffers t (lambda () (when (eq major-mode 'erc-mode) t))))
+
+  ;; truncate long irc buffers
+  (erc-truncate-mode +1)
+
+  ;; enable spell checking
+  (erc-spelling-mode 1)
+  ;; set different dictionaries by different servers/channels
+  ;;(setq erc-spelling-dictionaries '(("#emacs" "american")))
+
+  (defvar erc-notify-nick-alist nil
+    "Alist of nicks and the last time they tried to trigger a
+  notification")
+
+  (defvar erc-notify-timeout 10
+    "Number of seconds that must elapse between notifications from
+  the same person.")
+
+  (defun erc-notify-allowed-p (nick &optional delay)
+    "Return non-nil if a notification should be made for NICK.
+  If DELAY is specified, it will be the minimum time in seconds
+  that can occur between two notifications.  The default is
+  `erc-notify-timeout'."
+    (unless delay (setq delay erc-notify-timeout))
+    (let ((cur-time (time-to-seconds (current-time)))
+          (cur-assoc (assoc nick erc-notify-nick-alist))
+          (last-time nil))
+      (if cur-assoc
+          (progn
+            (setq last-time (cdr cur-assoc))
+            (setcdr cur-assoc cur-time)
+            (> (abs (- cur-time last-time)) delay))
+        (push (cons nick cur-time) erc-notify-nick-alist)
+        t)))
+
+  ;; autoaway setup
+  (setq erc-auto-discard-away t)
+  (setq erc-autoaway-idle-seconds 600)
+  (setq erc-autoaway-use-emacs-idle t)
+
+  ;; utf-8 always and forever
+  (setq erc-server-coding-system '(utf-8 . utf-8))
+
+  (defun start-irc ()
+    "Connect to IRC."
+    (interactive)
+    (when (y-or-n-p "Do you want to start IRC? ")
+      (erc :server "irc.freenode.net"
+           :port 6667
+           :nick erc-nick)))
+
+  (defun filter-server-buffers ()
+    (delq nil
+          (mapcar
+           (lambda (x) (and (erc-server-buffer-p x) x))
+           (buffer-list))))
+
+  (defun stop-irc ()
+    "Disconnects from all irc servers"
+    (interactive)
+    (dolist (buffer (filter-server-buffers))
+      (message "Server buffer: %s" (buffer-name buffer))
+      (with-current-buffer buffer
+        (erc-quit-server "Asta la vista"))))
+
+  (setq erc-autojoin-channels-alist '(("freenode.net"
+                                       "#org-mode"
+                                       "#hacklabto"
+                                       "#emacs")))
+#+END_SRC
+
+** Paradox
+   Project for modernizing Emacs' Package Menu. With improved appearance,
+   mode-line information. Github integration, customizability, asynchronous
+   upgrading, and more.
+
+   Only call with M-x paradox-list-packages instead of
+   packages-list-packages. Here it is set to (un)star packages that have a
+   repository on github.
+
+#+BEGIN_SRC emacs-lisp
+  (setq paradox-github-token "cc6d66dd1f8d317860ecabcda87f7c45c1578118")
+#+END_SRC
+
 * Org
 ** Loading additional org modules
 
@@ -401,15 +601,16 @@ command, making it more reliable than electric-indent-mode.
   (require 'org-bullets)
   (require 'org-notmuch)
   (require 'org-drill)
-  (require 'ox-latex)
-  (require 'ox-beamer)
-  (require 'ox-odt)
-  (require 'ox-html)
-  (require 'ox-deck)
-  (require 'ox-publish)
-  (require 'ox-bibtex)
-  (require 'ox-koma-letter)
-  (require 'ox-reveal)
+  (require 'ox-pandoc)
+;  (require 'ox-latex)
+;  (require 'ox-beamer)
+;  (require 'ox-odt)
+;  (require 'ox-html)
+;  (require 'ox-deck)
+;  (require 'ox-publish)
+;  (require 'ox-bibtex)
+;  (require 'ox-koma-letter)
+;  (require 'ox-reveal)
 #+end_src
 
 ** A few sane customisations
@@ -464,26 +665,23 @@ command, making it more reliable than electric-indent-mode.
            (R . t)
            (ruby . t)
            (sh . t)
-           (sqlite . t)
-           (sql . nil))))
-  ;(setq org-babel-python-command "python2")
+           (sql . t)
+           )))
+  ;;(setq org-babel-python-command "python2")
 #+end_src
 
 *** Code block fontification
     The following displays the contents of code blocks in Org-mode files using
     the major-mode of the code. It also changes the behavior of TAB to as if it
     were used in the appropriate major mode. This means that reading and editing
-    code form inside of your Org-mode files is much more like reading and editing
-    of code using its major mode.
+    code form inside of your Org-mode files is much more like reading and
+    editing of code using its major mode.
 
  #+BEGIN_SRC emacs-lisp
    (setq org-src-fontify-natively t)
    (setq org-src-tab-acts-natively t)
- #+END_SRC
 
-    Don’t ask for confirmation on every C-c C-c code-block compile.
-
- #+BEGIN_SRC emacs-lisp
+;; Don’t ask for confirmation on every C-c C-c code-block compile.
    (setq org-confirm-babel-evaluate nil)
  #+END_SRC
 
@@ -530,10 +728,10 @@ command, making it more reliable than electric-indent-mode.
    Sync orgmode files with Copy/Dropbox and iPhone. #+src-name: orgmode-mobile
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-directory "~/Copy/Org")
+  (setq org-directory "~/prj/org")
   (setq org-mobile-directory "~/Copy/MobileOrg")
   ;; Set to the files (or directory of files) you want sync'd
-  (setq org-agenda-files (quote ("~/Copy/Org")))
+  (setq org-agenda-files (quote ("~/prj/org")))
   ;; Set to the name of the file where new notes will be stored
   (setq org-mobile-inbox-for-pull "~/Copy/Org/from-mobile.org")
 #+END_SRC
@@ -550,63 +748,85 @@ command, making it more reliable than electric-indent-mode.
 #+END_SRC
 
 ** Exporters
-*** XeLaTeX and pdfLaTeX Export Settings
-    In order to use Minted for highlight code blocks, Pygments has to be installed:
-    $ pip install Pygments
+*** Pandoc Export
+    I'm using ox-pandoc to export org files to all formats ~Pandoc~ works with.
+    It only exports org files, in opposite of pandoc-mode, which exports from
+    any source format. The problem is that ox-pandoc needs considerably less
+    configuration and as I usually writes everything in org-mode, no need to
+    worry.
+    https://github.com/kawabata/ox-pandoc
+    http://www.rousette.org.uk/blog/archives/org-mode-and-pandoc/
+    [[http://erikclarke.net/2014/10/21/keeping-a-lab-notebook-with-org-mode-git-papers-and-pandoc-part-ii/][Keeping a lab book with org-mode]]
+    http://informatica.boccaperta.com/m-x-emacs-ox-pandoc/
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'org-latex-packages-alist '("" "minted"))
-  (setq org-latex-listings 'minted)
+  ;; default options for all output formats
+  (setq org-pandoc-options '((standalone . t)))
+  ;; cancel above settings only for 'docx' format
+  (setq org-pandoc-options-for-docx '((standalone . nil)))
+  ;; special settings for beamer-pdf and latex-pdf exporters
+  (setq org-pandoc-options-for-beamer-pdf '((latex-engine . "xelatex")))
+  (setq org-pandoc-options-for-latex-pdf '((latex-engine . "xelatex")))
+#+END_SRC
 
-  ;; This defines the variables minted uses for beautiful code-blocks.
-  ;; Without this, the code-blocks will just look like inline text.
-  (setq org-latex-minted-options
-        '(("frame" "lines")
-          ("framesep" "2mm")
-          ("baselinestretch" "1.2")
-          ("bgcolor" "mintedbg")
-          ("mathescape" "true")
-          ("linenos" "")
-          ("fontsize" "\\footnotesize")))
+*** XeLaTeX and pdfLaTeX Export Settings
+    In order to use Minted for highlight code blocks, Pygments has to be
+    installed: $ pip install Pygments
 
-  ;; LaTeX compilation command. For orgmode docs we just always use xelatex for convenience.
-  ;; You can change it to pdflatex if you like, just remember to make the adjustments to the packages-alist below.
-  (setq org-latex-pdf-process
-        '("latexmk -pdflatex='xelatex -synctex=1 --shell-escape' -pdf %f"))
-
-  ;; Sets the structure of the document to be Latex Koma-article by default
-  (unless (boundp 'org-latex-classes)
-        (setq org-latex-classes nil))
-  (add-to-list 'org-latex-classes
-               '("koma-article"
-                 "\\documentclass{scrartcl}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-  ;; To use the stardard Latex article design the class has to be included in the org file as:
-  ;; #+LaTeX_CLASS: article
-  ;; source: http://orgmode.org/worg/org-tutorials/org-latex-export.html
-  (add-to-list 'org-latex-classes
-               '("article"
-                 "\\documentclass{article}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
- ;; As above, but to use Memoir design, set memarticle in the org file
-  (add-to-list 'org-latex-classes
-               '("memarticle"
-                 "\\documentclass{memoir}"
-                  ("\\section{%s}" . "\\section*{%s}")
-                  ("\\subsection{%s}" . "\\subsection*{%s}")
-                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+#+BEGIN_SRC emacs-lisp
+;  (add-to-list 'org-latex-packages-alist '("" "minted"))
+;  (setq org-latex-listings 'minted)
+;
+;  ;; This defines the variables minted uses for beautiful code-blocks.
+;  ;; Without this, the code-blocks will just look like inline text.
+;  (setq org-latex-minted-options
+;        '(("frame" "lines")
+;          ("framesep" "2mm")
+;          ("baselinestretch" "1.2")
+;          ("bgcolor" "mintedbg")
+;          ("mathescape" "true")
+;          ("linenos" "")
+;          ("fontsize" "\\footnotesize")))
+;
+;  ;; LaTeX compilation command. For orgmode docs we just always use xelatex for
+;  ;; convenience.  You can change it to pdflatex if you like, just remember to
+;  ;; make the adjustments to the packages-alist below.
+;  (setq org-latex-pdf-process
+;        '("latexmk -pdflatex='xelatex -synctex=1 --shell-escape' -pdf %f"))
+;
+;  ;; Sets the structure of the document to be Latex Koma-article by default
+;  (unless (boundp 'org-latex-classes)
+;    (setq org-latex-classes nil))
+;  (add-to-list 'org-latex-classes
+;               '("koma-article"
+;                 "\\documentclass{scrartcl}"
+;                 ("\\section{%s}" . "\\section*{%s}")
+;                 ("\\subsection{%s}" . "\\subsection*{%s}")
+;                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+;
+;  ;; To use the stardard Latex article design the class has to be included in the
+;  ;; org file as: #+LaTeX_CLASS: article
+;  ;; http://orgmode.org/worg/org-tutorials/org-latex-export.html
+;  (add-to-list 'org-latex-classes
+;               '("article"
+;                 "\\documentclass{article}"
+;                 ("\\section{%s}" . "\\section*{%s}")
+;                 ("\\subsection{%s}" . "\\subsection*{%s}")
+;                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+;
+;  ;; As above, but to use Memoir design, set memarticle in the org file
+;  (add-to-list 'org-latex-classes
+;               '("memarticle"
+;                 "\\documentclass{memoir}"
+;                 ("\\section{%s}" . "\\section*{%s}")
+;                 ("\\subsection{%s}" . "\\subsection*{%s}")
+;                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 
 * Evil
@@ -689,13 +909,13 @@ command, making it more reliable than electric-indent-mode.
        (define-key company-active-map (kbd "C-:") 'helm-company)))
 #+end_src
 
-** Projectile
-Projectile is a project interaction library for Emacs. Its goal is to provide a
-nice set of features operating on a project level without introducing external
-dependencies(when feasible).  For instance - finding project files has a
-portable implementation written in pure Emacs Lisp without the use of GNU find
-(but for performance sake an indexing mechanism backed by external commands
-exists as well).
+** Projectile   
+   Projectile is a project interaction library for Emacs. Its goal is to provide
+   a nice set of features operating on a project level without introducing
+   external dependencies(when feasible).  For instance - finding project files
+   has a portable implementation written in pure Emacs Lisp without the use of
+   GNU find (but for performance sake an indexing mechanism backed by external
+   commands exists as well).
 
 #+begin_src emacs-lisp
 (projectile-global-mode)
@@ -704,6 +924,23 @@ exists as well).
 (setq projectile-switch-project-action 'helm-projectile)
 (setq projectile-enable-caching t)
 #+end_src
+
+* Hydra
+
+#+BEGIN_SRC emacs-lisp
+
+      "
+                                                                       ╭───────┐
+    Flyspell               Ispell                      Gtranslate      │ Spell │
+╭──────────────────────────────────────────────────────────────────────┴───────╯
+  [_k_] correct word       [_w_] check word            [_g_] en ⇆ es
+  [_n_] next error         [_t_] toggle dictionary     [_G_] any lang
+  [_f_] toggle flyspell    [_d_] change dictionary
+  [_p_] toggle prog mode
+--------------------------------------------------------------------------------
+      "
+
+#+END_SRC
 
 * Latex
 ** In-text Smart Quotes (XeLaTeX only)
@@ -773,16 +1010,6 @@ exists as well).
 ;  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
 ;  (setq TeX-view-program-list
 ;  '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
-#+END_SRC
-
-** Local Pandoc Support
-   A pandoc menu for markdown and tex files. #+src-name: pandoc_mode
-
-#+BEGIN_SRC emacs-lisp
-  (load "pandoc-mode")
-  (add-hook 'markdown-mode-hook 'pandoc-mode)
-  (add-hook 'TeX-mode-hook 'pandoc-mode)
-  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 #+END_SRC
 
 * Email
@@ -996,7 +1223,7 @@ exists as well).
 
 #+BEGIN_SRC emacs-lisp
   (setq ess-ask-for-ess-directory nil)
-  (setq inferior-R-program-name "/usr/local/bin/R")
+  (setq inferior-R-program-name "/usr/bin/R")
   (setq ess-local-process-name "R")
   (setq ansi-color-for-comint-mode 'filter)
   (setq comint-scroll-to-bottom-on-input t)
@@ -1005,6 +1232,34 @@ exists as well).
   (setq ess-eval-visibly nil)
   (require 'ess-site)
 #+END_SRC
+
+** SQL
+   Emacs has SQLi mode buitin, which work pretty well to connect to
+   database. Here a configuration for using PostgreSQL, of course.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Make SQLi default to PostgreSQL syntax highlighting
+  ;; https://blogs.gentoo.org/titanofold/2011/05/17/postgresql-syntax-highlighting-in-emacs/
+  (eval-after-load "sql"
+    '(progn
+       (sql-set-product 'postgres))
+    )
+
+  ;; Set default config for login
+  ;; https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
+  (setq sql-postgres-login-params
+        '((user :default "postgres")
+          (database :default "postgres")
+          (server :default "localhost")
+          (port :default 5432)))
+
+  ;; Truncate lines to better visualize many columns tables
+  (add-hook 'sql-interactive-mode-hook
+            (lambda ()
+              (toggle-truncate-lines t))
+            )
+#+END_SRC
+
 * Custom Functions
 ** Text line wraps at column 80
 
