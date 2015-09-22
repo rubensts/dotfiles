@@ -1,30 +1,24 @@
-!-----------------------------------------------------------------------------
-! file:     ~/.Xresources
-! author:   Rubens TS
-! modified: September 2014
-!-----------------------------------------------------------------------------
-
 ! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
 !-----------------------------------------------------------------------------
 URxvt*.geometry:	125x24
-!URxvt*font:	    xft:Inconsolata-dz for Powerline:size=10:antialias=true:hinting=true 
+!URxvt*font:        xft:Inconsolata-dz for Powerline:size=10:antialias=true:hinting=true
 !URxvt*.boldFont:	xft:Inconsolata-dz for Powerline:bold:size=10:antialias=true:hinting=true
-!URxvt*font:		xft:UbuntuMono:size=12:antialias=true:hinting=true 
+!URxvt*font:		xft:UbuntuMono:size=12:antialias=true:hinting=true
 !URxvt*.boldFont:	xft:UbuntuMono:bold:size=12:antialias=true:hinting=true
 
-URxvt*font:	        xft:Sauce Code Powerline:size=10:antialias=true:hinting=true 
+URxvt*font:         xft:Sauce Code Powerline:size=10:antialias=true:hinting=true
 URxvt*.boldFont:	xft:Sauce Code Powerline:black:size=10:antialias=true:hinting=true
 !Sauce Code Powerline
 
-URxvt*.letterSpace:	    -1
+URxvt*.letterSpace:     -1
 URxvt*.scrollBar:       false   !! scrollbar style (rxvt, plain, next, xterm or false)
 !URxvt.borderLess:      false
 URxvt*.saveLines:       10000   !! Scrollback buffer is essential
 URxvt*.visualBell:      true    !! No audible bell
 URxvt*.cursorBlink:     true    !! Blinking cursor
-URxvt*.utmpInhibit:	    true
-URxvt*.print-pipe:	    cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
-URxvt*.urgentOnBell:	    true	!! Highlights the appropriate tag when an app sends a bell to the terminal
+URxvt*.utmpInhibit:     true
+URxvt*.print-pipe:      cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
+URxvt*.urgentOnBell:        true	!! Highlights the appropriate tag when an app sends a bell to the terminal
 URxvt*.scrollTtyOutput:		false	!! do not scroll with output
 URxvt*.scrollWithBuffer:	true	!! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
 URxvt*.scrollTtyKeypress:	true	!! scroll back to the bottom on keypress
@@ -39,17 +33,15 @@ URxvt*.keysym.C-Insert:   perl:matcher
 URxvt*.urlLauncher:       /usr/bin/xdg-open
 URxvt*.matcher.button:    1
 URxvt*.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt*.colorUL: 	  #4682B4	  !! set a blue color for web links
+URxvt*.colorUL:           #4682B4     !! set a blue color for web links
 
 ! Xft Settings
 !-----------------------------------------------------------------------------
-Xft.antialias: 1
-Xft.autohint: 0
-Xft.dpi: 96          !! 220 for Retina Display
-Xft.hinting: 1
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
+Xft.dpi:        96  !! 220 for Retina
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
 
 ! Xcursor
 !-----------------------------------------------------------------------------

@@ -9,7 +9,7 @@ if [ -d "${RBENV_ROOT}" ]; then
 fi
 
 ## Antigen - plugin manager
-source ~/prj/dotfiles/antigen/antigen.zsh
+source ~/git/dotfiles/antigen/antigen.zsh
 
 ## Load the oh-my-zsh's library.
 antigen use oh-my-zsh

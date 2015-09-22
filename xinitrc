@@ -47,7 +47,7 @@ fi
 # thunar-volman &
 
 ## DE selection (awesome kept as default)
-session=${1:-awesome}
+session=${1:-stumpwm}
 
 case $session in
     awesome           ) exec awesome;;
