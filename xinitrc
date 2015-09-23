@@ -1,11 +1,18 @@
-#!/bin/sh
+#! /bin/bash
 
+# sets up gnome-keyring so that applications can use it
+eval `gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh`
+export GNOME_KEYRING_CONTROL
+export SSH_AUTH_SOCK
+export GPG_AGENT_INFO
+export GNOME_KEYRING_PID
+
+# merge in defaults and keymaps
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-# merge in defaults and keymaps
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
@@ -29,6 +36,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     done
     unset f
 fi
+
+# X11 config
+exec xset s off &    # turn off screensaver (X11)
+exec xset b off &   # turn off bell
 
 # xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
 # setxkbmap us -variant intl           # keyboard layout
@@ -64,7 +75,7 @@ case $session in
     xfce|xfce4        ) exec startxfce4;;
     xmonad            ) exec xmonad;;
     lxqt              ) exec startlxqt;;
-    stumpwm           ) exec stumpwm;;
+    stumpwm           ) exec ssh-agent stumpwm;;
     # No known session, try to run it as command
     *) exec $1;;
 esac
