@@ -39,7 +39,7 @@ fi
 
 # X11 config
 exec xset s off &    # turn off screensaver (X11)
-exec xset b off &   # turn off bell
+exec xset b off &    # turn off bell
 
 # xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
 # setxkbmap us -variant intl           # keyboard layout
