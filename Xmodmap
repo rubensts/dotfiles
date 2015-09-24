@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-!! To check the keycode of a specific key, use xev
-=======
 !! To discover the keycode of an unknown key use xev
->>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 
 !! Modifies CapsLock to Control, and Shift+CapsLock to CapsLock
 clear lock
@@ -10,12 +6,8 @@ clear control
 add control = Caps_Lock Control_L Control_R
 keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
 
-<<<<<<< HEAD
 !! Modifies the winkey to F20, to be used as StumpWM prefix key
 !! https://github.com/stumpwm/stumpwm/wiki/FAQ
-=======
-!! Modifies winkey to be F20, to be used as StumpWM prefix key
->>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 clear mod4
 keycode 133 = F20
 

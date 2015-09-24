@@ -9,8 +9,7 @@
                      :style swank:*communication-style*
                      :dont-close t)
 
-;;; Prefix key
-;;(set-prefix-key (kbd "C-t"))
+;;; Prefix key - winkey set to F20 on .Xmodmap
 (set-prefix-key (kbd "F20"))
 
 
@@ -32,6 +31,9 @@
 (setf *message-window-gravity* :bottom-right)
 (setf *input-window-gravity* :bottom-right)
 
+;; Makes window (in window list) have more useful info and be more separated
+(setf *window-format* "%n%s%c")
+
 (set-bg-color "black")
 (set-fg-color "green")
 (set-border-color "blue")
@@ -39,15 +41,25 @@
 
 (setf *maxsize-border-width* 1
       *normal-border-width* 0
-      *window-border-style* :thin
+      *window-border-style* :none
       *transient-border-width* 4)
 
 (setf *message-window-gravity* :top-right
       *timeout-wait* 10
       *input-window-gravity* :top-left)
 
-;; Turn off welcome message
-;;(setf *startup-message* nil)
+;; Make a load of workspaces
+(mapcar #'gnew (list "Terminals" "IRC" "Emacs" "Web" "Email"))
+
+;; This is the split I'll want most often
+(defcommand hsplit-2-1 () ()
+            "hsplit in a 2:1 ratio"
+            (hsplit "2/3"))
+
+(define-key *root-map* (kbd "v") "hsplit-2-1")
+
+(define-key *root-map* (kbd "C-r") "remove-split")
+
 
 ;;;; Windows
 (set-focus-color "grey20")
@@ -55,51 +67,27 @@
 (set-normal-gravity :center)
 (setf *normal-border-width* 1)
 
-
-
-;; Modules
-(set-module-dir "/home/rubens/.stumpwm.d/modules")
-
-;; kbd-layouts
-;;(load-module "kbd-layouts")
-;;(keyboard-layout-list "it" "us")
-
-;;(load-module "ttf-fonts")
-;;(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 12))
-;;(set-font (make-instance 'xft:font :family "Arial" :subfamily "Regular" :size 12))
-
-;;(load-module "ttf-fonts")
-;;(setf xft:*font-dirs* '("/usr/share/fonts/TTF"))
-
-(load-module "ttf-fonts")
-;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
-(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 11))
-
-;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
-;;(set-font "Hack-12")
-
 ;; Settings for the grab-pointer (white square when pressing prefix-key)
 (setf *grab-pointer-foreground* (xlib:make-color :red 0.1 :green 0.25 :blue 0.5))
 (setf *grab-pointer-background* (lookup-color (current-screen) "Red"))
 (setf *grab-pointer-character* 56)
 (setf *grab-pointer-character-mask* 56)
 
-;;; Keyboard layout
-<<<<<<< HEAD
-;; Sets italian as the default layout, having english (us) as an
-;; alternative. The us layout presents two variants: internaltional
-;; and dvorak. To switch between all layouts press the "right windows
-;; key".
-;;(run-shell-command "setxkbmap -layout it,us -variant intl -option grp:rwin_toggle")
-(run-shell-command "setxkbmap -layout it,us -option grp:rwin_toggle")
 
-;; Sets the caps-lock key as another control
-;;(run-shell-command "setxkbmap -option ctrl:nocaps")
-=======
+;;; Modules
+(set-module-dir "/home/rubens/.stumpwm.d/modules")
+
+;;(setf xft:*font-dirs* '("/usr/share/fonts/TTF"))
+
+(load-module "ttf-fonts")
+(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 11))
+;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
+
+;;; Keyboard layout
+
 ;; Sets italian as the default layout, having international english as
 ;; alternative. To switch between layouts press the "menu key".
 (run-shell-command "setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle")
->>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 
 ;;; Keybindings
 ;; *root-map* needs prefix-key
@@ -154,15 +142,11 @@
 (run-shell-command "thunar --daemon")
 ;;(run-shell-command "urxvtcd -e bash -c 'screen -dRR -S $HOSTNAME'")
 (run-shell-command "urxvtd --quiet --opendisplay --fork")
-<<<<<<< HEAD
 ;;(run-shell-command "emacs --daemon")
 
 
-
-=======
-
->>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 ;;; Start/Switch applications
+
 ;;(defcommand emacs () ()
 ;;"run emacs"
 ;;(run-shell-command "emacsclient -c"))   ;; '(:class "Emacs")))
