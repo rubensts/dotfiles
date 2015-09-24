@@ -16,8 +16,46 @@
 
 ;;; Geral settings
 
+;;(set-frame-outline-width 1)
 ;; index frames starting from 1 to 0, following the keyboard layout
-(setf *frame-number-map* "1234567890")
+(setf *frame-number-map* "123456789")
+;;(setf *frame-number-map* "jkluio789")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; The Message Window - https://github.com/trapd00r/configs/blob/master/stumpwmrc
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Window border colors
+(setf *focus-color* "green")
+(setf *unfocus-color* "black")
+
+;;Set the message and input box to the bottom right. This way it overlaps with mode-line.
+(setf *message-window-gravity* :bottom-right)
+(setf *input-window-gravity* :bottom-right)
+
+(set-bg-color "black")
+(set-fg-color "green")
+(set-border-color "blue")
+(set-msg-border-width 1)
+
+(setf *maxsize-border-width* 1
+      *normal-border-width* 0
+      *window-border-style* :thin
+      *transient-border-width* 4)
+
+(setf *message-window-gravity* :top-right
+      *timeout-wait* 10
+      *input-window-gravity* :top-left)
+
+;; Turn off welcome message
+;;(setf *startup-message* nil)
+
+;;;; Windows
+(set-focus-color "grey20")
+(set-unfocus-color "grey10")
+(set-normal-gravity :center)
+(setf *normal-border-width* 1)
+
+
 
 ;; Modules
 (set-module-dir "/home/rubens/.stumpwm.d/modules")
@@ -33,6 +71,10 @@
 ;;(load-module "ttf-fonts")
 ;;(setf xft:*font-dirs* '("/usr/share/fonts/TTF"))
 
+(load-module "ttf-fonts")
+;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
+(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 11))
+
 ;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
 ;;(set-font "Hack-12")
 
@@ -42,8 +84,8 @@
 (setf *grab-pointer-character* 56)
 (setf *grab-pointer-character-mask* 56)
 
-
 ;;; Keyboard layout
+<<<<<<< HEAD
 ;; Sets italian as the default layout, having english (us) as an
 ;; alternative. The us layout presents two variants: internaltional
 ;; and dvorak. To switch between all layouts press the "right windows
@@ -53,6 +95,11 @@
 
 ;; Sets the caps-lock key as another control
 ;;(run-shell-command "setxkbmap -option ctrl:nocaps")
+=======
+;; Sets italian as the default layout, having international english as
+;; alternative. To switch between layouts press the "menu key".
+(run-shell-command "setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle")
+>>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 
 ;;; Keybindings
 ;; *root-map* needs prefix-key
@@ -70,7 +117,16 @@
 ;;(define-key *root-map* (kbd "Tab") "gnext-with-window")
 ;;(define-key *root-map* (kbd "ISO_Left_Tab") "gprev-with-window")
 
-;;; Windows movement
+;; group selection
+(define-key *top-map* (kbd "M-1") "gselect 1")
+(define-key *top-map* (kbd "M-2") "gselect 2")
+(define-key *top-map* (kbd "M-3") "gselect 3")
+(define-key *top-map* (kbd "M-4") "gselect 4")
+(define-key *top-map* (kbd "M-5") "gselect 5")
+(define-key *top-map* (kbd "M-6") "gselect 6")
+(define-key *top-map* (kbd "M-7") "gselect 7")
+
+;; Windows movement
 (define-key *root-map* (kbd "C-Left")  "move-window left")
 (define-key *root-map* (kbd "C-Down")  "move-window down")
 (define-key *root-map* (kbd "C-Up")    "move-window up")
@@ -85,21 +141,27 @@
 (define-key *top-map* (kbd "F12") "mode-line")
 (define-key *top-map* (kbd "M-F2") "exec")
 
+
 ;;; Startup applications
 
 ;;(run-shell-command "xrdb -merge ~/.Xresources")
 (run-shell-command "xsetroot -cursor_name left_ptr")
 (run-shell-command "xscreensaver -no-splash")
 (run-shell-command "compton --config ~/.compton.conf -b")
+(run-shell-command "xmodmap ~/.Xmodmap")
 (run-shell-command "numlockx")
 (run-shell-command "xmodmap ~/.Xmodmap")
 (run-shell-command "thunar --daemon")
 ;;(run-shell-command "urxvtcd -e bash -c 'screen -dRR -S $HOSTNAME'")
 (run-shell-command "urxvtd --quiet --opendisplay --fork")
+<<<<<<< HEAD
 ;;(run-shell-command "emacs --daemon")
 
 
 
+=======
+
+>>>>>>> 291ade56e200c30f97b58b1fff033063289c97dc
 ;;; Start/Switch applications
 ;;(defcommand emacs () ()
 ;;"run emacs"
