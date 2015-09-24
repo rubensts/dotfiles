@@ -10,7 +10,8 @@
                      :dont-close t)
 
 ;;; Prefix key
-(set-prefix-key (kbd "C-t"))
+;;(set-prefix-key (kbd "C-t"))
+(set-prefix-key (kbd "F20"))
 
 
 ;;; Geral settings
@@ -51,7 +52,7 @@
 (run-shell-command "setxkbmap -layout it,us -option grp:rwin_toggle")
 
 ;; Sets the caps-lock key as another control
-(run-shell-command "setxkbmap -option ctrl:nocaps")
+;;(run-shell-command "setxkbmap -option ctrl:nocaps")
 
 ;;; Keybindings
 ;; *root-map* needs prefix-key
@@ -91,14 +92,18 @@
 (run-shell-command "xscreensaver -no-splash")
 (run-shell-command "compton --config ~/.compton.conf -b")
 (run-shell-command "numlockx")
+(run-shell-command "xmodmap ~/.Xmodmap")
 (run-shell-command "thunar --daemon")
 ;;(run-shell-command "urxvtcd -e bash -c 'screen -dRR -S $HOSTNAME'")
 (run-shell-command "urxvtd --quiet --opendisplay --fork")
-;;; Start/Switch applications
+;;(run-shell-command "emacs --daemon")
 
-(defcommand emacs () ()
-            "run emacs"
-            (run-shell-command "emacsclient -c"))   ;; '(:class "Emacs")))
+
+
+;;; Start/Switch applications
+;;(defcommand emacs () ()
+;;"run emacs"
+;;(run-shell-command "emacsclient -c"))   ;; '(:class "Emacs")))
 (defcommand xterm () ()
             "run an xterm instance"
             (run-shell-command "urxvtc"))  ;; '(:instance "urxvt")))

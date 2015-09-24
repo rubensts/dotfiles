@@ -1,14 +1,13 @@
 ! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
 !-----------------------------------------------------------------------------
-URxvt*.geometry:	125x24
-!URxvt*font:        xft:Inconsolata-dz for Powerline:size=10:antialias=true:hinting=true
-!URxvt*.boldFont:	xft:Inconsolata-dz for Powerline:bold:size=10:antialias=true:hinting=true
-!URxvt*font:		xft:UbuntuMono:size=12:antialias=true:hinting=true
-!URxvt*.boldFont:	xft:UbuntuMono:bold:size=12:antialias=true:hinting=true
+URxvt.termName:     rxvt-256color
 
-URxvt*font:         xft:Sauce Code Powerline:size=10:antialias=true:hinting=true
-URxvt*.boldFont:	xft:Sauce Code Powerline:black:size=10:antialias=true:hinting=true
-!Sauce Code Powerline
+URxvt*.geometry:    125x24
+
+URxvt*font:         xft:Hack:size=10:antialias=true:hinting=true
+URxvt*.boldFont:    xft:Hack:black:size=10:antialias=true:hinting=true
+!URxvt*font:         xft:Sauce Code Powerline:size=10:antialias=true:hinting=true
+!URxvt*.boldFont:    xft:Sauce Code Powerline:black:size=10:antialias=true:hinting=true
 
 URxvt*.letterSpace:     -1
 URxvt*.scrollBar:       false   !! scrollbar style (rxvt, plain, next, xterm or false)
@@ -23,17 +22,20 @@ URxvt*.scrollTtyOutput:		false	!! do not scroll with output
 URxvt*.scrollWithBuffer:	true	!! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
 URxvt*.scrollTtyKeypress:	true	!! scroll back to the bottom on keypress
 
-!! True Transparency - compositing required (as xcompmgr or Compiz)
+!! True Transparency - compositing required (compton, xcompmgr or Compiz)
 URxvt*.depth: 32
 URxvt*.background: rgba:1111/1111/1111/dddd
 
 !! Clickable links and tabbing
 URxvt*.perl-ext-common:   default,matcher
 URxvt*.keysym.C-Insert:   perl:matcher
-URxvt*.urlLauncher:       /usr/bin/xdg-open
+URxvt*.urlLauncher:       firefox
 URxvt*.matcher.button:    1
 URxvt*.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 URxvt*.colorUL:           #4682B4     !! set a blue color for web links
+
+!! Disables the insanely annoying Ctrl+Shift shortcut that enters ISO14755 mode
+URxvt.iso14755:         False
 
 ! Xft Settings
 !-----------------------------------------------------------------------------
