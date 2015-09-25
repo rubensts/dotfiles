@@ -4,8 +4,8 @@ URxvt.termName:     rxvt-256color
 
 URxvt*.geometry:    125x24
 
-URxvt*font:         xft:Hack:size=10:antialias=true:hinting=true
-URxvt*.boldFont:    xft:Hack:black:size=10:antialias=true:hinting=true
+URxvt*font:         xft:Hack:size=9:antialias=true:hinting=true
+URxvt*.boldFont:    xft:Hack:black:size=9:antialias=true:hinting=true
 !URxvt*font:         xft:Sauce Code Powerline:size=10:antialias=true:hinting=true
 !URxvt*.boldFont:    xft:Sauce Code Powerline:black:size=10:antialias=true:hinting=true
 
