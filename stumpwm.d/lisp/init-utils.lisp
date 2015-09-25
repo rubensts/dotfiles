@@ -1,16 +1,8 @@
-;; -*-lisp-*-
-
 (in-package :stumpwm)
 
-;;; Swank configuration
-(require :swank)
-(swank-loader:init)
-(swank:create-server :port 4004
-                     :style swank:*communication-style*
-                     :dont-close t)
-
 ;;; Prefix key - winkey set to F20 on .Xmodmap
-(set-prefix-key (kbd "F20"))
+;;(set-prefix-key (kbd "F20"))
+(set-prefix-key (kbd "s-z"))
 
 
 ;;; Geral settings
@@ -20,52 +12,6 @@
 (setf *frame-number-map* "123456789")
 ;;(setf *frame-number-map* "jkluio789")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; The Message Window - https://github.com/trapd00r/configs/blob/master/stumpwmrc
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;Window border colors
-(setf *focus-color* "green")
-(setf *unfocus-color* "black")
-
-;;Set the message and input box to the bottom right. This way it overlaps with mode-line.
-(setf *message-window-gravity* :bottom-right)
-(setf *input-window-gravity* :bottom-right)
-
-;; Makes window (in window list) have more useful info and be more separated
-(setf *window-format* "%n%s%c")
-
-(set-bg-color "black")
-(set-fg-color "green")
-(set-border-color "blue")
-(set-msg-border-width 1)
-
-(setf *maxsize-border-width* 1
-      *normal-border-width* 0
-      *window-border-style* :none
-      *transient-border-width* 4)
-
-(setf *message-window-gravity* :top-right
-      *timeout-wait* 10
-      *input-window-gravity* :top-left)
-
-;; Make a load of workspaces
-(mapcar #'gnew (list "Terminals" "IRC" "Emacs" "Web" "Email"))
-
-;; This is the split I'll want most often
-(defcommand hsplit-2-1 () ()
-            "hsplit in a 2:1 ratio"
-            (hsplit "2/3"))
-
-(define-key *root-map* (kbd "v") "hsplit-2-1")
-
-(define-key *root-map* (kbd "C-r") "remove-split")
-
-
-;;;; Windows
-(set-focus-color "grey20")
-(set-unfocus-color "grey10")
-(set-normal-gravity :center)
-(setf *normal-border-width* 1)
 
 ;; Settings for the grab-pointer (white square when pressing prefix-key)
 (setf *grab-pointer-foreground* (xlib:make-color :red 0.1 :green 0.25 :blue 0.5))
@@ -75,12 +21,12 @@
 
 
 ;;; Modules
-(set-module-dir "/home/rubens/.stumpwm.d/modules")
+;;(set-module-dir "/home/rubens/.stumpwm.d/modules")
 
 ;;(setf xft:*font-dirs* '("/usr/share/fonts/TTF"))
 
 (load-module "ttf-fonts")
-(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 11))
+(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 10))
 ;;(set-font (make-instance 'xft:font :family "Anonymous Pro" :subfamily "Regular" :size 13))
 
 ;;; Keyboard layout
@@ -136,7 +82,7 @@
 (run-shell-command "xsetroot -cursor_name left_ptr")
 (run-shell-command "xscreensaver -no-splash")
 (run-shell-command "compton --config ~/.compton.conf -b")
-(run-shell-command "xmodmap ~/.Xmodmap")
+;;(run-shell-command "xmodmap ~/.Xmodmap")
 (run-shell-command "numlockx")
 (run-shell-command "xmodmap ~/.Xmodmap")
 (run-shell-command "thunar --daemon")
