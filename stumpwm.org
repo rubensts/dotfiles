@@ -1,0 +1,412 @@
+#+TITLE: StumpWM configuration
+
+* About
+  This configuration files is a collection of many stumpwmrc that I've
+  found on the web. Some places are:
+
+  http://www.xsteve.at/prg/stumpwm/
+  https://github.com/ivoarch/.dot-org-files/blob/master/stumpwm.org
+  https://github.com/qizhihere/.stumpwm.d
+  http://es.gnu.org/~holzplatten/downloads/stumpwmrc
+  http://yujianzhang.blogspot.it/2008/07/experiencing-stumpwm.html
+  http://thtump.blogspot.it/
+  http://cyborginstitute.org/projects/stack/stumpwm/
+  http://www.kaashif.co.uk/2015/06/28/hacking-stumpwm-with-common-lisp/index.html
+  https://github.com/kaashif/dotfiles/blob/master/stumpwm/.stumpwmrc
+
+* Code
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(in-package :stumpwm)
+#+END_SRC
+
+* Swank
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (require :swank)
+  (swank-loader:init)
+
+  (defvar *swank-server-running* nil)
+
+  (defun swank-start-server ()
+    (and (not *swank-server-running*)
+         (swank:create-server :port 4005
+                              :style swank:*communication-style*
+                              :dont-close t)
+         (setf *swank-server-running* t)))
+
+  (defun swank-stop-server ()
+    (and *swank-server-running*
+         (swank:stop-server 4005)
+         (setf *swank-server-running* nil)))
+
+  (defcommand start-swank-server () ()
+              "Start swank server."
+              (swank-start-server))
+
+  (defcommand stop-swank-server () ()
+              "Stop swank server."
+              (swank-stop-server))
+
+  ;; start server
+  (swank-start-server)
+#+END_SRC
+
+* Defaults
+** Keyboard layout
+    setxkbmap has to be called before xmodmap, otherwise the keyboard
+    keys get all messed up.
+
+    1. Sets italian as the default layout and international english as
+       alternative. To switch between layouts press the "menu key".
+    2. Load xmodmap, which does two things:
+       a) remap the capslock key to be another Ctrl key
+       b) remap the winkey to F20. It is the only way to make the
+          winkey play nice as StumpWM's prefix key
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+;(run-shell-command "setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle")
+;(run-shell-command "xmodmap ~/.Xmodmap")
+#+END_SRC
+
+** Prefix key
+    The winkey is set to be StumpWM's prefix key, as explained above
+    and on the StumpWM FAQ.
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+ (set-prefix-key (kbd "F20"))
+#+END_SRC
+
+** GUI
+*** Font
+     Set the font for the message bar and input bar.
+
+     1. Load module for xft fonts.
+     2. Set xft font.
+
+ #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+   (load-module "ttf-fonts")
+   (set-font (make-instance 'xft:font
+                            :family "Hack"
+                            :subfamily "Regular"
+                            :size 10))
+ #+END_SRC
+
+*** Colors
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (set-bg-color "#2b303b")
+  (set-fg-color "#89ebca")
+  (set-border-color "#4f5b66")
+  (set-float-focus-color "#333d46")
+  (set-float-unfocus-color "#4f5b66")
+#+END_SRC
+
+*** grab-pointer
+    The grab-pointer is the white square that shows up when the prefix
+    key is pressed. Here it is configured to a more pleasant look.
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (setf *grab-pointer-foreground* (xlib:make-color
+                                   :red 0.1
+                                   :green 0.25
+                                   :blue 0.5))
+  (setf *grab-pointer-background* (lookup-color
+                                   (current-screen) "Red"))
+  (setf *grab-pointer-character* 56)
+  (setf *grab-pointer-character-mask* 56)
+#+END_SRC
+
+*** Default border style
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (setq *window-border-style* :thin)
+#+END_SRC
+
+** Mode-line
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (setf *screen-mode-line-format* "[%g]  %v  %40d"
+  *time-modeline-string* "^> %a, %d/%b/%Y  ^B%H:%M^b"
+  *mode-line-border-width* 0
+  *mode-line-pad-x* 2
+  *mode-line-pad-y* 0)
+#+END_SRC
+
+** Window gravity
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(setf *message-window-gravity* :top-right)
+(setf *input-window-gravity* :top-right)
+#+END_SRC
+
+** Ignore size hints
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(setq *ignore-wm-inc-hints* t)
+#+END_SRC
+
+** Time for messages
+   I like 3 seconds for messages.
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(setf *timeout-wait* 5)
+#+END_SRC
+
+** Mouse focus by click
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(setf *mouse-focus-policy* :click)
+#+END_SRC
+
+** Default shell
+   Shell program used by =run-shell-command=
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (setq *shell-program* (stumpwm::getenv "SHELL"))
+#+END_SRC
+
+** Debug
+   Turn on debugging. The setting goes from 0 (no messages) to 10
+   (everything is informed). It logs to the files `.xsession-errors'.
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+ (setf *debug-level* 1)
+#+END_SRC
+
+* Windows
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+;; windows title format
+(setf *window-format* "%m%n%s%c")
+#+END_SRC
+
+* Frames
+    Index the frames following the keyboard layout, i.e. starting from
+    1 to 0. The default behaviour sets it as 0 being the first frame
+    applied to the first program loaded, then 1 to the
+    2nd. program loaded, being to awkward to reach.
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (setf *window-number-map* "1234567890")
+  (setf *frame-number-map* "1234567890")
+#+END_SRC
+
+* Groups
+   Renames the first group to Main and creates my other groups. The
+   important point here is setting which application open in a
+   specific group. The order of the first 3 characters on the lines is:
+
+   (frame raise lock) eg. (0 t t...)
+
+   If raise and lock are non-nil, it opens the application and jumps
+   the focus to it automatically.  More details at:
+   https://stumpwm.github.io/0.9.8/stumpwm-0.9.8_5.html#Rule-Based-Window-Placement
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  ;; group title format
+  (setf *group-format* "%s [%n] %t ")
+
+  ;; Rename the first group to Main
+  (setf (group-name
+         (first (screen-groups (current-screen)))) "Main")
+
+  ;; Create some new virtual desktops (called groups in stumpwm)
+  (run-commands "gnewbg Chat" "gnewbg Web" "gnewbg Files" "gnewbg Media")
+
+  ;; Window placement rules
+  ;; Clear rules
+  (clear-window-placement-rules)
+
+  (define-frame-preference "Main"
+      (0 t   t :title "emacs")
+    (0 t   t :class "XTerm"))
+
+  (define-frame-preference "Chat"
+      (0 t   t :class "Skype"))
+
+    (define-frame-preference "Web"
+        (0 t   t :class "Chromium")
+      (0 t   t :class "Conkeror")
+      (0 t   t :class "Firefox"))
+
+  (define-frame-preference "Media"
+      (0 t   t :instance "aumix")
+    (0 t   t :class "MPlayer")
+    (0 t   t :class "Avidemux")
+    (0 t   t :class "Vlc"))
+#+END_SRC
+
+* Keybindings
+  The keybindings set with *root-map* need the prefix-key.
+  The keybindings set with *top-map* don't need prefix-key
+
+** Call programs
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+;;  (define-key *root-map* (kbd "e")   "emacsclient")
+;;  (define-key *root-map* (kbd "c")   "org-capture")
+  (define-key *root-map* (kbd "t")   "thunar")
+  (define-key *root-map* (kbd "c")   "conkeror")
+  (define-key *root-map* (kbd "f")   "firefox")
+  (define-key *root-map* (kbd "y")   "skype")
+  (define-key *root-map* (kbd "RET") "xterm")
+  (define-key *root-map* (kbd "p")   "dmenu")
+  (define-key *root-map* (kbd "q")   "quit")
+
+  (define-key *top-map* (kbd "M-F2") "exec")
+#+END_SRC
+
+** Groups
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (define-key *top-map* (kbd "M-F9")    "loadrc")
+  (define-key *top-map* (kbd "C-Pause") "grouplist")
+  (define-key *top-map* (kbd "Pause")   "gother")
+
+  (define-key *root-map* (kbd "Tab") "gnext-with-window")
+  ;;(define-key *root-map* (kbd "ISO_Left_Tab") "gprev-with-window")
+
+  ;; group selection
+  (define-key *root-map* (kbd "1") "gselect 1")
+  (define-key *root-map* (kbd "2") "gselect 2")
+  (define-key *root-map* (kbd "3") "gselect 3")
+  (define-key *root-map* (kbd "4") "gselect 4")
+  (define-key *root-map* (kbd "5") "gselect 5")
+#+END_SRC
+
+** Windows/Frames
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (define-key *root-map* (kbd "o") "only")
+  (define-key *root-map* (kbd "z") "windows")
+
+  (define-key *root-map* (kbd "v") "hsplit-2-1")
+  (define-key *root-map* (kbd "C-r") "remove-split")
+
+  (define-key *root-map* (kbd "C-Up") "move-window up")
+  (define-key *root-map* (kbd "C-Left") "move-window left")
+  (define-key *root-map* (kbd "C-Down") "move-window down")
+  (define-key *root-map* (kbd "C-Right") "move-window right")
+
+  (define-key *top-map* (kbd "M-Tab") "pull-hidden-next")
+  (define-key *top-map* (kbd "M-ISO_Left_Tab") "pull-hidden-previous") ;; with Shift
+
+  (define-key *root-map* (kbd "Delete") "repack-window-numbers")
+  (define-key *root-map* (kbd "I") "show-window-properties")
+
+  (define-key *top-map* (kbd "F12") "mode-line")
+#+END_SRC
+
+* Applications
+  These programs are loaded automatically when StumpWM starts. Only
+  loading programs here that won't get messed up in case StumpWM is
+  being called from a Display Manager, such as GDM or KDM. If StumpWM
+  is called by startx from the terminal, the programs that would be
+  called by a DM are called by .xinitrc, so everything works nice.
+
+** Load at Startup
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+(run-shell-command "thunar --daemon")
+(run-shell-command "urxvtd --quiet --opendisplay --fork")
+;;(run-shell-command "emacs --daemon")
+#+END_SRC
+
+** Start/Switch applications
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  ;;(defcommand emacs () ()
+  ;;"run emacs"
+  ;;(run-shell-command "emacsclient -c" '(:class "Emacs")))
+
+  ;;  (defcommand emacsclient () ()
+  ;;              "Start a new instance of emacsclient."
+  ;;              (run-shell-command "emacsclient -c -a \"\"" '(:class "Emacs")))
+
+  ;;  (defcommand org-capture () ()
+  ;;              "Launch org capture inside an emacs client."
+  ;;              (run-shell-command
+  ;;               "emacsclient -c -a \"\" -e \"(progn (org-capture))\""
+  ;;               '(:class "Emacs")))
+
+  (defcommand xterm () ()
+              "run an xterm instance"
+              (run-shell-command "urxvtc" '(:instance "urxvt")))
+
+  (defcommand dmenu () ()
+              "run dmenu"
+              (run-shell-command "dmenu_run"))
+
+  (defcommand thunar () ()
+              "run thunar"
+              (run-or-raise "thunar" '(:class "Thunar")))
+
+  (defcommand conkeror () ()
+              "run conkeror"
+              (run-or-raise "conkeror" '(:class "Conkeror")))
+
+  (defcommand firefox () ()
+              "run firefox"
+              (run-or-raise "firefox" '(:class "Firefox")))
+
+  (defcommand skype () ()
+              "run skype"
+              (run-or-raise "skype" '(:class "Skype")))
+#+END_SRC
+
+* Reloading
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (defcommand reinit () ()
+    "reinit"
+    (run-commands "reload" "loadrc"))
+#+END_SRC
+
+* Custom functions
+** Vertical split
+   A function to horizontally split the window in 2/3 frame
+   This is the split I'll want most often. Taken from:
+   https://github.com/kaashif/dotfiles/blob/master/stumpwm/.stumpwmrc
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+  (defcommand hsplit-2-1 () ()
+              "hsplit in a 2:1 ratio"
+              (hsplit "2/3"))
+#+END_SRC
+
+** Screenshot of the screen =using PrtSc=
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+ (define-key *top-map* (kbd "Print")
+   "exec import -window root png:$HOME/Pictures/screenshots/stumpwm-$(date +%s)$$.png")
+#+END_SRC
+
+** Random wallpaper
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+;;  (defvar *background-image-path* "~/Pictures/wallpapers/")
+;;  (defun select-random-background-image ()
+;;    "Select a random image"
+;;    (let ((file-list (directory
+;;                      (concatenate
+;;                       'string *background-image-path* "*.jpg")))
+;;          (*random-state* (make-random-state t)))
+;;      (namestring (nth (random
+;;                        (length file-list)) file-list))))
+;;
+;;  (run-shell-command (concatenate
+;;                      'string "feh --bg-scale "
+;;                      (select-random-background-image)))
+#+END_SRC
+
+* Stumpwmrc ends here
+
+#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+;; Local Variables:
+;; coding: utf-8
+;; mode: lisp
+;; End:
+
+;;; stumpwmrc ends here
+#+END_SRC

@@ -4,23 +4,22 @@ URxvt.termName:     rxvt-256color
 
 URxvt*.geometry:    125x24
 
-URxvt*font:         xft:Hack:size=9:antialias=true:hinting=true
-URxvt*.boldFont:    xft:Hack:black:size=9:antialias=true:hinting=true
-!URxvt*font:         xft:Sauce Code Powerline:size=10:antialias=true:hinting=true
-!URxvt*.boldFont:    xft:Sauce Code Powerline:black:size=10:antialias=true:hinting=true
+URxvt*font:         xft:Source Code Pro for Powerline:size=10:antialias=true:hinting=true
+URxvt*.boldFont:    xft:Source Code Pro for Powerline:black:size=10:antialias=true:hinting=true
 
 URxvt*.letterSpace:     -1
-URxvt*.scrollBar:       false   !! scrollbar style (rxvt, plain, next, xterm or false)
 !URxvt.borderLess:      false
-URxvt*.saveLines:       10000   !! Scrollback buffer is essential
 URxvt*.visualBell:      true    !! No audible bell
 URxvt*.cursorBlink:     true    !! Blinking cursor
 URxvt*.utmpInhibit:     true
 URxvt*.print-pipe:      cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
 URxvt*.urgentOnBell:        true	!! Highlights the appropriate tag when an app sends a bell to the terminal
-URxvt*.scrollTtyOutput:		false	!! do not scroll with output
-URxvt*.scrollWithBuffer:	true	!! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*.scrollTtyKeypress:	true	!! scroll back to the bottom on keypress
+
+URxvt*.scrollBar:           false   !! scrollbar style (rxvt, plain, next, xterm or false)
+URxvt*.saveLines:           10000   !! Scrollback buffer is essential
+URxvt*scrollTtyOutput:      false   !! do not scroll with output
+URxvt*scrollWithBuffer:     true    !! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollTtyKeypress:    true    !! scroll back to the bottom on keypress
 
 !! True Transparency - compositing required (compton, xcompmgr or Compiz)
 URxvt*.depth: 32

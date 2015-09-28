@@ -31,11 +31,14 @@ fi
 exec xset s off &    # turn off screensaver (X11)
 exec xset b off &    # turn off bell
 
-# xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
-# setxkbmap us -variant intl           # keyboard layout
-# compton --config ~/.compton.conf -b  # transparency
-# numlockx &                           # turn on numlock keys
-# xscreensaver -no-splash &            # screensaver daemon, managed w/ xautolock
+# Sets italian as the default layout, having international english as
+# alternative. To switch between layouts press the "menu key".
+setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle
+xmodmap ~/.Xmodmap
+xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
+compton --config ~/.compton.conf -b  # transparency
+numlockx &                           # turn on numlock keys
+xscreensaver -no-splash &            # screensaver daemon, managed w/ xautolock
 # # volumeicon &
 # xfce4-power-manager &                # Xfce4 Power Manager
 # nm-applet --sm-disable &             # NetworkManager applet
