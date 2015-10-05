@@ -220,15 +220,19 @@
 
   (define-frame-preference "Main"
       (0 t   t :title "emacs")
+    (0 t   t :class "emacsclient")
     (0 t   t :class "XTerm"))
 
   (define-frame-preference "Chat"
       (0 t   t :class "Skype"))
 
-    (define-frame-preference "Web"
-        (0 t   t :class "Chromium")
-      (0 t   t :class "Conkeror")
-      (0 t   t :class "Firefox"))
+  (define-frame-preference "Web"
+      (0 t   t :class "Chromium")
+    (0 t   t :class "Conkeror")
+    (0 t   t :class "Firefox"))
+
+  (define-frame-preference "Files"
+      (0 t   t :class "Thunar"))
 
   (define-frame-preference "Media"
       (0 t   t :instance "aumix")

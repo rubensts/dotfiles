@@ -4,8 +4,8 @@ URxvt.termName:     rxvt-256color
 
 URxvt*.geometry:    125x24
 
-URxvt*font:         xft:Source Code Pro for Powerline:size=10:antialias=true:hinting=true
-URxvt*.boldFont:    xft:Source Code Pro for Powerline:black:size=10:antialias=true:hinting=true
+URxvt*font:         xft:Ubuntu Mono derivative Powerline:size=11:antialias=true:hinting=true
+URxvt*.boldFont:    xft:Ubuntu Mono derivative Powerline:black:size=11:antialias=true:hinting=true
 
 URxvt*.letterSpace:     -1
 !URxvt.borderLess:      false

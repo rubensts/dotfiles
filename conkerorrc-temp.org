@@ -1,0 +1,397 @@
+* Enabling the Password Manager
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+session_pref("signon.rememberSignons", true);
+session_pref("signon.expireMasterPassword", false);
+session_pref("signon.SignonFileName", "signons.txt");
+Components.classes['@mozilla.org/login-manager;1']
+    .getService(Components.interfaces.nsILoginManager);
+#+END_SRC
+
+* Modeline
+** Widgets
+   - Disables the clock widget
+   - Enables all the other widgets
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+require("mode-line.js");
+remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(zoom_widget));
+add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
+#+END_SRC
+
+** Favicons
+   Activate the favicons in the modeline.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+require("favicon.js");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
+#+END_SRC
+
+** Hinting
+   1. Displays the url of a link in hints mode.
+   2. Displays information about the currently selected hint.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+hints_display_url_panel = true;
+hints_minibuffer_annotation_mode(true);
+#+END_SRC
+
+* Hinting
+  It set to use letters instead of numbers.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+hint_digits="asdfghjkl";
+#+END_SRC
+
+* Downloads
+  1. Sets the default download directory to =~/Downloads=.
+  2. Don't open download buffer automatically
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+cwd = get_home_directory();
+cwd = make_file("~/Downloads");
+remove_hook("download_added_hook", open_download_buffer_automatically);
+#+END_SRC
+
+* External programs
+** Automatically open pdf files with zathura.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+content_handlers.set("application/pdf", content_handler_open_default_viewer);
+external_content_handlers.set("application/pdf", "zathura");
+#+END_SRC
+
+** Automatically open documents with Libreoffice.
+
+For a complete list checkout this TechNet [[http://technet.microsoft.com/en-us/library/ee309278%2528office.12%2529.aspx][article]] .
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+external_content_handlers.set(
+      "application/vnd.ms-excel",
+      "libreoffice"
+);
+external_content_handlers.set(
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "libreoffice"
+);
+external_content_handlers.set(
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "libreoffice"
+);
+external_content_handlers.set(
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "libreoffice"
+);
+#+END_SRC
+
+** Open magnet links with Transmission.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+set_protocol_handler("magnet", find_file_in_path("transmission-gtk"));
+#+END_SRC
+
+** Automatically open torrent files with Transmission.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+content_handlers.set("application/x-bittorrent", content_handler_open);
+external_content_handlers.set("application/x-bittorrent", "transmission-gtk");
+#+END_SRC
+
+** View source in emacs.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+editor_shell_command="emacsclient -ca emacs";
+view_source_use_external_editor = true;
+#+END_SRC
+
+* Extensions
+  1. Disables extension compatability checking.
+  2. Allows installing extension from any source.
+  3. Enables security updates.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+session_pref('extensions.checkCompatibility', false);
+session_pref("xpinstall.whitelist.required", false);
+user_pref("extensions.checkUpdateSecurity", true);
+#+END_SRC
+
+** Firebug
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_variable("firebug_url",
+    "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
+
+function firebug (I) {
+    var doc = I.buffer.document;
+    var script = doc.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', firebug_url);
+    script.setAttribute('onload', 'firebug.init();');
+    doc.body.appendChild(script);
+}
+    interactive("firebug", "open firebug lite", firebug);
+#+END_SRC
+
+** Https-everywhere
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+if ('@eff.org/https-everywhere;1' in Cc) {
+    interactive("https-everywhere-options-dialog",
+                "Open the HTTPS Everywhere options dialog.",
+                function (I) {
+                    window_watcher.openWindow(
+                        null, "chrome://https-everywhere/content/preferences.xul",
+                        "", "chrome,titlebar,toolbar,centerscreen,resizable", null);
+                });
+}
+#+END_SRC
+
+** Adblock-plus
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+require("adblockplus");
+#+END_SRC
+
+* PageModes
+  Page modes, in the spirit of Emacs major modes and GreaseMonkey
+  scripts, allow site-specific functionality to be implemented in
+  Conkeror.
+
+  * Details for the Wikipedia page mode:
+    1. Controls the names of the webjumps (default is "wikipedia-%s")
+    2. For English and Portuguese
+    3. wikipedia-didyoumean.js helps with misspelling. It works quite
+       well in conjunction with the Wikipedia webjumps. Writing
+       e.g. "en bruse sprengstien" jumps all the way to the English
+       Wikipedia article on Bruce Springsteen.
+
+  #+BEGIN_SRC js :tangle ~/.conkerorrc
+    require("twitter");
+    require("duckduckgo");
+    require("facebook");
+    require("github");
+    require("page-modes/google-search-results.js");
+    require("page-modes/gmail.js");
+    require("page-modes/google-video.js");
+    require("page-modes/youtube.js");
+
+    require("page-modes/wikipedia.js");
+    wikipedia_webjumps_format = "wp-%s";
+    define_wikipedia_webjumps("en", "pt-br", "it");
+    require("wikipedia-didyoumean.js");
+ #+END_SRC
+
+* Webjumps
+** Arch linux
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("arch/forums", "http://bbs.archlinux.org");
+define_webjump("arch/wiki", "http://wiki.archlinux.org/index.php?search=%s");
+define_webjump("arch/aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
+define_webjump("arch/packages",
+               "https://www.archlinux.org/packages/?sort=&q=%s&limit=50",
+               $alternative="https://packages.archlinux.org");
+#+END_SRC
+
+** Questions
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("linux-questions","http://www.linuxquestions.org/questions/");
+define_webjump("gmane", "http://gmane.org/find.php?list=%s");
+define_webjump("hackernews", "http://searchyc.com/%s", $alternative = "http://news.ycombinator.com/");
+define_webjump("stackoverflow",  "http://stackoverflow.com/search?q=%s", $alternative = "http://stackoverflow.com/");
+define_webjump("superuser", "http://superuser.com/search?q=%s", $alternative = "http://superuser.com/");
+#+END_SRC
+
+** Emacs
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("emacswiki",
+   "http://www.google.com/cse?cx=004774160799092323420%3A6-ff2s0o6yi"+
+       "&q=%s&sa=Search&siteurl=emacswiki.org%2F",
+   $alternative="http://www.emacswiki.org/"); // emacswiki
+
+define_webjump("marmalade", "http://marmalade-repo.org/packages?q=%s"); // emacs marmalade repo
+#+END_SRC
+
+** Distrowatch
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("distrowatch", "http://distrowatch.com/table.php?distribution=%s");
+#+END_SRC
+
+** DuckDuckGo
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("ddg", "http://duckduckgo.com/?q=%s");
+#+END_SRC
+
+** Google
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("trans", "http://translate.google.com/translate_t#auto|en|%s");
+define_webjump("imagesgoogle", "http://www.google.com/images?q=%s", $alternative = "http://www.google.com/imghp");
+#+END_SRC
+
+** PageDown
+   Confirms if the actual site is really down or it is only for you
+
+   #+BEGIN_SRC js :tangle ~/.conkerorrc
+     define_webjump("down?", function (url) {
+         if (url) {
+             return "http://downforeveryoneorjustme.com/" + url;
+         } else {
+             return "javascript:window.location.href='http://downforeveryoneorjustme.com/'+window.location.href;";
+         }
+     }, $argument = "optional");
+   #+END_SRC
+
+** Popular
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("wordpress", "http://wordpress.org/search/%s");
+define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_webjump("deviantart", "http://browse.deviantart.com/?q=%s", $alternative="http://www.deviantart.com");
+define_webjump("flickr", "http://www.flickr.com/search/?q=%s", $alternative="http://www.flickr.com");
+#+END_SRC
+
+** GIT
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+define_webjump("github", "http://github.com/search?q=%s&type=Everything");
+define_webjump("savannah", "https://savannah.gnu.org/search/?words=%s&type_of_search=soft");
+define_webjump("gitorious", "http://gitorious.org/search?q=%s");
+#+END_SRC
+
+** Wayback
+   You can check the history of Internet, seeing how were the site back then
+
+  #+BEGIN_SRC js :tangle ~/.conkerorrc
+    define_webjump("wayback", function (url) {
+        if (url) {
+            return "http://web.archive.org/web/*/" + url;
+        } else {
+            return "javascript:window.location.href='http://web.archive.org/web/*/'+window.location.href;";
+        }
+    }, $argument = "optional");
+  #+END_SRC
+
+** Wikipedia
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+wikipedia_webjumps_format = "wp-%s"; // controls the names of the webjumps.  default is "wikipedia-%s".
+define_wikipedia_webjumps("en", "es", "bg"); // For English, Spain and Bulgarian.
+#+END_SRC
+
+** Remove unused webjumps
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki','clusty','creativecommons','debbugs','debfile','debpkg','debpopcon','debpts','debqa','freshmeat','kuro5hin','launchpad','lucky','ratpoisonwiki','sadelicious','scholar','sdelicious','slashdot','sourceforge','stumpwmwiki','ubuntubugs','ubuntufile','ubuntupkg','wiktionary','yahoo'];
+
+for (var i=0; i<unused_webjumps.length; i++) {
+    delete webjumps[unused_webjumps[i]];
+}
+#+END_SRC
+
+* Keyboard
+
+** Disable the arrow keys in conkeror (use Emacs alternatives instead).
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+undefine_key(content_buffer_normal_keymap, "up", "cmd_scrollLineUp");
+undefine_key(content_buffer_normal_keymap, "down", "cmd_scrollLineDown");
+undefine_key(content_buffer_normal_keymap, "left", "cmd_scrollLeft");
+undefine_key(content_buffer_normal_keymap, "right", "cmd_scrollRight");
+#+END_SRC
+
+** Enable eye-guide scrolling
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+require('eye-guide.js');
+define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
+define_key(content_buffer_normal_keymap, "back_space", "eye-guide-scroll-up");
+#+END_SRC
+
+* Functions
+** Conkeror goto-buffer.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+// - source http://puntoblogspot.blogspot.com.es/2013/08/conkeror-go-to-buffer.html
+interactive("rgc-goto-buffer", "switches to buffer",
+            function rgc_switch_to_buffer(I){
+                var buff = yield I.minibuffer.read( $prompt = "number?:");
+                switch_to_buffer(I.window, I.window.buffers.get_buffer(buff-1));
+            }
+);
+define_key(content_buffer_normal_keymap, "M-g M-g", "rgc-goto-buffer");
+#+END_SRC
+
+** Restore killed buffer Url.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+// I think by the time kill_buffer_hook runs the buffer is gone so I
+// patch kill_buffer
+
+var kill_buffer_original = kill_buffer_original || kill_buffer;
+
+var killed_buffer_urls = [];
+
+kill_buffer = function (buffer, force) {
+    if (buffer.display_uri_string) {
+        killed_buffer_urls.push(buffer.display_uri_string);
+    }
+
+    kill_buffer_original(buffer,force);
+};
+
+interactive("restore-killed-buffer-url", "Loads url from a previously killed buffer",
+            function restore_killed_buffer_url (I) {
+                if (killed_buffer_urls.length !== 0) {
+                    var url = yield I.minibuffer.read(
+                        $prompt = "Restore killed url:",
+                        $completer = new all_word_completer($completions = killed_buffer_urls),
+                        $default_completion = killed_buffer_urls[killed_buffer_urls.length - 1],
+                        $auto_complete = "url",
+                        $auto_complete_initial = true,
+                        $auto_complete_delay = 0,
+                        $require_match = true);
+
+                    load_url_in_new_buffer(url);
+                } else {
+                    I.window.minibuffer.message("No killed buffer urls");
+                }
+            });
+#+END_SRC
+
+** Clear conkeror history.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+function history_clear () {
+    var history = Cc["@mozilla.org/browser/nav-history-service;1"]
+        .getService(Ci.nsIBrowserHistory);
+    history.removeAllPages();
+}
+
+interactive("history-clear",
+            "Clear the history.",
+            history_clear);
+#+END_SRC
+
+** User agent switcher.
+
+#+BEGIN_SRC js :tangle ~/.conkerorrc
+// source from https://github.com/technomancy/dotfiles/blob/master/.conkerorrc
+var user_agents = { "conkeror": "Mozilla/5.0 (X11; Linux x86_64; rv:8.0.1) " +
+                    "Gecko/20100101 conkeror/1.0pre",
+                    "chromium": "Mozilla/5.0 (X11; U; Linux x86_64; en-US) " +
+                    "AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63" +
+                    "Safari/534.3",
+                    "firefox": "Mozilla/5.0 (X11; Linux x86_64; rv:8.0.1) " +
+                    "Gecko/20100101 Firefox/8.0.1",
+                    "android": "Mozilla/5.0 (Linux; U; Android 2.2; en-us; " +
+                    "Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like " +
+                    "Gecko) Version/4.0 Mobile Safari/533.1"};
+  var agent_completer = prefix_completer($completions = Object.keys(user_agents));
+ interactive("user-agent", "Pick a user agent from the list of presets",
+            function(I) {
+                var ua = (yield I.window.minibuffer.read(
+                    $prompt = "Agent:",
+                    $completer = agent_completer));
+                set_user_agent(user_agents[ua]);
+            });
+#+END_SRC
