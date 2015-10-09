@@ -256,7 +256,7 @@
   (define-key *root-map* (kbd "y")   "skype")
   (define-key *root-map* (kbd "RET") "xterm")
   (define-key *root-map* (kbd "p")   "dmenu")
-  (define-key *root-map* (kbd "q")   "quit")
+  (define-key *root-map* (kbd "Shift-q")   "quit")
 
   (define-key *top-map* (kbd "M-F2") "exec")
 #+END_SRC
