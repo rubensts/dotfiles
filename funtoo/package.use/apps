@@ -1,0 +1,4 @@
+app-text/texlive doc dvi2tty dvipdfm graphics png pstricks science truetype luatex xetex context humanities
+app-admin/conky  apcupsd cmus curl hddtemp ical iconv imlib iostats irc lua lua-cairo lua-imlib lua-rsvg math mpd ncurses portmon rss truetype vim-syntax weather-metar weather-xoap webserver
+sys-apps/util-linux tty-helpers
+
