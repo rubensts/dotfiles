@@ -1,13 +1,8 @@
--- vim: ts=4 sw=4 noet ai cindent syntax=lua
-
 conky.config = {
     alignment = 'top_right',
     background = true,
     border_width = 1,
     cpu_avg_samples = 2,
-    default_color = 'white',
-    default_outline_color = 'white',
-    default_shade_color = 'white',
     double_buffer = true,
     maximum_width = 258,
     draw_borders = false,
@@ -34,7 +29,16 @@ conky.config = {
     uppercase = false,
     use_spacer = 'none',
     show_graph_scale = false,
-    show_graph_range = false
+    show_graph_range = false,
+    default_color = 'DEDEDE',
+    default_outline_color = 'DEDEDE',
+    default_shade_color = 'DEDEDE',
+    color1 = '1793D0',
+    color2 = '8C8C8C',
+    color3 = 'ABABAB',
+    color4 = 'C9C9C9',
+    color5 = 'DEDEDE',
+    color6 = '757575'
 }
 
 conky.text = [[

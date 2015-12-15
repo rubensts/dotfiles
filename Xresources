@@ -1,56 +1,59 @@
-! rxvt-unicode	- Using URxvt*."set" makes setting universal for all forms of URxvt
-!-----------------------------------------------------------------------------
-URxvt.termName:     rxvt-256color
+! rxvt settings --------------------------------------------------------------
 
-URxvt*.geometry:    125x24
+URxvt*termName:    rxvt-256color
+URxvt*geometry:    135x30
 
-URxvt*font:         xft:Ubuntu Mono derivative Powerline:size=11:antialias=true:hinting=true
-URxvt*.boldFont:    xft:Ubuntu Mono derivative Powerline:black:size=11:antialias=true:hinting=true
+URxvt*font:        xft:Source\ Code\ Pro\ for\ Powerline:size=10:antialias=true:hinting=true
+URxvt*boldFont:    xft:Source\ Code\ Pro\ for\ Powerline:black:size=10:antialias=true:hinting=true
 
-URxvt*.letterSpace:     -1
-!URxvt.borderLess:      false
-URxvt*.visualBell:      true    !! No audible bell
-URxvt*.cursorBlink:     true    !! Blinking cursor
-URxvt*.utmpInhibit:     true
-URxvt*.print-pipe:      cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
-URxvt*.urgentOnBell:        true	!! Highlights the appropriate tag when an app sends a bell to the terminal
+URxvt*letterSpace:     -1
+URxvt*borderLess:      true
+URxvt*visualBell:      true    !! No audible bell
+URxvt*cursorBlink:     true    !! Blinking cursor
+URxvt*utmpInhibit:     true
+URxvt*print-pipe:      cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))  !! PrtScr to the specified file (Command+Shift+3 on Mac)
+URxvt*urgentOnBell:    true    !! Highlights the appropriate tag when an app sends a bell to the terminal
 
-URxvt*.scrollBar:           false   !! scrollbar style (rxvt, plain, next, xterm or false)
-URxvt*.saveLines:           10000   !! Scrollback buffer is essential
-URxvt*scrollTtyOutput:      false   !! do not scroll with output
-URxvt*scrollWithBuffer:     true    !! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollTtyKeypress:    true    !! scroll back to the bottom on keypress
+URxvt*scrollBar:           false   !! rxvt, plain, next, xterm or false
+URxvt*saveLines:           10000   !! Scrollback buffer is essential
+! URxvt*scrollTtyOutput:      false   !! do not scroll with output
+! URxvt*scrollWithBuffer:     true    !! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+! URxvt*scrollTtyKeypress:    true    !! scroll back to the bottom on keypress
 
 !! True Transparency - compositing required (compton, xcompmgr or Compiz)
-URxvt*.depth: 32
-URxvt*.background: rgba:1111/1111/1111/dddd
+URxvt*depth: 32
+URxvt*background: rgba:1111/1111/1111/dddd
 
 !! Clickable links and tabbing
-URxvt*.perl-ext-common:   default,matcher
-URxvt*.keysym.C-Insert:   perl:matcher
-URxvt*.urlLauncher:       firefox
-URxvt*.matcher.button:    1
-URxvt*.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt*.colorUL:           #4682B4     !! set a blue color for web links
+URxvt*perl-ext-common:   default,matcher
+URxvt*keysym.C-Insert:   perl:matcher
+URxvt*urlLauncher:       firefox
+URxvt*matcher.button:    1
+URxvt*matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*colorUL: #4682B4     !! set a blue color for web links
 
 !! Disables the insanely annoying Ctrl+Shift shortcut that enters ISO14755 mode
-URxvt.iso14755:         False
+URxvt*iso14755:         False
 
-! Xft Settings
-!-----------------------------------------------------------------------------
+
+! Xft settings ---------------------------------------------------------------
+
+Xft.antialias:  1
+Xft.autohint:   0
 Xft.dpi:        96  !! 220 for Retina
-Xft.antialias:  true
+Xft.hinting:    1
+Xft.hintstyle:  hintfull
+Xft.lcdfilter:  lcddefault
 Xft.rgba:       rgb
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
 
-! Xcursor
-!-----------------------------------------------------------------------------
+
+! Xcursor --------------------------------------------------------------------
+
 Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size:  22
 
-! Color Theme
-!-----------------------------------------------------------------------------
+! Color Theme ----------------------------------------------------------------
+
 *background: #0f0f0f
 *foreground: #c8c8c8
 !black
