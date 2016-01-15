@@ -1,49 +1,62 @@
-;;; packages.el --- my-org Layer packages File for Spacemacs
+;;; packages.el --- my-org layer packages file for Spacemacs.
 ;;
-;; Copyright (c) 2012-2014 Sylvain Benner
-;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
-;; Author: Sylvain Benner <sylvain.benner@gmail.com>
+;; Author: Rubens Souza <rubens@coleman.devise-it.lan>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
 
-;; List of all packages to install and/or initialize. Built-in packages
-;; which require an initialization must be listed explicitly in the list.
+;;; Commentary:
 
-;; The org-plus-contrib package holds many interesting org packages that were
-;; not inserted yet as standalone packages, thus they are automaticaly installed
-;; in ~/.emacs.d/elpa/org-plus-contrib-<date> once org-plus-contrib is
-;; installed. They have to be called in the <my-org>extensions.el file.
+;; See the Spacemacs documentation and FAQs for instructions on how to implement
+;; a new layer:
+;;
+;;   SPC h SPC layers RET
+;;
+;;
+;; Briefly, each package to be installed or configured by this layer should be
+;; added to `my-org-packages'. Then, for each package PACKAGE:
+;;
+;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
+;;   function `my-org/init-PACKAGE' to load and initialize the package.
 
-(setq my-org-packages
-    '(
-      org-plus-contrib
-      ox-pandoc
-      ox-reveal
-      ))
+;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
+;;   define the functions `my-org/pre-init-PACKAGE' and/or
+;;   `my-org/post-init-PACKAGE' to customize the package as it is loaded.
 
-;; List of packages to exclude.
-(setq my-org-excluded-packages '())
+;;; Code:
 
-;; List of packages to be initialized.
+(defconst my-org-packages
+  '()
+  "The list of Lisp packages required by the my-org layer.
 
-(defun my-org/init-org-plus-contrib ()
-  "Initialize org-plus-contrib"
-  (use-package org-plus-contrib
-    :defer t)
-  )
+Each entry is either:
 
-(defun my-org/init-ox-pandoc ()
-  "Initialize ox-pandoc"
-  (use-package ox-pandoc
-    :defer t)
-  )
+1. A symbol, which is interpreted as a package to be installed, or
 
-(defun my-org/init-ox-reveal ()
-  "Initialize ox-reveal"
-  (use-package ox-reveal
-    :defer t)
-  )
+2. A list of the form (PACKAGE KEYS...), where PACKAGE is the
+    name of the package to be installed or loaded, and KEYS are
+    any number of keyword-value-pairs.
+
+    The following keys are accepted:
+
+    - :excluded (t or nil): Prevent the package from being loaded
+      if value is non-nil
+
+    - :location: Specify a custom installation location.
+      The following values are legal:
+
+      - The symbol `elpa' (default) means PACKAGE will be
+        installed using the Emacs package manager.
+
+      - The symbol `local' directs Spacemacs to load the file at
+        `./local/PACKAGE/PACKAGE.el'
+
+      - A list beginning with the symbol `recipe' is a melpa
+        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+
+;;; packages.el ends here
