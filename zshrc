@@ -1,6 +1,9 @@
 ## PATHS
 # Enter any necessary PATH alteration here
 
+export TERM="xterm-256color"
+alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
+
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
 #if [ -d "${RBENV_ROOT}" ]; then
@@ -59,4 +62,4 @@ fortune
 echo
 
 # Keychain
-eval `keychain --eval id_rsa`
+#eval `keychain --eval id_rsa`
