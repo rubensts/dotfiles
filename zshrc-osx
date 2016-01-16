@@ -51,8 +51,13 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=/usr/local/bin:$HOME/.cask/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.cask/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# 2ndQuadrant-asciidoc path
+export PATH="/usr/local/Cellar/gnu-getopt/1.1.6/bin:$PATH"
+# asciidoc xml support
+export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
 
 # Python
 export PYTHONPATH=/usr/local/bin
@@ -85,6 +90,13 @@ export LANG=en_US.UTF-8
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
+
+# Go config
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/prj/go
+export PATH=$PATH:$GOROOT/bin
+
+export PATH=$GOPATH/go_appengine:$PATH
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
