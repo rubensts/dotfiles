@@ -3,8 +3,8 @@
 URxvt*termName:    rxvt-256color
 URxvt*geometry:    135x30
 
-URxvt*font:        xft:Source\ Code\ Pro\ for\ Powerline:size=10:antialias=true:hinting=true
-URxvt*boldFont:    xft:Source\ Code\ Pro\ for\ Powerline:black:size=10:antialias=true:hinting=true
+URxvt*font:        xft:Source\ Code\ Pro\ for\ Powerline:size=9:antialias=true:hinting=true
+URxvt*boldFont:    xft:Source\ Code\ Pro\ for\ Powerline:black:size=9:antialias=true:hinting=true
 
 URxvt*letterSpace:     -1
 URxvt*borderLess:      true
