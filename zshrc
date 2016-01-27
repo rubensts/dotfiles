@@ -3,6 +3,7 @@
 
 export TERM="xterm-256color"
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
+alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
@@ -63,3 +64,9 @@ echo
 
 # Keychain
 #eval `keychain --eval id_rsa`
+
+PATH="/home/rubens/perl5/bin${PATH+:}${PATH}"; export PATH;
+PERL5LIB="/home/rubens/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/rubens/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/rubens/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/rubens/perl5"; export PERL_MM_OPT;
