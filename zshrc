@@ -12,6 +12,8 @@ alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 #  eval "$(rbenv init -)"
 #fi
 
+export TERM="xterm-256color"
+
 ## Antigen - plugin manager
 source ~/git/antigen/antigen.zsh
 
