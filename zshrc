@@ -67,6 +67,7 @@ echo
 # Keychain
 #eval `keychain --eval id_rsa`
 
+## Added by cpan
 PATH="/home/rubens/perl5/bin${PATH+:}${PATH}"; export PATH;
 PERL5LIB="/home/rubens/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/rubens/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
