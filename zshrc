@@ -4,6 +4,8 @@
 export TERM="xterm-256color"
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
+alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pipold="pip list --outdated"
 
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
@@ -11,8 +13,6 @@ alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 #  export PATH="${RBENV_ROOT}/bin:${PATH}"
 #  eval "$(rbenv init -)"
 #fi
-
-export TERM="xterm-256color"
 
 ## Antigen - plugin manager
 source ~/git/antigen/antigen.zsh
@@ -62,10 +62,3 @@ antigen apply
 
 # Keychain
 #eval `keychain --eval id_rsa`
-
-## Added by cpan
-PATH="/home/rubens/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/rubens/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/rubens/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/rubens/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/rubens/perl5"; export PERL_MM_OPT;
