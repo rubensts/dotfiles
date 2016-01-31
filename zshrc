@@ -23,17 +23,17 @@ antigen use oh-my-zsh
 ## Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundles <<EOBUNDLES
 
-	#archlinux
-	#systemd
-	emacs
-	git
-	github
-	gitignore
-	pip
-	#lein
-	command-not-found
-	screen
-	zsh-users/zsh-syntax-highlighting
+        #archlinux
+        #systemd
+        emacs
+        git
+        github
+        gitignore
+        pip
+        #lein
+        command-not-found
+        screen
+        zsh-users/zsh-syntax-highlighting
 
 EOBUNDLES
 
@@ -59,10 +59,6 @@ antigen theme bhilburn/powerlevel9k powerlevel9k
 
 ## Tell antigen that you're done.
 antigen apply
-
-## Shows a fortune
-fortune
-echo
 
 # Keychain
 #eval `keychain --eval id_rsa`
