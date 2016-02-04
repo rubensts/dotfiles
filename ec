@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Source: http://mjwall.com/blog/2013/10/04/how-i-use-emacs/
 # This script starts emacs daemon if it is not running, opens whatever file
 # you pass in and changes the focus to emacs.  Without any arguments, it just
 # opens the current buffer or *scratch* if nothing else is open.  The following
