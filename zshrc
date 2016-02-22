@@ -6,6 +6,11 @@ alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipold="pip list --outdated"
+alias conkeror='firefox --app ~/git/conkeror/application.ini'
+alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
+alias ls='ls --group-directories-first --color=always'
+alias xg='xinit gnome'
+alias xs='xinit stumpwm'
 
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
