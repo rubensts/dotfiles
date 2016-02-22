@@ -196,12 +196,14 @@ assign [class="Firefox"] $WS3
 assign [class="Emacs"] $WS2
 
 # workspace default monitors
-workspace $WS1 output DVI-I-2
-workspace $WS2 output DVI-I-2
-workspace $WS3 output DVI-I-2
-workspace $WS4 output DVI-I-2
-workspace $WS5 output DVI-I-2
-workspace $WS6 output DVI-I-2
-workspace $WS9 output DVI-I-2
-workspace $WS10 output DVI-I-2
+workspace $WS1 output VGA-0
+workspace $WS2 output DVI-I-1
+workspace $WS3 output DVI-I-1
+workspace $WS4 output DVI-I-1
+workspace $WS5 output DVI-I-1
+workspace $WS6 output DVI-I-1
+workspace $WS9 output DVI-I-1
+workspace $WS10 output DVI-I-1
 
+# Dual monitor config
+exec_always xrandr --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-0 --off --output HDMI-0 --off
