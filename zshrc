@@ -9,8 +9,7 @@ alias pipold="pip list --outdated"
 alias conkeror='firefox --app ~/git/conkeror/application.ini'
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias ls='ls --group-directories-first --color=always'
-alias xg='xinit gnome'
-alias xs='xinit stumpwm'
+alias x='startx'
 
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
