@@ -33,6 +33,9 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# Pulseaudio config
+exec --no-startup-id pulseaudio --start
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
