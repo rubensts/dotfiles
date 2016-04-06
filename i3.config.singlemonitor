@@ -21,7 +21,8 @@ hide_edge_borders both
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -34,7 +35,7 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Pulseaudio config
-exec --no-startup-id pulseaudio --start
+exec --no-startup-id "pulseaudio --start"
 
 # change focus
 bindsym $mod+j focus left
@@ -87,16 +88,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # variables for the workspaces
-set $WS1 "1 a"
-set $WS2 "2 b"
-set $WS3 "3 c"
-set $WS4 "4 d"
-set $WS5 "5 e"
-set $WS6 "6 f"
-set $WS7 "7 g"
-set $WS8 "8 h"
-set $WS9 "9 i"
-set $WS10 "10 j"
+set $WS1 "1 "
+set $WS2 "2 "
+set $WS3 "3 "
+set $WS4 "4 "
+set $WS5 "5 "
+set $WS6 "6 "
+set $WS7 "7 "
+set $WS8 "8 "
+set $WS9 "9 "
+set $WS10 "10 "
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -172,17 +173,21 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        colors {
-               	background $bg-color
-                separator #757575
-                #                  border             background         text
-                focused_workspace  $bg-color          $bg-color          $text-color
-                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-        }
-
-        tray_output primary
+    status_command i3status
+    position          top
+    mode              dock
+    workspace_buttons yes
+    tray_output       primary
+    
+    colors {
+           background $bg-color
+           separator #757575
+           #                  border             background         text
+           focused_workspace  $bg-color          $bg-color          $text-color
+           inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+           urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+    }
+    tray_output primary
 }
 
 # floating

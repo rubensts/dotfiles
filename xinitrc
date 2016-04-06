@@ -47,12 +47,12 @@ urxvtd --quiet --opendisplay --fork & #urxvt daemon (run with urxvtc)
 thunar --daemon &
 thunar-volman &
 
-#exec i3
+exec i3
 #exec awesome
 #exec gnome-session
 #exec gnome-session --session=gnome-classic
 #exec openbox-session
-exec startxfce4
+#exec startxfce4
 #exec xmonad
 #exec startlxqt
 #exec ssh-agent stumpwm
