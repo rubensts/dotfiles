@@ -193,7 +193,7 @@ bar {
 # floating
 for_window [class="qTox"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Skype"] floating enable
+#for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 
 # default workspaces
