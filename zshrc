@@ -38,6 +38,7 @@ antigen bundles <<EOBUNDLES
         command-not-found
         screen
         zsh-users/zsh-syntax-highlighting
+        zsh-users/zsh-autosuggestions
 
 EOBUNDLES
 
