@@ -14,9 +14,12 @@
   http://www.kaashif.co.uk/2015/06/28/hacking-stumpwm-with-common-lisp/index.html
   https://github.com/kaashif/dotfiles/blob/master/stumpwm/.stumpwmrc
 
+*Remember:* To tangle this file to ~/.stumpwm.d/init.lisp use to keybinding *C-c C-v t*
+source: http://orgmode.org/manual/Extracting-source-code.html
+  
 * Code
 
-#+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+#+BEGIN_SRC lisp :mkdirp yes :tangle ~/.stumpwm.d/init.lisp
 (in-package :stumpwm)
 #+END_SRC
 
@@ -87,7 +90,7 @@
  #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
    (load-module "ttf-fonts")
    (set-font (make-instance 'xft:font
-                            :family "Hack"
+                            :family "Source Code Pro"
                             :subfamily "Regular"
                             :size 10))
  #+END_SRC
