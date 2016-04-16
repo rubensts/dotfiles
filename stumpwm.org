@@ -392,19 +392,19 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 ** Random wallpaper
 
 #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
-;;  (defvar *background-image-path* "~/Pictures/wallpapers/")
-;;  (defun select-random-background-image ()
-;;    "Select a random image"
-;;    (let ((file-list (directory
-;;                      (concatenate
-;;                       'string *background-image-path* "*.jpg")))
-;;          (*random-state* (make-random-state t)))
-;;      (namestring (nth (random
-;;                        (length file-list)) file-list))))
-;;
-;;  (run-shell-command (concatenate
-;;                      'string "feh --bg-scale "
-;;                      (select-random-background-image)))
+  (defvar *background-image-path* "~/Sync/wallpapers/")
+  (defun select-random-background-image ()
+    "Select a random image"
+    (let ((file-list (directory
+                      (concatenate
+                       'string *background-image-path* "*.jpg")))
+          (*random-state* (make-random-state t)))
+      (namestring (nth (random
+                        (length file-list)) file-list))))
+
+  (run-shell-command (concatenate
+                      'string "feh --bg-scale "
+                      (select-random-background-image)))
 #+END_SRC
 
 * Stumpwmrc ends here
