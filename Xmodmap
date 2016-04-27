@@ -8,8 +8,8 @@ keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
 
 !! Modifies the winkey to F20, to be used as StumpWM prefix key
 !! https://github.com/stumpwm/stumpwm/wiki/FAQ
-clear mod4
-keycode 133 = F20
+!clear mod4
+!keycode 133 = F20
 
 !! Configure mouse scrolling to the Natural scrolling (Apple)
 !pointer = 1 2 3 5 4 7 6 8 9 10 11 12

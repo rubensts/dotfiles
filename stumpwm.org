@@ -1,22 +1,29 @@
 #+TITLE: StumpWM configuration
+#+AUTHOR: Rubens.TS
+#+EMAIL: rubensts@gmail.com
 
 * About
-  This configuration files is a collection of many stumpwmrc that I've
-  found on the web. Some places are:
+To install StumpWM follow the instructions from [[http://www.kaashif.co.uk/2015/06/28/hacking-stumpwm-with-common-lisp/index.html][here]]. It installs StumpWM
+through quicklisp (a lot easier).
 
-  http://www.xsteve.at/prg/stumpwm/
-  https://github.com/ivoarch/.dot-org-files/blob/master/stumpwm.org
-  https://github.com/qizhihere/.stumpwm.d
-  http://es.gnu.org/~holzplatten/downloads/stumpwmrc
-  http://yujianzhang.blogspot.it/2008/07/experiencing-stumpwm.html
-  http://thtump.blogspot.it/
-  http://cyborginstitute.org/projects/stack/stumpwm/
-  http://www.kaashif.co.uk/2015/06/28/hacking-stumpwm-with-common-lisp/index.html
-  https://github.com/kaashif/dotfiles/blob/master/stumpwm/.stumpwmrc
+This configuration file is a collection of many stumpwmrc that I've found on the
+web. Some places are:
+
+- http://www.xsteve.at/prg/stumpwm/
+- https://github.com/ivoarch/.dot-org-files/blob/master/stumpwm.org
+- https://github.com/qizhihere/.stumpwm.d
+- https://github.com/kaashif/dotfiles/blob/master/stumpwm/.stumpwmrc
+- https://github.com/KeiferMiller/dotfiles/blob/master/dotfiles.org
+- https://github.com/alezost/stumpwm-config
+- http://es.gnu.org/~holzplatten/downloads/stumpwmrc
+- http://yujianzhang.blogspot.it/2008/07/experiencing-stumpwm.html
+- http://thtump.blogspot.it/
+- http://cyborginstitute.org/projects/stack/stumpwm/
+- http://dotshare.it/dots/49/
 
 *Remember:* To tangle this file to ~/.stumpwm.d/init.lisp use to keybinding *C-c C-v t*
 source: http://orgmode.org/manual/Extracting-source-code.html
-  
+
 * Code
 
 #+BEGIN_SRC lisp :mkdirp yes :tangle ~/.stumpwm.d/init.lisp
@@ -33,7 +40,7 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 
   (defun swank-start-server ()
     (and (not *swank-server-running*)
-         (swank:create-server :port 4005
+         (swank:create-server :port 4004
                               :style swank:*communication-style*
                               :dont-close t)
          (setf *swank-server-running* t)))
@@ -57,15 +64,15 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 
 * Defaults
 ** Keyboard layout
-    setxkbmap has to be called before xmodmap, otherwise the keyboard
-    keys get all messed up.
+setxkbmap has to be called before xmodmap, otherwise the keyboard
+keys get all messed up.
 
-    1. Sets italian as the default layout and international english as
-       alternative. To switch between layouts press the "menu key".
-    2. Load xmodmap, which does two things:
-       a) remap the capslock key to be another Ctrl key
-       b) remap the winkey to F20. It is the only way to make the
-          winkey play nice as StumpWM's prefix key
+1. Sets italian as the default layout and international english as alternative.
+   To switch between layouts press the "menu key".
+2. Load xmodmap, which does two things:
+   * remap the capslock key to be another Ctrl key
+   * remap the winkey to F20. It is the only way to make the winkey play nice as
+     StumpWM's prefix key
 
 #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
 ;(run-shell-command "setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle")
@@ -73,8 +80,8 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 #+END_SRC
 
 ** Prefix key
-    The winkey is set to be StumpWM's prefix key, as explained above
-    and on the StumpWM FAQ.
+The winkey is set to be StumpWM's prefix key, as explained above and on the
+StumpWM FAQ.
 
 #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
  (set-prefix-key (kbd "F20"))
@@ -82,18 +89,35 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 
 ** GUI
 *** Font
-     Set the font for the message bar and input bar.
+Set the font for the message bar and input bar.
 
-     1. Load module for xft fonts.
-     2. Set xft font.
+1. Load module for xft fonts.
+2. Set xft font.
 
- #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
-   (load-module "ttf-fonts")
-   (set-font (make-instance 'xft:font
-                            :family "Source Code Pro"
-                            :subfamily "Regular"
-                            :size 10))
- #+END_SRC
+  #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
+        ;;(ql:quickload :ttf-fonts)
+        ;;(setf xft:*font-dirs* '("/usr/share/fonts"))
+
+
+        (load-module "ttf-fonts")
+        (xft:cache-fonts)
+        (set-font (make-instance 'xft:font
+                                 :family "Ubuntu Mono"
+                                 :subfamily "Regular"
+                                 :size 12))
+
+        ;;(set-font "-*-inconsolata-medium-r-normal-*-*-*-*-*-*-*-*-*")
+        ;;(set-font "-*-lucida-medium-r-normal-sans-14-100-100-*-*-*-*-*")
+
+
+;;    (add-to-load-path "~/.stumpwm.d/stumpwm-contrib/util/ttf-fonts")
+;;    (load-module "ttf-fonts")
+;;    (ignore-errors
+;;      (or (and (xft:cache-fonts)
+;;               (set-font (make-instance 'xft:font :family "Ubuntu Mono" :subfamily "Regular" :size 12)))
+;;          (set-font "-*-lucida-medium-r-normal-sans-14-100-100-*-*-*-*-*")))
+
+  #+END_SRC
 
 *** Colors
 
@@ -126,7 +150,7 @@ source: http://orgmode.org/manual/Extracting-source-code.html
   (setq *window-border-style* :thin)
 #+END_SRC
 
-** Mode-line
+** Modeline
 
 #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
   (setf *screen-mode-line-format* "[%g]  %v  %40d"
@@ -317,7 +341,6 @@ source: http://orgmode.org/manual/Extracting-source-code.html
 #+BEGIN_SRC lisp :tangle ~/.stumpwm.d/init.lisp
 (run-shell-command "thunar --daemon")
 (run-shell-command "urxvtd --quiet --opendisplay --fork")
-;;(run-shell-command "emacs --daemon")
 #+END_SRC
 
 ** Start/Switch applications
