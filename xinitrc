@@ -36,7 +36,7 @@ exec xset b off &    # turn off bell
 setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle
 xmodmap ~/.Xmodmap
 xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
-#compton --config ~/.compton.conf -b  # transparency
+compton --config ~/.compton.conf -b  # transparency
 numlockx &                           # turn on numlock keys
 #xscreensaver -no-splash &            # screensaver daemon, managed w/ xautolock
 # volumeicon &
