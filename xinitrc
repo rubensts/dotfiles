@@ -33,7 +33,8 @@ exec xset b off &    # turn off bell
 
 # Sets italian as the default layout, having international english as
 # alternative. To switch between layouts press the "menu key".
-setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle
+#setxkbmap -layout it,us -variant ,intl -option grp:menu_toggle
+setxkbmap -layout us,it -variant intl -option grp:menu_toggle
 xmodmap ~/.Xmodmap
 xsetroot -cursor_name left_ptr       # sets the usual cursor pointer
 compton --config ~/.compton.conf -b  # transparency

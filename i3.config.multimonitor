@@ -34,11 +34,18 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Autostart apps
+exec --no-startup-id "/usr/bin/gnome-settings-daemon"
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
+exec --no-startup-id "/usr/bin/gnome-sound-applet"
+exec --no-startup-id "setxkbmap -layout us,it -variant intl -option grp:menu_toggle"
 #exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
+
+# borders config
+new_window normal
+bindsym $mod+b border toggle
 
 # Volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -- '-5%'
@@ -96,7 +103,7 @@ bindsym $mod+a focus parent
 
 # variables for the workspaces
 set $WS1 "1 "
-set $WS2 "2 "
+set $WS2 "2 "
 set $WS3 "3 "
 set $WS4 "4 "
 set $WS5 "5 "
@@ -200,15 +207,24 @@ bar {
 # floating
 for_window [class="qTox"] floating enable
 for_window [class="Pavucontrol"] floating enable
-#for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 
+# tiling mode only for the main/chat Skype window
+for_window [instance="skype" title="^rubens.sou - Skype™"] floating enable
+for_window [instance="skype" title="^Find Text$"] floating enable
+for_window [instance="skype" title="^Information$"] floating enable
+for_window [instance="skype" title="^*$Skype™"] floating disable
+#for_window [class="^Skype"] move right
+
 # default workspaces
-assign [class="Spotify"] $WS10
-assign [class="Skype"] $WS2
-assign [class="qTox"] $WS2
-assign [class="Emacs"] $WS3
-assign [class="Firefox"] $WS4
+assign [class="qTox"] → $WS1
+assign [class="Emacs"] → $WS3
+assign [class="Firefox"] → $WS4
+assign [class="Thunar"] → $WS5
+assign [class="Spotify"] → $WS10
+
+assign [instance="skype" title="^rubens.sou - Skype™"] → $WS1
+assign [instance="skype" title="^*$Skype™"] → $WS1
 
 # workspace default monitors
 workspace $WS1 output VGA-0
@@ -219,12 +235,6 @@ workspace $WS5 output DVI-I-1
 workspace $WS6 output DVI-I-1
 workspace $WS9 output DVI-I-1
 workspace $WS10 output DVI-I-1
-
-# use tiling mode only for main/chat Skype window and floating of all dialogs
-# Skype main window title looks like this - "alexey.diyan - Skype™"
-#for_window [instance="skype" title="^.*?(?<!Skype)$"] floating enable
-#for_window [instance="skype" title="Skype™|Call with|File Transfers"] floating disable
-#for_window [class="^Skype"] move right
 
 # Dual monitor config
 exec_always xrandr --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-0 --off --output HDMI-0 --off
