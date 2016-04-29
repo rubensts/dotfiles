@@ -4,8 +4,8 @@
 export TERM="xterm-256color"
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
-alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-alias pipold="pip list --outdated"
+alias pipup="sudo pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
+alias pipold="sudo pip list --outdated"
 alias conkeror='firefox --app ~/git/conkeror/application.ini'
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias ls='ls --group-directories-first --color=always'
@@ -60,7 +60,8 @@ POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 export DEFAULT_USER=rubens
 
 ## Apply the theme
-antigen theme bhilburn/powerlevel9k powerlevel9k
+#antigen theme bhilburn/powerlevel9k powerlevel9k
+antigen theme amuse
 
 ## Tell antigen that you're done.
 antigen apply
