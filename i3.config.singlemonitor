@@ -32,6 +32,10 @@ bindsym $mod+d exec dmenu_run
 # Pulseaudio config
 exec --no-startup-id "pulseaudio --start"
 
+# borders config
+new_window none
+bindsym $mod+b border toggle
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -188,18 +192,19 @@ bar {
 # floating
 for_window [class="qTox"] floating enable
 for_window [class="Pavucontrol"] floating enable
-#for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 
-# default workspaces
-assign [class="Spotify"] $WS10
-assign [class="Skype"] $WS1
-assign [class="qTox"] $WS1
-assign [class="Firefox"] $WS3
-assign [class="Emacs"] $WS2
-
-# use tiling mode only for main/chat Skype window and floating of all dialogs
-# Skype main window title looks like this - "alexey.diyan - Skype™"
-for_window [instance="skype" title="^.*?(?<!Skype)$"] floating enable
-for_window [instance="skype" title="Skype™|Call with|File Transfers"] floating disable
+# tiling mode only for the main/chat Skype window
+for_window [instance="skype" title="^rubens.sou - Skype™"] floating enable
+for_window [instance="skype" title="^*$Skype™"] floating disable
 for_window [class="^Skype"] move right
+
+# default workspaces
+assign [class="qTox"]    → $WS1
+assign [class="Emacs"]   → $WS2
+assign [class="Firefox"] → $WS3
+assign [class="Thunar"]   → $WS4
+assign [class="Spotify"] → $WS10
+
+assign [instance="skype" title="^rubens.sou - Skype™"] → $WS5
+assign [instance="skype" title="^*$Skype™"] → $WS1
