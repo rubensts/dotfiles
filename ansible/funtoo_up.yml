@@ -1,0 +1,17 @@
+---
+- name: 'Funtoo installation'
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Update package repositories
+      portage: sync=yes
+      tags:
+        - update
+
+    - name: Install universal base packages
+      portage: package={{ item }} state=present
+      with_items:
+        - vim
+      tags:
+        - packages
