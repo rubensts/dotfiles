@@ -14,7 +14,7 @@ exec_always ~/git/dotfiles/wallpaper.sh
 # Thin borders
 hide_edge_borders both
 
-# Mouse+$mod to drag floating windows
+# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Stop following the mouse
