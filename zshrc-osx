@@ -41,26 +41,27 @@ antigen bundles <<EOBUNDLES
 
 EOBUNDLES
 
-## Load the theme
-## All the POWERLEVEL variables have to be set before applying the theme
-#POWERLEVEL9K_MODE='compatible'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+## Config the bullettrain theme
+BULLETTRAIN_DIR_EXTENDED=2
+BULLETTRAIN_RUBY_PREFIX="♦"
+BULLETTRAIN_VIRTUALENV_PREFIX="🐍"
 
-# Limit dir segmente (listed above) to show only the last two folders
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+BULLETTRAIN_PROMPT_ORDER=(
+    time
+    dir
+    virtualenv
+    ruby
+    go
+    git
+)
 
-# Output time, date, and a symbol from the "Awesome Powerline Font" set
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
-
-# The context segment (listed above) shows user@host on the shell.
+# The context segment shows user@host on the shell.
 # The line below sets it to only display when is not the Default user.
 export DEFAULT_USER=rubens
 
 ## Apply the theme
 #antigen theme bhilburn/powerlevel9k powerlevel9k
-antigen theme amuse
+antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
 ## Tell antigen that you're done.
 antigen apply
