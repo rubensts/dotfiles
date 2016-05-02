@@ -7,7 +7,6 @@ alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 alias pipup="sudo pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
 alias pipold="sudo pip list --outdated"
 alias conkeror='firefox --app ~/git/conkeror/application.ini'
-alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias ls='ls --group-directories-first --color=always'
 alias x='startx'
 
