@@ -1,17 +1,23 @@
-x11-libs/libxcb xkb
 dev-libs/libpcre pcre16
-media-video/ffmpeg opus
+x11-libs/libxcb xkb
+x11-libs/cairo xcb
+x11-libs/libva abi_x86_32 abi_x86_64
+x11-libs/libva-intel-driver abi_x86_32 abi_x86_64
+
+#media-video/ffmpeg opus
 app-text/texlive doc dvi2tty dvipdfm graphics png pstricks science truetype luatex xetex context humanities
-app-admin/conky  apcupsd cmus curl hddtemp ical iconv imlib iostats irc lua lua-cairo lua-imlib lua-rsvg math mpd ncurses portmon rss truetype vim-syntax weather-metar weather-xoap webserver echo nouserpriv.conf
-sys-apps/util-linux tty-helpers
-media-sound/pulseaudio alsa caps dbus gdbm glib gnome orc udev alsa-plugin sox
+#app-admin/conky  apcupsd cmus curl hddtemp ical iconv imlib iostats irc lua lua-cairo lua-imlib lua-rsvg math mpd ncurses portmon rss truetype vim-syntax weather-metar weather-xoap webserver echo nouserpriv.conf
+#sys-apps/util-linux tty-helpers
+#media-sound/pulseaudio alsa caps dbus gdbm glib gnome orc udev alsa-plugin sox
 sys-auth/consolekit policykit
-app-editors/emacs gtk3 gnutls xft
-app-text/poppler cairo
+#app-editors/emacs gtk3 gnutls xft
+#app-text/poppler cairo
 x11-terms/rxvt-unicode 256-color
-media-libs/gd fontconfig
-sys-block/gparted  btrfs fat hfs jfs ntfs policykit xfs -dmraid -f2fs -kde -mdadm -reiser4
-net-p2p/transmission gtk -qt5 -ayatana
-net-print/cups ppds
-net-fs/samba client pam
+#media-libs/gd fontconfig
+#sys-block/gparted  btrfs fat hfs jfs ntfs policykit xfs -dmraid -f2fs -kde -mdadm -reiser4
+#net-p2p/transmission gtk -qt5 -ayatana
+#net-print/cups ppds
+#net-fs/samba client pam
 app-admin/pass emacs importers zsh-completion
+media-libs/gd fontconfig
+
