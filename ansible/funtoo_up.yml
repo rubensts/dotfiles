@@ -22,9 +22,17 @@
         - xorg-x11
         - xf86-input-evdev
         - i3
+        - i3status
         - xrandr
         - dmenu
         - numlockx
+        - xscreensaver
+        - feh
+        - thunar
+        - p7zip
+        - unrar
+        - unzip
+        - file-roller
         - firefox
       tags:
         - packages
