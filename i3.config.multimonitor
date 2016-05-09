@@ -42,6 +42,7 @@ exec --no-startup-id "setxkbmap -layout us,it -variant intl -option grp:menu_tog
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
+exec --no-startup-id "syncthing"
 
 # borders config
 new_window normal
@@ -220,7 +221,8 @@ for_window [instance="skype" title="^*$Skype™"] floating disable
 assign [class="qTox"] → $WS1
 assign [class="Emacs"] → $WS3
 assign [class="Firefox"] → $WS4
-assign [class="Thunar"] → $WS5
+assign [class="Thunderbird"] → $WS5
+assign [class="Thunar"] → $WS6
 assign [class="Spotify"] → $WS10
 
 assign [instance="skype" title="^rubens.sou - Skype™"] → $WS1
