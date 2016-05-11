@@ -38,6 +38,7 @@ exec --no-startup-id "/usr/bin/gnome-settings-daemon"
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
 exec --no-startup-id "/usr/bin/gnome-sound-applet"
 exec --no-startup-id "setxkbmap -layout us,it -variant intl -option grp:menu_toggle"
+exec --no-startup-id "xmodmap ~/.Xmodmap"
 #exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
@@ -212,9 +213,9 @@ for_window [class="mpv"] floating enable
 
 # tiling mode only for the main/chat Skype window
 for_window [instance="skype" title="^rubens.sou - Skype™"] floating enable
-for_window [instance="skype" title="^Find Text$"] floating enable
-for_window [instance="skype" title="^Information$"] floating enable
-for_window [instance="skype" title="^*$Skype™"] floating disable
+for_window [instance="skype" title="^Find Text"] floating enable
+for_window [instance="skype" title="^Information"] floating enable
+for_window [instance="skype" title="^$Skype™"] floating disable
 #for_window [class="^Skype"] move right
 
 # default workspaces
