@@ -1,12 +1,5 @@
 #! /bin/bash
 
-# sets up gnome-keyring so that applications can use it
-#eval `gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh`
-#export GNOME_KEYRING_CONTROL
-#export SSH_AUTH_SOCK
-#export GPG_AGENT_INFO
-#export GNOME_KEYRING_PID
-
 # merge in defaults and keymaps
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
@@ -45,10 +38,12 @@ numlockx &                           # turn on numlock keys
 #nm-applet --sm-disable &             # NetworkManager applet
 urxvtd --quiet --opendisplay --fork & #urxvt daemon (run with urxvtc)
 #mpd &                           # music player daemon
-#thunar --daemon &
-#thunar-volman &
+thunar --daemon &
+thunar-volman &
 
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session i3 -V -d all > ~/.i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
+#exec ck-launch-session dbus-launch --sh-syntax --exit-with-session i3 -V -d all > ~/.i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
+exec i3 -V -d all > ~/.i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
+#exec spectrwm
 #exec awesome
 #exec gnome-session
 #exec gnome-session --session=gnome-classic
