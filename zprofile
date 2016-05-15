@@ -29,6 +29,3 @@ path=(
     $GOPATH/bin
 )
 
-## Shows a fortune
-fortune
-echo

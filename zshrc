@@ -70,7 +70,9 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 ## Tell antigen that you're done.
 antigen apply
 
-# Say something
-fortune
 # Keychain
-eval `keychain --eval id_rsa`
+eval $(keychain --eval --quiet id_rsa 6BB1CF3B --agents ssh,gpg)
+
+## Shows a fortune
+fortune
+echo
