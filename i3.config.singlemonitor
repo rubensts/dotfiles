@@ -21,7 +21,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -98,14 +98,14 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # variables for the workspaces
-set $WS1 "1 "
-set $WS2 "2 "
-set $WS3 "3 "
-set $WS4 "4 "
-set $WS5 "5 "
-set $WS6 "6 "
-set $WS7 "7 "
-set $WS8 "8 "
+set $WS1 "1 "
+set $WS2 "2 "
+set $WS3 "3 "
+set $WS4 "4 "
+set $WS5 "5 "
+set $WS6 "6 "
+set $WS7 "7 "
+set $WS8 "8 "
 set $WS9 "9 "
 set $WS10 "10 "
 
@@ -218,6 +218,7 @@ assign [class="qTox"]       → $WS1
 assign [class="Emacs"]      → $WS3
 assign [class="Firefox"]    → $WS4
 assign [class="Thunar"]     → $WS5
+assign [class="Transmission-gtk"] → $WS6
 assign [class="Spotify"]    → $WS10
 
 assign [instance="skype" title="^rubens.sou - Skype™"] → $WS5
