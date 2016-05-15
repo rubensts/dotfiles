@@ -44,7 +44,7 @@ bindsym $mod+Shift+q kill
 #exec --no-startup-id "nm-applet"
 
 # borders config
-new_window none
+new_window normal
 bindsym $mod+b border toggle
 
 # change focus
@@ -204,18 +204,21 @@ bar {
 for_window [class="qTox"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="mpv"] floating enable
+for_window [class="Transmission-gtk"] floating enable
 
 # tiling mode only for the main/chat Skype window
 for_window [instance="skype" title="^rubens.sou - Skype™"] floating enable
+for_window [instance="skype" title="^Find Text$"] floating enable
+for_window [instance="skype" title="^Information$"] floating enable
 for_window [instance="skype" title="^*$Skype™"] floating disable
 for_window [class="^Skype"] move right
 
 # default workspaces
-assign [class="qTox"]    → $WS1
-assign [class="Emacs"]   → $WS2
-assign [class="Firefox"] → $WS3
-assign [class="Thunar"]   → $WS4
-assign [class="Spotify"] → $WS10
+assign [class="qTox"]       → $WS1
+assign [class="Emacs"]      → $WS3
+assign [class="Firefox"]    → $WS4
+assign [class="Thunar"]     → $WS5
+assign [class="Spotify"]    → $WS10
 
 assign [instance="skype" title="^rubens.sou - Skype™"] → $WS5
 assign [instance="skype" title="^*$Skype™"] → $WS1

@@ -10,6 +10,10 @@ alias conkeror='firefox --app ~/git/conkeror/application.ini'
 alias ls='ls --group-directories-first --color=always'
 alias x='startx'
 
+# Persistent rehash
+# source: https://wiki.archlinux.org/index.php/zsh
+zstyle ':completion:*' rehash true
+
 # rbenv PATH config
 #export RBENV_ROOT="${HOME}/.rbenv"
 #if [ -d "${RBENV_ROOT}" ]; then
@@ -66,5 +70,7 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 ## Tell antigen that you're done.
 antigen apply
 
+# Say something
+fortune
 # Keychain
-#eval `keychain --eval id_rsa`
+eval `keychain --eval id_rsa`

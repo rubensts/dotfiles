@@ -1,32 +1,33 @@
 ---
-- name: 'Funtoo installation'
+- name: 'Archlinux installation'
   hosts: localhost
   become: yes
 
   tasks:
     - name: Update package repositories
-      portage: sync=yes
+      pacman:
+        update_cache: yes
+        upgrade: yes
       tags:
         - update
 
     - name: Install universal base packages
-      portage: package={{ item }} state=present
+      pacman:
+        name: {{ item }}
+        state: present
+        update_cache: yes
       with_items:
-        - gentoolkit
         - vim
         - emacs
         - zsh
         - rxvt-unicode
         - keychain
-        - fortune
+        - fortune-mod
         - tmux
         - glances
-        - eix
-        - layman
         - xorg-x11
         - xf86-input-evdev
         - i3
-        - i3status
         - xrandr
         - dmenu
         - numlockx
@@ -46,4 +47,4 @@
         - mcomix
         - mpv
       tags:
-        - packages
+        - install
