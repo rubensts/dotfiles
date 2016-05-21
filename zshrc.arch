@@ -71,7 +71,7 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 antigen apply
 
 # Keychain
-eval $(keychain --eval --quiet id_rsa 6BB1CF3B --agents ssh,gpg)
+eval $(keychain --eval --quiet id_rsa --agents ssh)
 
 ## Shows a fortune
 fortune
