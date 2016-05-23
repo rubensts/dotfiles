@@ -12,6 +12,11 @@ export PYTHONPATH=/usr/local/bin
 # Go
 export GOPATH=$HOME/prj/go
 
+# pgenv
+if [ -r "$HOME/pgsql/pgenv.sh" ] ; then
+    . "$HOME/pgsql/pgenv.sh"
+    fi
+
 ## Added by cpan
 #PATH="/home/rubens/perl5/bin${PATH+:}${PATH}"; export PATH;
 #PERL5LIB="/home/rubens/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
