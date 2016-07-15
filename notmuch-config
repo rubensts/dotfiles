@@ -1,6 +1,6 @@
 # .notmuch-config - Configuration file for the notmuch mail system
 #
-# For more information about notmuch, see http://notmuchmail.org
+# For more information about notmuch, see https://notmuchmail.org
 
 # Database configuration
 #
@@ -11,7 +11,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/Users/rubens/.mail
+path=/home/rubens/Maildir
 
 # User configuration
 #
@@ -29,9 +29,9 @@ path=/Users/rubens/.mail
 # address to which the original email was addressed.
 #
 [user]
-name=Rubens.TS
-primary_email=rubensts@gmail.com
-#other_email=rubensts@outlook.com;
+name=Rubens Souza
+primary_email=rubens.souza@2ndquadrant.it
+other_email=rubensts@gmail.com;
 
 # Configuration for "notmuch new"
 #
@@ -48,7 +48,8 @@ primary_email=rubensts@gmail.com
 #		in the mail store.
 #
 [new]
-tags=unread;inbox;
+#tags=unread;inbox;
+tags=new
 ignore=
 
 # Search configuration
@@ -86,3 +87,13 @@ exclude_tags=deleted;spam;
 #
 [maildir]
 synchronize_flags=true
+
+# Cryptography related configuration
+#
+# The following option is supported here:
+#
+#	gpg_path
+#		binary name or full path to invoke gpg.
+#
+[crypto]
+gpg_path=gpg

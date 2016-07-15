@@ -1,28 +1,43 @@
+#------------------------------------------------------------------------------
+# Personal gmail account
+#------------------------------------------------------------------------------
 IMAPAccount gmail
-# Address to connect to
 Host imap.gmail.com
 User rubensts@gmail.com
-# To store the password in an encrypted file use PassCmd instead of Pass
-PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mbsyncpass.gpg"
-#
-# Use SSL
-UseIMAPS yes
-CertificateFile ~/.cert/imap.gmail.com.pem
-CertificateFile ~/.cert/Equifax_Secure_CA.pem
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.password-store/email/gmail.mbsync.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
 
+# THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
+# - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
+#   SPECIFICATION OF AN IMAP ACCOUNT)
+# - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER
+
+# REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)
 IMAPStore gmail-remote
 Account gmail
 
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore gmail-local
-# The trailing "/" is important
-Path ~/.mail/gmail/
-Inbox ~/.mail/gmail/Inbox
+Path ~/Maildir/gmail/
+Inbox ~/Maildir/gmail/inbox
 
-# Channel gmail
-# Master :gmail-remote:
-# Slave :gmail-local:
-## Select only the desired folders
-# Patterns "INBOX" "[Gmail]/Sent Mail" "[Gmail]/Drafts"
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+#
+# FOR INSTANCE IN THE SPECIFICATION BELOW:
+#
+# gmail-inbox gets the folder INBOX, ARCHIVE, and everything under "ARCHIVE*"
+# gmail-trash gets only the "[Gmail]/Trash" folder and stores it to the local "trash" folder
+
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
 # Permanently remove all messages [on the Master/Slave] marked for deletion
@@ -30,21 +45,66 @@ Expunge Both
 # Save the synchronization state files in the relevant directory
 SyncState *
 
-Channel gmail-default
+Channel gmail-inbox
 Master :gmail-remote:
 Slave :gmail-local:
-Patterns "INBOX" "Classes" "Personal\*"
+Patterns "INBOX"
 
 Channel gmail-sent
 Master :gmail-remote:"[Gmail]/Sent Mail"
-Slave :gmail-local:sent-mail
+Slave :gmail-local:sent
 
-Channel gmail-drafts
-Master :gmail-remote:"[Gmail]/Drafts"
-Slave :gmail-local:drafts
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:trash
 
-# Get all the channels together into a group.
+#------------------------------------------------------------------------------
+# 2ndQuadrant account
+#------------------------------------------------------------------------------
+IMAPAccount 2ndQ
+Host imap.gmail.com
+User rubens.souza@2ndquadrant.it
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.password-store/2ndQ/gmail.mbsync.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore 2ndQ-remote
+Account 2ndQ
+
+MaildirStore 2ndQ-local
+Path ~/Maildir/2ndQ/
+Inbox ~/Maildir/2ndQ/inbox
+
+Create Both
+Expunge Both
+SyncState *
+
+Channel 2ndQ-inbox
+Master :2ndQ-remote:
+Slave :2ndQ-local:
+Patterns "INBOX"
+
+Channel 2ndQ-sent
+Master :2ndQ-remote:"[Gmail]/Sent Mail"
+Slave :2ndQ-local:sent
+
+Channel 2ndQ-trash
+Master :2ndQ-remote:"[Gmail]/Trash"
+Slave :2ndQ-local:trash
+
+# Groups put together channels, so that we can invoke mbsync on a group to sync
+# all channels
+#
+# For instance: "mbsync -V gmail" gets (verbosily) mail from "gmail-inbox",
+# "gmail-sent", and "gmail-trash"
 Group gmail
-Channel gmail-default
+Channel gmail-inbox
 Channel gmail-sent
-Channel gmail-drafts
+Channel gmail-trash
+
+Group 2ndQ
+Channel 2ndQ-inbox
+Channel 2ndQ-sent
+Channel 2ndQ-trash
