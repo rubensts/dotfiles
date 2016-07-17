@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+
+#local db_path="$(notmuch config get database.path)"
+
+## Start tagging
+
+# Separate personal and work emails
+notmuch tag +personal -new -- tag:new and path:"gmail/**"
+notmuch tag +2ndQ -new -- tag:new and path:"2ndQ/**"
+
+# Monitor (Nagios and Icinga)
+notmuch tag +monitor +jobrapido -new -- tag:new and from:icinga@jobrapido.com
+notmuch tag +monitor +nagios -new -- tag:new and from:nagios@support.2ndquadrant.com
+notmuch tag +monitor +navionics -new -- tag:new and from:monitor@navionicsindia.com
+notmuch tag +monitor +subito -new -- tag:new and from:nagios@mxx.subito.it
+
+# Barman
+notmuch tag +barman +webmaster -new -- tag:new and to:webmaster@pgbarman.org
+notmuch tag +barman +jobrapido -new -- tag:new and from:daemon@jobrapido.com
+notmuch tag +barman +navionics -new -- tag:new and from:backupngs@navionics.com
+notmuch tag +barman +subito -new -- tag:new and from:barman@subito.it
+notmuch tag +barman +root -new -- tag:new and from:root@2ndquadrant.it and subject:barman
+notmuch tag +barman +sincos -new -- tag:new and from:barman@dr.com
+
+# Support RT
+notmuch tag +rt -new -- tag:new and from:support@2ndquadrant.com
+notmuch tag +rt +platinum -new -- tag:new and tag:rt and subject:platinum-support
+notmuch tag +rt +24x7 -new -- tag:new and tag:rt and subject:support and not tag:platinum
+notmuch tag +rt +rdba -new -- tag:new and tag:rt and subject:rdba
+notmuch tag +rt +developer -new -- tag:new and from:developer-support@2ndquadrant.com
+notmuch tag +rt +onboard -new -- tag:new and from:onboarding@2ndquadrant.com
+
+# Staff
+notmuch tag +staff -new -- tag:new and to:staff@2ndquadrant.com
+
+# Redmine - Italy
+notmuch tag +redmine -new -- tag:new and from:redmine@2ndquadrant.it
+notmuch tag +redmine +jobrapido -new -- tag:new and tag:redmine and subject:jobrapido
+notmuch tag +redmine +navionics -new -- tag:new and tag:redmine and subject:navionics
+notmuch tag +redmine +subito -new -- tag:new and tag:redmine and subject:subito
+notmuch tag +redmine +promedicus -new -- tag:new and tag:redmine and subject:"pro medicus"
+notmuch tag +redmine +tierra -new -- tag:new and tag:redmine and subject:tierra
+
+# Fail2ban
+notmuch tag +fail2ban -new -- tag:new and from:fail2ban@
+
+# Timelive
+notmuch tag +timelive -new -- tag:new and from:TimeLive2ndQuadrant
+
+# ITPug
+notmuch tag +itpug -new -- tag:new and to:itpug-soci@lists.itpug.org
+
+# finally, retag all "new" messages "inbox" and "unread"
+notmuch tag +inbox +unread -new -- tag:new

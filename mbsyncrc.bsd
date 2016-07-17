@@ -8,7 +8,7 @@ PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.password-store/email/gmail.
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile /etc/ssl/cert.pem
 
 # THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
 # - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
@@ -76,7 +76,7 @@ PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.password-store/2ndQ/gmail.m
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile /etc/ssl/cert.pem
 
 IMAPStore 2ndQ-remote
 Account 2ndQ
@@ -103,7 +103,7 @@ Master :2ndQ-remote:"[Gmail]/Sent Mail"
 Slave :2ndQ-local:sent
 
 Channel 2ndQ-trash
-Master :2ndQ-remote:"[Gmail]/Trash"
+Master :2ndQ-remote:"[Gmail]/Bin"
 Slave :2ndQ-local:trash
 
 # Groups put together channels, so that we can invoke mbsync on a group to sync
