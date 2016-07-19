@@ -103,7 +103,7 @@ Master :2ndQ-remote:"[Gmail]/Sent Mail"
 Slave :2ndQ-local:sent
 
 Channel 2ndQ-trash
-Master :2ndQ-remote:"[Gmail]/Trash"
+Master :2ndQ-remote:"[Gmail]/Bin"
 Slave :2ndQ-local:trash
 
 # Groups put together channels, so that we can invoke mbsync on a group to sync

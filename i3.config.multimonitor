@@ -21,8 +21,8 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-#bindsym $mod+Return exec --no-startup-id urxvtc
-bindsym $mod+Return exec --no-startup-id konsole
+bindsym $mod+Return exec --no-startup-id urxvtc
+#bindsym $mod+Return exec --no-startup-id konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -35,16 +35,16 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Autostart apps
-exec --no-startup-id "/usr/bin/gnome-settings-daemon"
-exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
+#exec --no-startup-id "/usr/bin/gnome-settings-daemon"
+#exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
 exec --no-startup-id "/usr/bin/gnome-sound-applet"
 exec --no-startup-id "setxkbmap -layout us,it -variant intl -option grp:menu_toggle"
 exec --no-startup-id "xmodmap ~/.Xmodmap"
 #exec --no-startup-id "compton --config ~/.compton.conf -b"
-#exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
+exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
-exec --no-startup-id "syncthing"
+exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
 
 # borders config
 new_window normal
@@ -190,7 +190,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
+    status_command    i3status
     position          top
     mode              dock
     workspace_buttons yes
@@ -231,14 +231,15 @@ assign [instance="skype" title="^rubens.sou - Skype™"] → $WS1
 assign [instance="skype" title="^*$Skype™"] → $WS1
 
 # workspace default monitors
-workspace $WS1 output VGA-0
-workspace $WS2 output VGA-0
-workspace $WS3 output DVI-I-1
-workspace $WS4 output DVI-I-1
-workspace $WS5 output DVI-I-1
-workspace $WS6 output DVI-I-1
-workspace $WS9 output DVI-I-1
-workspace $WS10 output DVI-I-1
+workspace $WS1 output DVI-0
+workspace $WS2 output DVI-0
+workspace $WS3 output VGA-0
+workspace $WS4 output VGA-0
+workspace $WS5 output VGA-0
+workspace $WS6 output VGA-0
+workspace $WS9 output VGA-0
+workspace $WS10 output VGA-0
 
 # Dual monitor config
-exec_always xrandr --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-0 --off --output HDMI-0 --off
+#exec_always xrandr --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-0 --off --output HDMI-0 --off
+exec_always xrandr --output DVI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output VGA-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-0 --off

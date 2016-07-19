@@ -7,8 +7,8 @@ URxvt*geometry:    135x30
 !URxvt*font:     xft:Source\ Code\ Pro\ for\ Powerline:size=9:antialias=true:hinting=true
 !URxvt*boldFont: xft:Source\ Code\ Pro\ for\ Powerline:size=9:antialias=true:hinting=true
 
-URxvt*font:     xft:Source Code Pro for Powerline:pixelsize=11,xft:FontAwesome:pixelsize=11
-URxvt*boldFont: xft:Source Code Pro for Powerline:pixelsize=11,xft:FontAwesome:pixelsize=11
+URxvt*font:     xft:Source Code Pro:pixelsize=11,xft:FontAwesome:pixelsize=11
+URxvt*boldFont: xft:Source Code Pro:pixelsize=11,xft:FontAwesome:pixelsize=11
 
 URxvt*letterSpace:     -1
 URxvt*visualBell:      true    !! No audible bell

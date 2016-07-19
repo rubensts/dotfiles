@@ -1,4 +1,7 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 printf -v ARGS "%q " "$@"
-exec ssh notmuch notmuch ${ARGS}
+exec ssh chez-notmuch notmuch ${ARGS}
 
+#!/bin/bash
+#printf -v ARGS "%q " "$@"
+#exec ssh your_server addrlookup ${ARGS}
