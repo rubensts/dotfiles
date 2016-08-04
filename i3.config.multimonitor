@@ -35,10 +35,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Autostart apps
-#exec --no-startup-id "/usr/bin/gnome-settings-daemon"
-#exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
+exec --no-startup-id "/usr/bin/gnome-settings-daemon"
+exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
 exec --no-startup-id "/usr/bin/gnome-sound-applet"
-exec --no-startup-id "setxkbmap -layout us,it -variant intl -option grp:menu_toggle"
+exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_toggle"
 exec --no-startup-id "xmodmap ~/.Xmodmap"
 #exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
