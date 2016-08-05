@@ -34,6 +34,13 @@ bindsym $mod+Shift+q kill
 # installed.
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+## Scratchpad
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
 # Autostart apps
 exec --no-startup-id "/usr/bin/gnome-settings-daemon"
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
