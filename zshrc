@@ -71,7 +71,7 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 antigen apply
 
 # Keychain
-eval $(keychain --eval id_rsa)
+#eval $(keychain --eval id_rsa)
 
 ## Shows a fortune
 fortune

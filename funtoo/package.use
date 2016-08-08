@@ -1,80 +1,34 @@
-dev-libs/libpcre 	pcre16
-x11-libs/libxcb 	xkb
-x11-libs/cairo 		xcb
-x11-libs/libva 		abi_x86_32 abi_x86_64
-x11-libs/libva-intel-driver abi_x86_32 abi_x86_64
+dev-libs/libpcre		pcre16
+x11-libs/libxcb			xkb
+x11-libs/cairo			xcb
 
 sys-auth/consolekit		policykit
-x11-terms/rxvt-unicode	256-color unicode3
-app-editors/emacs		athena Xaw3d -gtk -motif
-app-text/texlive 		doc dvi2tty dvipdfm graphics png pstricks science truetype luatex xetex context humanities
-app-admin/pass			emacs importers zsh-completion
+x11-terms/rxvt-unicode	256-color unicode3 vanilla -alt-font-width
+app-editors/emacs		imagemagick
+#-athena -Xaw3d -motif
+app-text/texlive 		doc dvi2tty dvipdfm graphics pstricks science luatex context humanities
+app-admin/pass			zsh-completion
 media-libs/gd			fontconfig
 net-misc/connman		openconnect openvpn vpnc
 net-misc/connman-gtk	openconnect
 games-misc/fortune-mod	offensive
+app-text/hunspell		l10n_en l10n_it
+media-video/mpv			lua
+net-mail/notmuch		emacs nmbug
+dev-libs/gmime			smime
 
-media-fonts/powerline-fonts anonymouspro dejavusansmono droidsansmono inconsolatadz liberationmono meslo sourcecodepro terminus_pcf ubuntumono
+app-portage/layman		gpg sync-plugin-portage subversion
 
-#app-admin/conky  apcupsd cmus curl hddtemp ical iconv imlib iostats irc lua lua-cairo lua-imlib lua-rsvg math mpd ncurses portmon rss truetype vim-syntax weather-metar weather-xoap webserver echo nouserpriv.conf
-#sys-apps/util-linux tty-helpers
-#media-sound/pulseaudio alsa caps dbus gdbm glib gnome orc udev alsa-plugin sox
-#app-text/poppler cairo
-#sys-block/gparted  btrfs fat hfs jfs ntfs policykit xfs -dmraid -f2fs -kde -mdadm -reiser4
-#net-p2p/transmission gtk -qt5 -ayatana
-#net-print/cups ppds
-#net-fs/samba client pam
+#app-emulation/virtualbox	extensions
 
-################################################################################
-## Skype
-################################################################################
-dev-libs/openssl				abi_x86_32
-x11-libs/libXScrnSaver			abi_x86_32
-dev-libs/nettle					abi_x86_32
-dev-libs/json-c					abi_x86_32
-dev-qt/qtdbus					abi_x86_32
-dev-libs/gmp					abi_x86_32
-media-libs/libsndfile			abi_x86_32
-dev-lang/orc					abi_x86_32
-net-libs/gnutls					abi_x86_32
-media-libs/alsa-lib				abi_x86_32
-sys-apps/tcp-wrappers			abi_x86_32
-dev-qt/qtcore					abi_x86_32
-dev-qt/qtscript					abi_x86_32
-dev-qt/qtgui					abi_x86_32 #gtkstyle
-x11-proto/videoproto			abi_x86_32
-media-libs/gstreamer			abi_x86_32
-x11-libs/libICE					abi_x86_32
-dev-libs/libgcrypt				abi_x86_32
-sys-apps/dbus					abi_x86_32
-x11-proto/recordproto			abi_x86_32
-media-plugins/alsa-plugins		abi_x86_32
-media-sound/pulseaudio			abi_x86_32
-dev-qt/qtxmlpatterns			abi_x86_32
-sys-apps/util-linux				abi_x86_32
-media-libs/gst-plugins-base		abi_x86_32
-net-libs/libasyncns				abi_x86_32
-x11-libs/libXcursor				abi_x86_32
-x11-proto/scrnsaverproto		abi_x86_32
-sys-libs/readline				abi_x86_32
-dev-db/sqlite					abi_x86_32
-x11-libs/libXtst				abi_x86_32
-sys-libs/libcap					abi_x86_32
-dev-libs/libtasn1				abi_x86_32
-media-libs/flac					abi_x86_32
-net-print/cups					abi_x86_32
-media-libs/libogg				abi_x86_32
-virtual/libintl					abi_x86_32
-dev-qt/qtwebkit					-exceptions abi_x86_32
-media-libs/libvorbis			abi_x86_32
-x11-libs/libXv					abi_x86_32
-x11-libs/libSM					abi_x86_32
-dev-libs/libgpg-error			abi_x86_32
-dev-libs/atk					abi_x86_32
-x11-libs/gtk+					abi_x86_32
-x11-proto/compositeproto		abi_x86_32
-x11-libs/libXcomposite			abi_x86_32
-sys-devel/gettext				abi_x86_32
-app-accessibility/at-spi2-atk	abi_x86_32
-app-accessibility/at-spi2-core	abi_x86_32
-media-libs/libepoxy				abi_x86_32
+#media-fonts/powerline-fonts	anonymouspro dejavusansmono droidsansmono inconsolatadz liberationmono meslo sourcecodepro terminus_pcf ubuntumono
+
+#app-admin/conky		apcupsd cmus curl hddtemp ical iconv imlib iostats irc lua lua-cairo lua-imlib lua-rsvg math mpd ncurses portmon rss truetype vim-syntax weather-metar weather-xoap webserver echo nouserpriv.conf
+#sys-apps/util-linux	tty-helpers
+#media-sound/pulseaudio	alsa caps dbus gdbm glib gnome orc udev alsa-plugin sox
+#app-text/poppler	cairo
+#sys-block/gparted	 	btrfs fat hfs jfs ntfs policykit xfs -dmraid -f2fs -kde -mdadm -reiser4
+#net-p2p/transmission	gtk -qt5 -ayatana
+#net-print/cups			ppds
+#net-fs/samba			client pam
+

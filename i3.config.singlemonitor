@@ -40,7 +40,7 @@ bindsym $mod+Shift+q kill
 exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_toggle"
 exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
-#exec --no-startup-id "pulseaudio --start"
+exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
 
 # borders config
