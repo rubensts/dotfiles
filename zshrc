@@ -1,25 +1,34 @@
-## PATHS
-# Enter any necessary PATH alteration here
-
+# For rxvt-unicode
 export TERM="xterm-256color"
+
+# Aliases
 alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
 alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
-alias pipup="sudo pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
-alias pipold="sudo pip list --outdated"
+alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pipold="pip list --outdated"
 alias conkeror='firefox --app ~/git/conkeror/application.ini'
 alias ls='ls --group-directories-first --color=always'
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
 alias x='startx'
+alias xs='startx ~/.xinitrc stumpwm'
+alias xx='startx ~/.xinitrc xmonad'
+alias xa='startx ~/.xinitrc awesome'
+alias x3='startx ~/.xinitrc i3'
+alias xg='startx ~/.xinitrc gnome'
+alias xf='startx ~/.xinitrc xfce'
+alias xo='startx ~/.xinitrc openbox'
+alias xk='startx ~/.xinitrc kde'
+#alias tail='sudo tail -f /var/log/emerge-fetch.log''
+#alias uzbl='uzbl-tabbed'
+#alias dmenu_run='dmenu_run -i -fn Source Code for Powerline-9 -nb #303030 -nf #909090 -sb #909090 -sf #303030'
+alias dmenu='dmenu_run -i -p "Run command:" -fn Inconsolata-10 -sf orange'
+
 
 # Persistent rehash
+# to automatically find new executables in the $PATH
 # source: https://wiki.archlinux.org/index.php/zsh
 zstyle ':completion:*' rehash true
-
-# rbenv PATH config
-#export RBENV_ROOT="${HOME}/.rbenv"
-#if [ -d "${RBENV_ROOT}" ]; then
-#  export PATH="${RBENV_ROOT}/bin:${PATH}"
-#  eval "$(rbenv init -)"
-#fi
 
 ## Antigen - plugin manager
 source ~/git/antigen/antigen.zsh
@@ -70,9 +79,11 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 ## Tell antigen that you're done.
 antigen apply
 
-# Keychain
-#eval $(keychain --eval id_rsa)
 
-## Shows a fortune
+# Shows a fortune
 fortune
 echo
+
+# Keychain
+eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
+

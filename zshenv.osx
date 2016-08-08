@@ -6,13 +6,17 @@ typeset -U path
 # asciidoc xml support
 export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
 
-# Python
-#export PYTHONPATH=/usr/local/bin
+# Python - pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/prj/document-publisher:$PATH"
+eval "$(pyenv init -)"
 
 # Go
 export GOPATH=$HOME/prj/go
 
-# pgenv
+# PostgreSQL - pgenv
 if [ -r "$HOME/pgsql/pgenv.sh" ] ; then
     . "$HOME/pgsql/pgenv.sh"
     fi
@@ -27,7 +31,4 @@ path=(
     $path
     $GOPATH/bin
 )
-
-# Keychain
-eval `keychain --eval --agents ssh,gpg id_rsa 6BB1CF3B`
 
