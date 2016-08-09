@@ -3,6 +3,7 @@ x11-libs/libxcb			xkb
 x11-libs/cairo			xcb
 
 sys-auth/consolekit		policykit
+app-crypt/pinentry		gtk qt5
 x11-terms/rxvt-unicode	256-color unicode3 vanilla -alt-font-width
 app-editors/emacs		imagemagick
 #-athena -Xaw3d -motif
@@ -15,11 +16,11 @@ games-misc/fortune-mod	offensive
 app-text/hunspell		l10n_en l10n_it
 media-video/mpv			lua
 net-mail/notmuch		emacs nmbug
+net-mail/mu				emacs
 dev-libs/gmime			smime
 
 app-portage/layman		gpg sync-plugin-portage subversion
 
-#app-emulation/virtualbox	extensions
 
 #media-fonts/powerline-fonts	anonymouspro dejavusansmono droidsansmono inconsolatadz liberationmono meslo sourcecodepro terminus_pcf ubuntumono
 

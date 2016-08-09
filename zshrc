@@ -80,10 +80,11 @@ antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-
 antigen apply
 
 
+# Keychain
+eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
+
 # Shows a fortune
 fortune
 echo
 
-# Keychain
-eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
 
