@@ -24,6 +24,12 @@ fi
 exec xset s off &    # turn off screensaver (X11)
 exec xset b off &    # turn off bell
 
+#eval $(gnome-keyring-daemon --components=pkcs11,secrets,ssh,gpg)
+#export GNOME_KEYRING_PID
+#export GNOME_KEYRING_SOCKET
+#export SSH_AUTH_SOCK
+#export GPG_AGENT_INFO
+
 ## Keyboard layout: international english and italian
 ## switch between layouts pressing the "menu key".
 #setxkbmap -layout us,it -variant intl, -option grp:menu_toggle
@@ -40,8 +46,8 @@ exec xset b off &    # turn off bell
 #thunar --daemon &
 #thunar-volman &
 
-#exec ck-launch-session dbus-launch --sh-syntax --exit-with-session i3 -V -d all > ~/.i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
-exec i3 -V -d all > ~/.config/i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session i3 -V -d all > ~/.config/i3/i3log-$(date +'%Y%m%dT%H%M%S') 2>&1
+#exec i3 -V -d all > ~/.config/i3/i3log-$(date +'%F-%k-%M-%S') 2>&1
 #exec spectrwm
 #exec awesome
 #exec gnome-session

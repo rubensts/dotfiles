@@ -10,4 +10,3 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/prj/document-publisher:$PATH"
 eval "$(pyenv init -)"
 
-

@@ -1,0 +1,3 @@
+# Keychain
+eval `keychain --quiet -noask --eval --agents ssh,gpg id_rsa 6BB1CF3B`
+
