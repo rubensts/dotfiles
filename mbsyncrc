@@ -50,9 +50,9 @@ Master :gmail-remote:
 Slave :gmail-local:
 Patterns "INBOX"
 
-Channel gmail-classes
-Master :gmail-remote:"[Gmail]/Classes"
-Slave :gmail-local:classes
+#Channel gmail-classes
+#Master :gmail-remote:"[Gmail]/Classes"
+#Slave :gmail-local:classes
 
 Channel gmail-drafts
 Master :gmail-remote:"[Gmail]/Drafts"

@@ -81,7 +81,8 @@ antigen apply
 
 
 # Keychain
-#eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
+#eval `keychain --eval --quiet --noask --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
+eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
 
 # Shows a fortune
 fortune
