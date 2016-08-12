@@ -8,6 +8,8 @@
 notmuch tag +personal -- path:"gmail/**"
 notmuch tag +2ndQ -- path:"2ndQ/**"
 
+## 2ndQuadrant filters
+
 # Monitor (Nagios and Icinga)
 notmuch tag +monitor +jobrapido -new -- tag:new and from:icinga@jobrapido.com
 notmuch tag +monitor +nagios -new -- tag:new and from:nagios@support.2ndquadrant.com
@@ -50,5 +52,8 @@ notmuch tag +timelive -new -- tag:new and from:TimeLive2ndQuadrant
 # ITPug
 notmuch tag +itpug -new -- tag:new and to:itpug-soci@lists.itpug.org
 
-# finally, retag all "new" messages "inbox" and "unread"
+
+## Personal filters
+
+# finally, retag all "new" messages to "inbox" and "unread"
 notmuch tag +inbox +unread -new -- tag:new

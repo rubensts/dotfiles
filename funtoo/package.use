@@ -8,6 +8,7 @@ app-crypt/pinentry		gtk qt5 gnome-keyring
 app-crypt/gcr			gtk
 x11-terms/rxvt-unicode	256-color unicode3 vanilla -alt-font-width
 app-editors/emacs		imagemagick
+app-editors/emacs-vcs	imagemagick
 #-athena -Xaw3d -motif
 app-text/texlive 		doc dvi2tty dvipdfm graphics pstricks science luatex context humanities
 app-admin/pass			zsh-completion

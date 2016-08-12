@@ -31,7 +31,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
- bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Autostart apps
 #exec --no-startup-id "/usr/bin/gnome-settings-daemon"
@@ -43,7 +43,7 @@ exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
 #dbus-launch nm-applet
-exec_always --no-startup-id ~/git/dotfiles/checkmail.sh
+#exec_always --no-startup-id ~/git/dotfiles/checkmail.sh
 
 # borders config
 new_window normal
