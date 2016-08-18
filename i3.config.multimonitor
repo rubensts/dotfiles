@@ -8,9 +8,6 @@ set $mod Mod4
 # Font
 font pango:SourceCodePro-Regular 8
 
-# Wallpapers
-exec_always ~/git/dotfiles/wallpaper.sh
-
 # Thin borders
 hide_edge_borders both
 
@@ -22,7 +19,6 @@ focus_follows_mouse no
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id urxvtc
-#bindsym $mod+Return exec --no-startup-id konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -38,21 +34,27 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-# Show the first scratchpad window
+## Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-# Autostart apps
+## Keyboard Layout
+## Set keyboard layout to English (with accents) and Italian as 2nd. option
+## Use the menu-key to change between layouts. Also set CapsLock to be another Ctrl key
+exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_toggle,ctrl:nocaps"
+
+## Autostart apps
 #exec --no-startup-id "/usr/bin/gnome-settings-daemon"
 #exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
 exec --no-startup-id "/usr/bin/gnome-sound-applet"
-exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_toggle"
-exec --no-startup-id "xmodmap ~/.Xmodmap"
 #exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
 exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
 #exec_always --no-startup-id ~/git/dotfiles/checkmail.sh
+
+## Set wallpaper
+exec_always ~/git/dotfiles/wallpaper.sh
 
 # borders config
 new_window normal
