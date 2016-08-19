@@ -18,7 +18,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvt
+bindsym $mod+Return exec --no-startup-id urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -50,7 +50,7 @@ exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet"
-#exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
+exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
 #exec_always --no-startup-id ~/git/dotfiles/checkmail.sh
 
 ## Set wallpaper

@@ -11,6 +11,7 @@ app-editors/emacs		imagemagick
 app-editors/emacs-vcs	imagemagick
 #-athena -Xaw3d -motif
 app-text/texlive 		doc dvi2tty dvipdfm graphics pstricks science luatex context humanities
+app-text/evince			djvu
 app-admin/pass			zsh-completion
 media-libs/gd			fontconfig
 net-misc/connman		openconnect openvpn vpnc

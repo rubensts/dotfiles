@@ -266,26 +266,120 @@ synchronize_flags=true
 gpg_path=gpg
 #+END_SRC
 
+*** notmuch post hook
+
+#+BEGIN_SRC :tangle ~/Maildir/.notmuch/hooks/post-new
+#!/bin/sh
+$HOME/.local/bin/afew --tag --new
+#+END_SRC
+
+
+*** notmuch post hook *old one - whithout using afew*
+
+In case of using this post-hook, remember that the file has to be executable.
+
+#+BEGIN_SRC shell :tangle no
+#!/usr/bin/env zsh
+
+#local db_path="$(notmuch config get database.path)"
+
+## Start tagging
+
+# Separate personal and work emails
+notmuch tag +personal -- path:"gmail/**"
+notmuch tag +2ndQ -- path:"2ndQ/**"
+
+## 2ndQuadrant filters
+
+# Monitor (Nagios and Icinga)
+notmuch tag +monitor +jobrapido -new -- tag:new and from:icinga@jobrapido.com
+notmuch tag +monitor +nagios -new -- tag:new and from:nagios@support.2ndquadrant.com
+notmuch tag +monitor +navionics -new -- tag:new and from:monitor@navionicsindia.com
+notmuch tag +monitor +subito -new -- tag:new and from:nagios@mxx.subito.it
+
+# Barman
+notmuch tag +barman +webmaster -new -- tag:new and to:webmaster@pgbarman.org
+notmuch tag +barman +jobrapido -new -- tag:new and from:daemon@jobrapido.com
+notmuch tag +barman +navionics -new -- tag:new and from:backupngs@navionics.com
+notmuch tag +barman +subito -new -- tag:new and from:barman@subito.it
+notmuch tag +barman +root -new -- tag:new and from:root@2ndquadrant.it and subject:barman
+notmuch tag +barman +sincos -new -- tag:new and from:barman@dr.com
+
+# Support RT
+notmuch tag +rt -new -- tag:new and from:support@2ndquadrant.com
+notmuch tag +platinum -- tag:rt and subject:platinum-support
+notmuch tag +24x7 -- tag:rt and subject:support and not tag:platinum
+notmuch tag +rdba -- tag:rt and subject:rdba
+notmuch tag +rt +developer -new -- tag:new and from:developer-support@2ndquadrant.com
+notmuch tag +rt +onboard -new -- tag:new and from:onboarding@2ndquadrant.com
+
+# Staff
+notmuch tag +staff -new -- tag:new and to:staff@2ndquadrant.com
+
+# Redmine - Italy
+notmuch tag +redmine -new -- tag:new and from:redmine@2ndquadrant.it
+notmuch tag +jobrapido -- tag:redmine and subject:jobrapido
+notmuch tag +navionics -- tag:redmine and subject:navionics
+notmuch tag +subito -- tag:redmine and subject:subito
+notmuch tag +promedicus -- tag:redmine and subject:"pro medicus"
+notmuch tag +tierra -- tag:redmine and subject:tierra
+
+# Fail2ban
+notmuch tag +fail2ban -new -- tag:new and from:fail2ban@
+
+# Timelive
+notmuch tag +timelive -new -- tag:new and from:TimeLive2ndQuadrant
+
+# ITPug
+notmuch tag +itpug -new -- tag:new and to:itpug-soci@lists.itpug.org
+
+
+## Personal filters
+
+# finally, retag all "new" messages to "inbox" and "unread"
+notmuch tag +inbox +unread -new -- tag:new
+#+END_SRC
+
 ** ☛ TODO afew
 
 #+BEGIN_SRC shell :tangle ~/.config/afew/config
-# This is the default filter chain
-[SpamFilter]
-[ClassifyingFilter]
-[KillThreadsFilter]
-[ListMailsFilter]
-[ArchiveSentMailsFilter]
-[InboxFilter]
+  # This is the default filter chain
+  [SpamFilter]
+  [ClassifyingFilter]
+  [KillThreadsFilter]
+  [ListMailsFilter]
+  [ArchiveSentMailsFilter]
 
-# My rules
+  [Filter.1]
+  message = Monitoring for Jobrapido
+  query = 'from:icinga@jobrapido.com'
+  tags = +monitor;+jobrapido
 
-[MailMover]
-folders = INBOX Junk
-max_age = 15
+  [Filter.2]
+  message = Nagios
+  query = 'from:nagios@support.2ndquadrant.com'
+  tags = +monitor;+nagios
 
-# rules
-INBOX = 'tag:spam':Junk 'NOT tag:inbox':Archive
-Junk = 'NOT tag:spam AND tag:inbox':INBOX 'NOT tag:spam':Archive
+  [Filter.3]
+  message = Monitoring Navionics
+  query = 'from:monitor@navionicsindia.com'
+  tags = +monitoring;+navionics
+
+  [Filter.4]
+  message = My version of the inbox filter
+  query = tag:new
+  tags = inbox;unread;-new
+
+  [InboxFilter]
+
+  # Move mode rules
+  # [MailMover]
+  # folders = INBOX Junk
+  # max_age = 15
+
+  # # rules
+  # INBOX = 'tag:spam':Junk 'NOT tag:inbox':Archive
+  #Junk = 'NOT tag:spam AND tag:inbox':INBOX 'NOT tag:spam':Archive
 #+END_SRC
 
 ** ☛ TODO msmtp
