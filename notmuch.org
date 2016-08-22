@@ -350,20 +350,73 @@ notmuch tag +inbox +unread -new -- tag:new
   [ListMailsFilter]
   [ArchiveSentMailsFilter]
 
+  ## Clients
+
   [Filter.1]
-  message = Monitoring for Jobrapido
-  query = 'from:icinga@jobrapido.com'
-  tags = +monitor;+jobrapido
+  message = Jobrapido
+  query = 'from:jobrapido'
+  tags = +jobrapido
 
   [Filter.2]
-  message = Nagios
-  query = 'from:nagios@support.2ndquadrant.com'
-  tags = +monitor;+nagios
+  message = Navionics
+  query = 'from:navionics'
+  tags = +navionics
 
   [Filter.3]
-  message = Monitoring Navionics
-  query = 'from:monitor@navionicsindia.com'
-  tags = +monitoring;+navionics
+  message = Subito
+  query = 'from:subito'
+  tags = +subito
+
+  ## Monitoring
+
+  [Filter.4]
+  message = Monitoring
+  query = 'from:icinga OR from:nagios OR from:monitor'
+  tags = +monitor
+
+  ## Barman
+
+  [Filter.5]
+  message = Barman
+  query = 'from:barman OR from:backup OR from:daemon@jobrapido.com OR (from:root@2ndquadrant.it AND subject:barman)'
+  tags = +barman
+
+  ## Support RT
+
+X-RT-Ticket
+
+[HeaderMatchingFilter.2]
+header = List-Id
+pattern = <(?P<list_id>.*)>
+tags = +lists +{list_id}
+
+[HeaderMatchingFilter.3]
+header = X-Redmine-Project
+pattern = (?P<project>.*)
+tags = +redmine +{project}
+
+
+
+  [Filter.6]
+  message = Support RT - Platinum
+  query = 'from:support@2ndquadrant.com AND subject:/platinum'
+  tags = +rt;+platinum
+
+  [Filter.7]
+  message = Support RT - 24x7
+  query = 'from:support@2ndquadrant.com AND subject:/support'
+  tags = +rt;+platinum
+
+  [Filter.8]
+  message = Support RT - RDBA
+  query = 'from:support@2ndquadrant.com AND subject:/rdba'
+  tags = +rt;+rdba
+
+  [Filter.9]
+  message = Support RT - 24x7
+  query = 'from:support@2ndquadrant.com AND subject:/support'
+  tags = +rt;+platinum
+
 
   [Filter.4]
   message = My version of the inbox filter
