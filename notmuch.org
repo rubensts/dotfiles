@@ -3,7 +3,7 @@
 #+EMAIL:     rubensts@gmail.com
 #+DATE:      2016-08-18
 #+LANGUAGE:  en
-#+PROPERTY: header-args :comments both
+#+PROPERTY: header-args :comments org
 #+OPTIONS: author:nil date:nil toc:nil title:nil e:nil
 #+LaTeX_HEADER: \pagenumbering{gobble}
 #+LaTeX_HEADER: \usepackage[T1]{fontenc}
@@ -30,9 +30,9 @@ This is the configuration for my email setup. It uses the following softwares:
 * Workflow
 
 
-* Configuration [2/4]
+* Configuration
 
-** ✔ DONE isync (mbsync)
+** isync (mbsync)
 
 
 
@@ -162,7 +162,7 @@ Channel 2ndQ-sent
 Channel 2ndQ-trash
 #+END_SRC
 
-** ✔ DONE notmuch
+** notmuch
 
 #+BEGIN_SRC shell :tangle ~/.notmuch-config
 # .notmuch-config - Configuration file for the notmuch mail system
@@ -340,7 +340,7 @@ notmuch tag +itpug -new -- tag:new and to:itpug-soci@lists.itpug.org
 notmuch tag +inbox +unread -new -- tag:new
 #+END_SRC
 
-** ☛ TODO afew
+** afew
 
 #+BEGIN_SRC shell :tangle ~/.config/afew/config
   # This is the default filter chain
@@ -378,22 +378,22 @@ notmuch tag +inbox +unread -new -- tag:new
 
   [Filter.5]
   message = Barman
-  query = 'from:barman OR from:backup OR from:daemon@jobrapido.com OR (from:root@2ndquadrant.it AND subject:barman)'
+  query = 'from:barman'
   tags = +barman
 
   ## Support RT
 
-X-RT-Ticket
+  X-RT-Ticket
 
-[HeaderMatchingFilter.2]
-header = List-Id
-pattern = <(?P<list_id>.*)>
-tags = +lists +{list_id}
+  [HeaderMatchingFilter.2]
+  header = List-Id
+  pattern = <(?P<list_id>.*)>
+  tags = +lists +{list_id}
 
-[HeaderMatchingFilter.3]
-header = X-Redmine-Project
-pattern = (?P<project>.*)
-tags = +redmine +{project}
+  [HeaderMatchingFilter.3]
+  header = X-Redmine-Project
+  pattern = (?P<project>.*)
+  tags = +redmine +{project}
 
 
 
@@ -405,7 +405,7 @@ tags = +redmine +{project}
   [Filter.7]
   message = Support RT - 24x7
   query = 'from:support@2ndquadrant.com AND subject:/support'
-  tags = +rt;+platinum
+  tags = +rt;+24x7
 
   [Filter.8]
   message = Support RT - RDBA
@@ -417,11 +417,17 @@ tags = +redmine +{project}
   query = 'from:support@2ndquadrant.com AND subject:/support'
   tags = +rt;+platinum
 
+  ## Redmine
 
-  [Filter.4]
-  message = My version of the inbox filter
-  query = tag:new
-  tags = inbox;unread;-new
+  message = Redmine
+  query = 'from:redmine'
+  tags = +redmine
+
+  ## ITPUG
+  [Filter.10]
+  message = ITPUG Mailing List
+  query = 'subject:itpug'
+  tags = +itpug
 
   [InboxFilter]
 
@@ -435,4 +441,4 @@ tags = +redmine +{project}
   #Junk = 'NOT tag:spam AND tag:inbox':INBOX 'NOT tag:spam':Archive
 #+END_SRC
 
-** ☛ TODO msmtp
+** msmtp
