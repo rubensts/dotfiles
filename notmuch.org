@@ -363,93 +363,95 @@ notmuch tag +inbox +unread -new -- tag:new
   [Filter.1]
   message = Jobrapido
   query = 'from:jobrapido'
-  tags = +jobrapido
+  tags = +jobrapido;-new
 
   [Filter.2]
   message = Navionics
   query = 'from:navionics'
-  tags = +navionics
+  tags = +navionics;-new
 
   [Filter.3]
   message = Subito
   query = 'from:subito'
-  tags = +subito
+  tags = +subito;-new
 
   [Filter.4]
   message = Root
   query = 'from:root'
-  tags = +root
+  tags = +root;-new
 
   ## Monitoring
 
   [Filter.5]
   message = Monitoring
   query = 'from:icinga OR from:nagios OR from:monitor'
-  tags = +monitor
+  tags = +monitor;-new
 
   ## Barman
 
   [Filter.6]
   message = Barman
   query = 'from:barman or subject:barman'
-  tags = +barman
+  tags = +barman;-new
 
   ## Kanban
 
   [Filter.7]
   message = Kanban
-  query = 'from:kanban'
-  tags = +kanban
+  query = 'subject:"24x7 Support Kanban Board"'
+  tags = +kanban;-new
 
   ## Support RT
 
   [HeaderMatchingFilter.1]
   header = X-RT-Ticket
-  pattern = <(^2ndquadrant.com .*)>
-  tags = +rt
+  pattern = <(^2ndquadrant.com)>
+  tags = +rt;-new
 
   [Filter.8]
   message = Support RT - Platinum
-  query = 'tag:rt AND subject:/platinum'
-  tags = +platinum
+  query = 'subject:/platinum'
+  tags = +platinum;-new
 
   [Filter.9]
   message = Support RT - 24x7
-  query = 'tag:rt AND subject:/support'
-  tags = +24x7
+  query = 'subject:/support'
+  tags = +24x7;-new
+
+(\[[a-zA-Z]\w+\/\bsupport)
 
   [Filter.10]
   message = Support RT - RDBA
-  query = 'tag:rt AND subject:/rdba'
-  tags = +rdba
+  query = 'subject:/rdba'
+  tags = +rdba;-new
 
   [Filter.11]
   message = Support RT - Developer
   query = 'from:developer-support@2ndquadrant.com'
-  tags = +developer
+  tags = +developer;-new
 
   [Filter.12]
   message = Support RT - Onboarding
   query = 'from:onboarding@2ndquadrant.com'
-  tags = +onboard
+  tags = +onboard;-new
 
   ## Redmine
   [Filter.13]
   message = Redmine
   query = 'from:redmine'
-  tags = +redmine
+  tags = +redmine;-new
 
   ## ITPUG
   [Filter.14]
   message = ITPUG Mailing List
   query = 'subject:itpug'
-  tags = +itpug
+  tags = +itpug;-new
 
   ## Fail2ban
   [Filter.15]
   message = Fail2ban 2ndQ
   query = 'from:fail2ban@ironman.2ndquadrant.it'
-  tags = +fail2ban2ndQ
+  tags = +fail2ban2ndQ;-new
 
   [InboxFilter]
 
