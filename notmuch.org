@@ -268,7 +268,12 @@ gpg_path=gpg
 
 *** notmuch post hook
 
-#+BEGIN_SRC :tangle ~/Maildir/.notmuch/hooks/post-new
+Hooks that will call actions after =notmuch= runs. Usually is used to tag the
+messages using =notmuch tag= commands or even calling =afew=. The hook file has
+to be located at =~/Maildir/.notmuch/hooks/post-new=, so remember to tangle the
+code block below.
+
+#+BEGIN_SRC shell tangle: no
 #!/bin/sh
 $HOME/.local/bin/afew --tag --new
 #+END_SRC
@@ -343,9 +348,12 @@ notmuch tag +inbox +unread -new -- tag:new
 ** afew
 
 #+BEGIN_SRC shell :tangle ~/.config/afew/config
+  # global configuration
+  [global]
+
   # This is the default filter chain
   [SpamFilter]
-  [ClassifyingFilter]
+  #[ClassifyingFilter]
   [KillThreadsFilter]
   [ListMailsFilter]
   [ArchiveSentMailsFilter]
@@ -367,67 +375,81 @@ notmuch tag +inbox +unread -new -- tag:new
   query = 'from:subito'
   tags = +subito
 
+  [Filter.4]
+  message = Root
+  query = 'from:root'
+  tags = +root
+
   ## Monitoring
 
-  [Filter.4]
+  [Filter.5]
   message = Monitoring
   query = 'from:icinga OR from:nagios OR from:monitor'
   tags = +monitor
 
   ## Barman
 
-  [Filter.5]
+  [Filter.6]
   message = Barman
-  query = 'from:barman'
+  query = 'from:barman or subject:barman'
   tags = +barman
+
+  ## Kanban
+
+  [Filter.7]
+  message = Kanban
+  query = 'from:kanban'
+  tags = +kanban
 
   ## Support RT
 
-  X-RT-Ticket
-
-  [HeaderMatchingFilter.2]
-  header = List-Id
-  pattern = <(?P<list_id>.*)>
-  tags = +lists +{list_id}
-
-  [HeaderMatchingFilter.3]
-  header = X-Redmine-Project
-  pattern = (?P<project>.*)
-  tags = +redmine +{project}
-
-
-
-  [Filter.6]
-  message = Support RT - Platinum
-  query = 'from:support@2ndquadrant.com AND subject:/platinum'
-  tags = +rt;+platinum
-
-  [Filter.7]
-  message = Support RT - 24x7
-  query = 'from:support@2ndquadrant.com AND subject:/support'
-  tags = +rt;+24x7
+  [HeaderMatchingFilter.1]
+  header = X-RT-Ticket
+  pattern = <(^2ndquadrant.com .*)>
+  tags = +rt
 
   [Filter.8]
-  message = Support RT - RDBA
-  query = 'from:support@2ndquadrant.com AND subject:/rdba'
-  tags = +rt;+rdba
+  message = Support RT - Platinum
+  query = 'tag:rt AND subject:/platinum'
+  tags = +platinum
 
   [Filter.9]
   message = Support RT - 24x7
-  query = 'from:support@2ndquadrant.com AND subject:/support'
-  tags = +rt;+platinum
+  query = 'tag:rt AND subject:/support'
+  tags = +24x7
+
+  [Filter.10]
+  message = Support RT - RDBA
+  query = 'tag:rt AND subject:/rdba'
+  tags = +rdba
+
+  [Filter.11]
+  message = Support RT - Developer
+  query = 'from:developer-support@2ndquadrant.com'
+  tags = +developer
+
+  [Filter.12]
+  message = Support RT - Onboarding
+  query = 'from:onboarding@2ndquadrant.com'
+  tags = +onboard
 
   ## Redmine
-
+  [Filter.13]
   message = Redmine
   query = 'from:redmine'
   tags = +redmine
 
   ## ITPUG
-  [Filter.10]
+  [Filter.14]
   message = ITPUG Mailing List
   query = 'subject:itpug'
   tags = +itpug
+
+  ## Fail2ban
+  [Filter.15]
+  message = Fail2ban 2ndQ
+  query = 'from:fail2ban@ironman.2ndquadrant.it'
+  tags = +fail2ban2ndQ
 
   [InboxFilter]
 

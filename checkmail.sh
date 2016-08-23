@@ -7,5 +7,6 @@
 while true; do
     mbsync -a
     notmuch new
+    ~/.local/bin/afew -tn
     sleep 60
 done
