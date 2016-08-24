@@ -13,6 +13,7 @@ then
     do
         mbsync -a
         notmuch new
+        ~/.local/bin/afew -tn
         sleep 60
     done
     exit 0
