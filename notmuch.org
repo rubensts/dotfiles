@@ -357,6 +357,10 @@ notmuch tag +inbox +unread -new -- tag:new
   [ListMailsFilter]
   [ArchiveSentMailsFilter]
 
+  ###########################################################
+  # Work
+  ###########################################################
+
   ## Barman
   [HeaderMatchingFilter.1]
   header = Subject
@@ -367,7 +371,7 @@ notmuch tag +inbox +unread -new -- tag:new
   [HeaderMatchingFilter.2]
   header = X-RT-Ticket
   pattern = (?P<team>[a-zA-Z0-9]+)\.\bcom
-  tags = +rt;-new
+  tags = +rt
 
   ### Classify RT/Github projects lists accordingly to queue
   [HeaderMatchingFilter.3]
@@ -405,6 +409,27 @@ notmuch tag +inbox +unread -new -- tag:new
   pattern = (itpug-soci)
   tags = +itpug;-new
 
+  ###########################################################
+  # Personal
+  ###########################################################
+
+  ## Quora
+  [HeaderMatchingFilter.9]
+  header = From
+  pattern = (quora.com)
+  tags = +quora;-new;-inbox
+
+  ## Social
+  [HeaderMatchingFilter.10]
+  header = From
+  pattern = (linkedin.com)
+  tags = +social;-new;-inbox
+
+  # Put lists out of inbox
+  [HeaderMatchingFilter.11]
+  header = List-Id
+  pattern = <(?P<list_id>.*)>
+  tags = -new;-inbox
 
   [InboxFilter]
 
@@ -418,90 +443,90 @@ notmuch tag +inbox +unread -new -- tag:new
   #Junk = 'NOT tag:spam AND tag:inbox':INBOX 'NOT tag:spam':Archive
 
 
-## Clients
+  ## Clients
 
-#[Filter.1]
-#message = Jobrapido
-#query = 'from:jobrapido'
-#tags = +jobrapido;-new
-#
-#[Filter.2]
-#message = Navionics
-#query = 'from:navionics'
-#tags = +navionics;-new
-#
-#[Filter.3]
-#message = Subito
-#query = 'from:subito'
-#tags = +subito;-new
-#
-#[Filter.4]
-#message = Root
-#query = 'from:root'
-#tags = +root;-new
-#
-#  ## Monitoring
-#  [Filter.1]
-#  message = Monitoring
-#  query = 'from:icinga OR from:nagios OR from:monitor'
-#  tags = +monitor;-new
+  #[Filter.1]
+  #message = Jobrapido
+  #query = 'from:jobrapido'
+  #tags = +jobrapido;-new
+  #
+  #[Filter.2]
+  #message = Navionics
+  #query = 'from:navionics'
+  #tags = +navionics;-new
+  #
+  #[Filter.3]
+  #message = Subito
+  #query = 'from:subito'
+  #tags = +subito;-new
+  #
+  #[Filter.4]
+  #message = Root
+  #query = 'from:root'
+  #tags = +root;-new
+  #
+  #  ## Monitoring
+  #  [Filter.1]
+  #  message = Monitoring
+  #  query = 'from:icinga OR from:nagios OR from:monitor'
+  #  tags = +monitor;-new
 
-#  [Filter.6]
-#  message = Barman
-#  query = 'from:barman or subject:barman'
-#  tags = +barman;-new
-#
-## Kanban
+  #  [Filter.6]
+  #  message = Barman
+  #  query = 'from:barman or subject:barman'
+  #  tags = +barman;-new
+  #
+  ## Kanban
 
-#[Filter.7]
-#message = Kanban
-#query = 'subject:"24x7 Support Kanban Board"'
-#tags = +kanban;-new
-#
-#  [Filter.8]
-#  message = Support RT - Platinum
-#  query = 'subject:/platinum'
-#  tags = +platinum;-new
-#
-#  [Filter.9]
-#  message = Support RT - 24x7
-#  query = 'subject:/support'
-#  tags = +24x7;-new
-#
-#(\[[a-zA-Z]\w+\/\bsupport)
-#
-#  [Filter.10]
-#  message = Support RT - RDBA
-#  query = 'subject:/rdba'
-#  tags = +rdba;-new
-#
-#  [Filter.11]
-#  message = Support RT - Developer
-#  query = 'from:developer-support@2ndquadrant.com'
-#  tags = +developer;-new
-#
-#  [Filter.12]
-#  message = Support RT - Onboarding
-#  query = 'from:onboarding@2ndquadrant.com'
-#  tags = +onboard;-new
-#
-## Redmine
-#[Filter.13]
-#message = Redmine
-#query = 'from:redmine'
-#tags = +redmine;-new
+  #[Filter.7]
+  #message = Kanban
+  #query = 'subject:"24x7 Support Kanban Board"'
+  #tags = +kanban;-new
+  #
+  #  [Filter.8]
+  #  message = Support RT - Platinum
+  #  query = 'subject:/platinum'
+  #  tags = +platinum;-new
+  #
+  #  [Filter.9]
+  #  message = Support RT - 24x7
+  #  query = 'subject:/support'
+  #  tags = +24x7;-new
+  #
+  #(\[[a-zA-Z]\w+\/\bsupport)
+  #
+  #  [Filter.10]
+  #  message = Support RT - RDBA
+  #  query = 'subject:/rdba'
+  #  tags = +rdba;-new
+  #
+  #  [Filter.11]
+  #  message = Support RT - Developer
+  #  query = 'from:developer-support@2ndquadrant.com'
+  #  tags = +developer;-new
+  #
+  #  [Filter.12]
+  #  message = Support RT - Onboarding
+  #  query = 'from:onboarding@2ndquadrant.com'
+  #  tags = +onboard;-new
+  #
+  ## Redmine
+  #[Filter.13]
+  #message = Redmine
+  #query = 'from:redmine'
+  #tags = +redmine;-new
 
-### ITPUG
-#[Filter.14]
-#message = ITPUG Mailing List
-#query = 'subject:itpug'
-#tags = +itpug;-new
+  ### ITPUG
+  #[Filter.14]
+  #message = ITPUG Mailing List
+  #query = 'subject:itpug'
+  #tags = +itpug;-new
 
-### Fail2ban
-#[Filter.15]
-#message = Fail2ban 2ndQ
-#query = 'from:fail2ban@ironman.2ndquadrant.it'
-#tags = +fail2ban2ndQ;-new
+  ### Fail2ban
+  #[Filter.15]
+  #message = Fail2ban 2ndQ
+  #query = 'from:fail2ban@ironman.2ndquadrant.it'
+  #tags = +fail2ban2ndQ;-new
 
 #+END_SRC
 
