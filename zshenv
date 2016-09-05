@@ -10,3 +10,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/prj/document-publisher:$PATH"
 eval "$(pyenv init -)"
 
+# Python - virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/prj
+source /usr/local/bin/virtualenvwrapper.sh
+
