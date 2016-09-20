@@ -1,7 +1,8 @@
 ## Setting PATH
 
 # asciidoc xml support
-export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
+#export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
+export XML_CATALOG_FILES=/etc/xml/catalog
 
 # Python - pyenv
 export PYENV_ROOT="$HOME/.pyenv"
