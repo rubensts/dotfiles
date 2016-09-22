@@ -48,9 +48,9 @@ antigen bundles <<EOBUNDLES
         pip
         #lein
         command-not-found
-        screen
-        zsh-users/zsh-syntax-highlighting
+        #screen
         zsh-users/zsh-autosuggestions
+        zsh-users/zsh-syntax-highlighting
 
 EOBUNDLES
 
@@ -87,4 +87,3 @@ eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
 # Shows a fortune
 fortune
 echo
-
