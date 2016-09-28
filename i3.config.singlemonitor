@@ -49,8 +49,9 @@ exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_to
 exec --no-startup-id "compton --config ~/.compton.conf -b"
 exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
-exec --no-startup-id "nm-applet"
+exec --no-startup-id "nm-applet --sm-disable"
 exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
+exec --no-startup-id "numlockx"
 #exec_always --no-startup-id ~/git/dotfiles/checkmail.sh
 
 ## Set wallpaper
