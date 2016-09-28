@@ -16,3 +16,5 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/prj
 source /usr/local/bin/virtualenvwrapper.sh
 
+# Keychain
+eval `keychain --eval --quiet --agents ssh,gpg id_rsa 6BB1CF3B`
