@@ -2,8 +2,10 @@
 export TERM="xterm-256color"
 
 # Aliases
-alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
-alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
+alias ssh2q='ssh -F ~/rdba/ssh_config'
+#alias ssh2q='ssh -F ~/prj/remote-dba/ssh_config'
+alias scp2q='scp -F ~/rdba/ssh_config'
+#alias scp2q='scp -F ~/prj/remote-dba/ssh_config'
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipold="pip list --outdated"
 alias conkeror='firefox --app ~/git/conkeror/application.ini'
