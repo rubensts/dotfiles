@@ -18,7 +18,8 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
+#bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym $mod+Return exec --no-startup-id xfce4-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -46,8 +47,8 @@ exec --no-startup-id "setxkbmap -layout us,it -variant intl, -option grp:menu_to
 #exec --no-startup-id "/usr/bin/gnome-settings-daemon"
 #exec --no-startup-id "/usr/bin/gnome-keyring-daemon"
 exec --no-startup-id "/usr/bin/gnome-sound-applet"
-#exec --no-startup-id "compton --config ~/.compton.conf -b"
-exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
+exec --no-startup-id "compton --config ~/.compton.conf -b"
+#exec --no-startup-id "urxvtd --quiet --opendisplay --fork"
 exec --no-startup-id "pulseaudio --start"
 exec --no-startup-id "nm-applet --sm-disable"
 exec --no-startup-id "syncthing -no-browser -home='/home/rubens/.config/syncthing'"
