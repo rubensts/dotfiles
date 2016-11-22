@@ -87,6 +87,11 @@ antigen apply
 #eval `keychain --eval --quiet --nogui --agents ssh,gpg id_rsa 6BB1CF3B`
 #eval `keychain --eval --quiet --agents ssh,gpg id_rsa 6BB1CF3B`
 
+# pgenv
+if [ -r "$HOME/pgsql/pgenv.sh" ] ; then
+    . "$HOME/pgsql/pgenv.sh"
+    fi
+
 # Shows a fortune
 fortune
 echo
