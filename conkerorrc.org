@@ -6,7 +6,7 @@
   Allow for 'contrib' stuff
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    load_paths.unshift("chrome://conkeror-contrib/content/");
+load_paths.unshift("chrome://conkeror-contrib/content/");
   #+END_SRC
 
 * Appearance
@@ -15,9 +15,9 @@
   3. Load theme [[https://github.com/ivoarch/conkeror-theme-zenburn][conkeror-theme-zenburn]].
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    theme_load_paths.unshift("~/.conkeror/themes/");
-    theme_unload("default");
-    theme_load("conkeror-theme-zenburn");
+theme_load_paths.unshift("~/.conkeror/themes/");
+theme_unload("default");
+theme_load("conkeror-theme-zenburn");
   #+END_SRC
 
 * Modeline
@@ -26,30 +26,30 @@
    - Enables all the other widgets
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     require("mode-line.js");
-     remove_hook("mode_line_hook", mode_line_adder(clock_widget));
-     add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
-     add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
-     add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
-     add_hook("mode_line_hook", mode_line_adder(zoom_widget));
-     //add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
+require("mode-line.js");
+remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(zoom_widget));
+//add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
    #+END_SRC
 
 ** Favicons
-   Activate the favicons in the modeline.
+Activate the favicons in the modeline.
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     require("favicon.js");
-     add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
-     read_buffer_show_icons = true;
+require("favicon.js");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
    #+END_SRC
 
 ** Buttons
-   Show navigation buttons.
+Show navigation buttons.
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    require("mode-line-buttons.js");
-    mode_line_add_buttons(standard_mode_line_buttons, true);
+require("mode-line-buttons.js");
+mode_line_add_buttons(standard_mode_line_buttons, true);
   #+END_SRC
 
 ** Hinting
@@ -57,8 +57,8 @@
    2. Displays information about the currently selected hint.
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     hints_display_url_panel = true;
-     hints_minibuffer_annotation_mode(true);
+hints_display_url_panel = true;
+hints_minibuffer_annotation_mode(true);
   #+END_SRC
 
 * Session and History
@@ -68,9 +68,9 @@
   3. Load session when URLs are given from the command-line
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    require("session.js");
-    session_auto_save_auto_load = true;
-    session_auto_save_auto_load_fn = session_auto_save_load_window_current;
+require("session.js");
+session_auto_save_auto_load = true;
+session_auto_save_auto_load_fn = session_auto_save_load_window_current;
   #+END_SRC
 
 Setup how long in days, history entries are kept before being
@@ -81,19 +81,19 @@ session_pref('browser.history_expire_days', 30);
 #+END_SRC
 
 * Auto-completion
-  It sets auto-completion system for =history=, =bookamrks=,
+  It sets auto-completion system for =history=, =bookmarks=,
   =webjumps= and the =minibuffer=.
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    url_completion_use_history = true;
-    url_completion_use_bookmarks = true;
-    url_completion_use_webjumps = true;
-    minibuffer_auto_complete_default = true;
+url_completion_use_history = true;
+url_completion_use_bookmarks = true;
+url_completion_use_webjumps = true;
+minibuffer_auto_complete_default = true;
   #+END_SRC
 
 * New buffers instead of new windows.
-  I need this for open URLs from GNU Emacs in Conkeror in a new
-  buffer. See [[http://www.emacswiki.org/emacs/BrowseUrl][this link for more info.]]
+  I need this for open URLs from GNU Emacs in Conkeror in a new buffer. See [[http://www.emacswiki.org/emacs/BrowseUrl][this
+  link for more info.]]
 
 #+BEGIN_SRC js :tangle ~/.conkerorrc
 url_remoting_fn = load_url_in_new_buffer;
@@ -102,11 +102,11 @@ url_remoting_fn = load_url_in_new_buffer;
 * Enabling the Password Manager
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    session_pref("signon.rememberSignons", true);
-    session_pref("signon.expireMasterPassword", false);
-    session_pref("signon.SignonFileName", "signons.txt");
-    Components.classes['@mozilla.org/login-manager;1']
-        .getService(Components.interfaces.nsILoginManager);
+session_pref("signon.rememberSignons", true);
+session_pref("signon.expireMasterPassword", false);
+session_pref("signon.SignonFileName", "signons.txt");
+Components.classes['@mozilla.org/login-manager;1']
+    .getService(Components.interfaces.nsILoginManager);
   #+END_SRC
 
 * Hinting
@@ -115,15 +115,15 @@ url_remoting_fn = load_url_in_new_buffer;
 #+BEGIN_SRC js :tangle ~/.conkerorrc
 hint_digits="asdfghjkl";
 #+END_SRC
+
 * Downloads
   1. Sets the default download directory to =~/Downloads=.
   2. Don't open download buffer automatically
 
-
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    cwd = get_home_directory();
-    cwd = make_file("~/Downloads");
-    remove_hook("download_added_hook", open_download_buffer_automatically);
+cwd = get_home_directory();
+cwd = make_file("~/Downloads");
+remove_hook("download_added_hook", open_download_buffer_automatically);
   #+END_SRC
 
 * External programs
@@ -183,46 +183,46 @@ view_source_use_external_editor = true;
   3. Enables security updates.
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    session_pref('extensions.checkCompatibility', false);
-    session_pref("xpinstall.whitelist.required", false);
-    user_pref("extensions.checkUpdateSecurity", true);
+session_pref('extensions.checkCompatibility', false);
+session_pref("xpinstall.whitelist.required", false);
+user_pref("extensions.checkUpdateSecurity", true);
   #+END_SRC
 
 ** Firebug
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    define_variable("firebug_url",
-        "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
+define_variable("firebug_url",
+                "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
 
-    function firebug (I) {
-        var doc = I.buffer.document;
-        var script = doc.createElement('script');
-        script.setAttribute('type', 'text/javascript');
-        script.setAttribute('src', firebug_url);
-        script.setAttribute('onload', 'firebug.init();');
-        doc.body.appendChild(script);
-    }
-    interactive("firebug", "open firebug lite", firebug);
+function firebug (I) {
+    var doc = I.buffer.document;
+    var script = doc.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', firebug_url);
+    script.setAttribute('onload', 'firebug.init();');
+    doc.body.appendChild(script);
+}
+interactive("firebug", "open firebug lite", firebug);
   #+END_SRC
 
 ** Https-everywhere
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    if ('@eff.org/https-everywhere;1' in Cc) {
-        interactive("https-everywhere-options-dialog",
-                    "Open the HTTPS Everywhere options dialog.",
-                    function (I) {
-                        window_watcher.openWindow(
-                            null, "chrome://https-everywhere/content/preferences.xul",
-                            "", "chrome,titlebar,toolbar,centerscreen,resizable", null);
-                    });
-    }
+if ('@eff.org/https-everywhere;1' in Cc) {
+    interactive("https-everywhere-options-dialog",
+                "Open the HTTPS Everywhere options dialog.",
+                function (I) {
+                    window_watcher.openWindow(
+                        null, "chrome://https-everywhere/content/preferences.xul",
+                        "", "chrome,titlebar,toolbar,centerscreen,resizable", null);
+                });
+}
   #+END_SRC
 
 ** Adblock-plus
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    require("adblockplus");
+require("adblockplus");
   #+END_SRC
 
 * PageModes
@@ -239,156 +239,155 @@ view_source_use_external_editor = true;
        Wikipedia article on Bruce Springsteen.
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    require("twitter");
-    require("duckduckgo");
-    require("facebook");
-    require("github");
-    require("gmail");
-    require("youtube");
+require("twitter");
+require("duckduckgo");
+require("facebook");
+require("github");
+require("gmail");
+require("youtube");
 
-    require("page-modes/wikipedia.js");
-    wikipedia_webjumps_format = "wp-%s";
-    define_wikipedia_webjumps("en", "pt-br", "it");
-    require("wikipedia-didyoumean.js");
+require("page-modes/wikipedia.js");
+wikipedia_webjumps_format = "wp-%s";
+define_wikipedia_webjumps("en", "pt-br", "it");
+require("wikipedia-didyoumean.js");
  #+END_SRC
 
 * Webjumps
 ** Archlinux
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("arch/forums", "http://bbs.archlinux.org");
-     define_webjump("arch/wiki", "http://wiki.archlinux.org/index.php?search=%s");
-     define_webjump("arch/aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
-     define_webjump("arch/packages",
-                    "https://www.archlinux.org/packages/?sort=&q=%s&limit=50",
-                    $alternative="https://packages.archlinux.org");
+define_webjump("arch/forums", "http://bbs.archlinux.org");
+define_webjump("arch/wiki", "http://wiki.archlinux.org/index.php?search=%s");
+define_webjump("arch/aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
+define_webjump("arch/packages",
+               "https://www.archlinux.org/packages/?sort=&q=%s&limit=50",
+               $alternative="https://packages.archlinux.org");
   #+END_SRC
 
 ** Commandline-fu
-   Check linux commands and its mysteries.
+Check linux commands and its mysteries.
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("commandlinefu",
-                    function(term) {
-                        return 'http://www.commandlinefu.com/commands/matching/' +
-                            term.replace(/[^a-zA-Z0-9_\-]/g, '')
-                            .replace(/[\s\-]+/g, '-') +
-                            '/' + btoa(term);
-                    },
-                    $argument = 'optional',
-                    $alternative = "http://www.commandlinefu.com/");
+define_webjump("commandlinefu",
+               function(term) {
+                   return 'http://www.commandlinefu.com/commands/matching/' +
+                       term.replace(/[^a-zA-Z0-9_\-]/g, '')
+                       .replace(/[\s\-]+/g, '-') +
+                       '/' + btoa(term);
+               },
+               $argument = 'optional',
+               $alternative = "http://www.commandlinefu.com/");
    #+END_SRC
 
 ** Dictionary
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("dictionary","http://www.thefreedictionary.com/%s");
+define_webjump("dictionary","http://www.thefreedictionary.com/%s");
    #+END_SRC
 
 ** Distrowatch
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("distrowatch", "http://distrowatch.com/table.php?distribution=%s");
+define_webjump("distrowatch", "http://distrowatch.com/table.php?distribution=%s");
   #+END_SRC
 
 ** DuckDuckGo
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("ddg", "http://duckduckgo.com/?q=%s");
+define_webjump("ddg", "http://duckduckgo.com/?q=%s");
   #+END_SRC
 
 ** Emacs
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    define_webjump("emacswiki",
-                   "http://www.google.com/cse?cx=004774160799092323420%3A6-ff2s0o6yi"+
-                   "&q=%s&sa=Search&siteurl=emacswiki.org%2F",
-                   $alternative="http://www.emacswiki.org/");
-
-    define_webjump("marmalade", "http://marmalade-repo.org/packages?q=%s");
-    define_webjump("orgmode-worg",
-                   "https://www.google.com/cse?cx=002987994228320350715%3Az4glpcrritm&q=%s&sa=Search&siteurl=orgmode.org%2Fworg",
-                   $alternative="http://orgmode.org/worg/");
+define_webjump("emacswiki",
+               "http://www.google.com/cse?cx=004774160799092323420%3A6-ff2s0o6yi"+
+               "&q=%s&sa=Search&siteurl=emacswiki.org%2F",
+               $alternative="http://www.emacswiki.org/");
+define_webjump("marmalade", "http://marmalade-repo.org/packages?q=%s");
+define_webjump("orgmode-worg",
+               "https://www.google.com/cse?cx=002987994228320350715%3Az4glpcrritm&q=%s&sa=Search&siteurl=orgmode.org%2Fworg",
+               $alternative="http://orgmode.org/worg/");
   #+END_SRC
 
 ** GIT
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("github", "http://github.com/search?q=%s&type=Everything");
-     define_webjump("gitorious", "http://gitorious.org/search?q=%s");
+define_webjump("github", "http://github.com/search?q=%s&type=Everything");
+define_webjump("gitorious", "http://gitorious.org/search?q=%s");
    #+END_SRC
 
 ** Gmail
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-    define_webjump("1gmail", "https://mail.google.com/mail/u/0/");
-    define_webjump("2gmail", "https://mail.google.com/mail/u/1/");
-    define_webjump("3gmail", "https://mail.google.com/mail/u/2/");
+define_webjump("1gmail", "https://mail.google.com/mail/u/0/");
+define_webjump("2gmail", "https://mail.google.com/mail/u/1/");
+define_webjump("3gmail", "https://mail.google.com/mail/u/2/");
   #+END_SRC
 
 ** Google
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    define_webjump("trans", "http://translate.google.com/translate_t#auto|en|%s");
-    define_webjump("imagesgoogle", "http://www.google.com/images?q=%s",
-                   $alternative = "http://www.google.com/imghp");
+define_webjump("trans", "http://translate.google.com/translate_t#auto|en|%s");
+define_webjump("imagesgoogle", "http://www.google.com/images?q=%s",
+               $alternative = "http://www.google.com/imghp");
   #+END_SRC
 
 ** PageDown
    Confirms if the actual site is really down or it is only for you
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("down?", function (url) {
-         if (url) {
-             return "http://downforeveryoneorjustme.com/" + url;
-         } else {
-             return "javascript:window.location.href='http://downforeveryoneorjustme.com/'+window.location.href;";
-         }
-     }, $argument = "optional");
+define_webjump("down?", function (url) {
+    if (url) {
+        return "http://downforeveryoneorjustme.com/" + url;
+    } else {
+        return "javascript:window.location.href='http://downforeveryoneorjustme.com/'+window.location.href;";
+    }
+}, $argument = "optional");
    #+END_SRC
 
 ** Popular
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("wordpress", "http://wordpress.org/search/%s");
-     define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
-     define_webjump("deviantart", "http://browse.deviantart.com/?q=%s",
-                    $alternative="http://www.deviantart.com");
-     define_webjump("flickr", "http://www.flickr.com/search/?q=%s",
-                    $alternative="http://www.flickr.com");
+define_webjump("wordpress", "http://wordpress.org/search/%s");
+define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_webjump("deviantart", "http://browse.deviantart.com/?q=%s",
+               $alternative="http://www.deviantart.com");
+define_webjump("flickr", "http://www.flickr.com/search/?q=%s",
+               $alternative="http://www.flickr.com");
    #+END_SRC
 
 ** Questions
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("linux-questions","http://www.linuxquestions.org/questions/");
-     define_webjump("gmane", "http://gmane.org/find.php?list=%s");
-     define_webjump("hackernews", "http://searchyc.com/%s",
-                    $alternative = "http://news.ycombinator.com/");
-     define_webjump("stackoverflow",  "http://stackoverflow.com/search?q=%s",
-                    $alternative = "http://stackoverflow.com/");
-     define_webjump("superuser", "http://superuser.com/search?q=%s",
-                    $alternative = "http://superuser.com/");
+define_webjump("linux-questions","http://www.linuxquestions.org/questions/");
+define_webjump("gmane", "http://gmane.org/find.php?list=%s");
+define_webjump("hackernews", "http://searchyc.com/%s",
+               $alternative = "http://news.ycombinator.com/");
+define_webjump("stackoverflow",  "http://stackoverflow.com/search?q=%s",
+               $alternative = "http://stackoverflow.com/");
+define_webjump("superuser", "http://superuser.com/search?q=%s",
+               $alternative = "http://superuser.com/");
   #+END_SRC
 
 ** Wayback
    You can check the history of Internet, seeing how were the site back then
 
   #+BEGIN_SRC js :tangle ~/.conkerorrc
-    define_webjump("wayback", function (url) {
-        if (url) {
-            return "http://web.archive.org/web/*/" + url;
-        } else {
-            return "javascript:window.location.href='http://web.archive.org/web/*/'+window.location.href;";
-        }
-    }, $argument = "optional");
+define_webjump("wayback", function (url) {
+    if (url) {
+        return "http://web.archive.org/web/*/" + url;
+    } else {
+        return "javascript:window.location.href='http://web.archive.org/web/*/'+window.location.href;";
+    }
+}, $argument = "optional");
   #+END_SRC
 
 ** Youtube
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
-     define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
+define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
    #+END_SRC
 
 * Keyboard
@@ -396,10 +395,10 @@ view_source_use_external_editor = true;
 ** Disable the arrow keys in conkeror (use Emacs alternatives instead).
 
    #+BEGIN_SRC js :tangle ~/.conkerorrc
-     undefine_key(content_buffer_normal_keymap, "up", "cmd_scrollLineUp");
-     undefine_key(content_buffer_normal_keymap, "down", "cmd_scrollLineDown");
-     undefine_key(content_buffer_normal_keymap, "left", "cmd_scrollLeft");
-     undefine_key(content_buffer_normal_keymap, "right", "cmd_scrollRight");
+undefine_key(content_buffer_normal_keymap, "up", "cmd_scrollLineUp");
+undefine_key(content_buffer_normal_keymap, "down", "cmd_scrollLineDown");
+undefine_key(content_buffer_normal_keymap, "left", "cmd_scrollLeft");
+undefine_key(content_buffer_normal_keymap, "right", "cmd_scrollRight");
    #+END_SRC
 
 ** Enable eye-guide scrolling
