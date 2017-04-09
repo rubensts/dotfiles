@@ -10,10 +10,6 @@ alias conkeror='firefox --app ~/git/conkeror/application.ini'
 alias ls='ls --group-directories-first --color=always'
 alias x='startx'
 
-# Persistent rehash
-# source: https://wiki.archlinux.org/index.php/zsh
-zstyle ':completion:*' rehash true
-
 # Python - pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -28,7 +24,11 @@ eval "$(pyenv init -)"
 #  eval "$(rbenv init -)"
 #fi
 
-## Antigen - plugin manager
+## Persistent rehash
+# source: https://wiki.archlinux.org/index.php/zsh
+zstyle ':completion:*' rehash true
+
+# Antigen - plugin manager
 source ~/git/antigen/antigen.zsh
 
 ## Load the oh-my-zsh's library.
