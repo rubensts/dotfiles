@@ -1,34 +1,46 @@
-## Setting PATH
-
-# don't add anything to $path if it's there already
-typeset -U path
+# set TERM
+export TERM="xterm-256color"
 
 # asciidoc xml support
 export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
 
-# Python - pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/prj/document-publisher:$PATH"
-eval "$(pyenv init -)"
+# set default dictionary (hunspell)
+export DICTIONARY="en_GB"
 
 # Go
 export GOPATH=$HOME/prj/go
+
+# don't add anything to $path if it's there already
+typeset -U path
+
+# setting PATH
+path=(
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/local/opt/coreutils/libexec/gnubin
+    $GOPATH/bin
+    $HOME/.cargo/bin
+    $path
+)
 
 # PostgreSQL - pgenv
 if [ -r "$HOME/pgsql/pgenv.sh" ] ; then
     . "$HOME/pgsql/pgenv.sh"
     fi
 
+# Ruby - rbenv
+#export RBENV_ROOT="${HOME}/.rbenv"
 
-path=(
-    /usr/local/bin
-    /usr/local/sbin
-    $HOME/.cask/bin
-    # 2ndQuadrant-asciidoc path
-    /usr/local/Cellar/gnu-getopt/1.1.6/bin
-    $path
-    $GOPATH/bin
-)
+# Python - pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
+# Ruby - rbenv
+# eval "$(rbenv init -)"
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)";
+fi
+
+# keychain
+#eval `keychain --eval --agents ssh --inherit any id_rsa`
+#eval `keychain --eval --agents ssh,gpg --inherit any id_rsa rubens.souza@2ndquadrant.it`

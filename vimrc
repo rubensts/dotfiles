@@ -10,7 +10,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 " plugin on GitHub repo
@@ -33,7 +33,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
 
 " Powerline plugin
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Color themes
 "Plugin 'altercation/vim-colors-solarized'
@@ -62,7 +62,6 @@ filetype plugin indent on    " required
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
-
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
@@ -70,6 +69,8 @@ autocmd! bufwritepost .vimrc source %
 set pastetoggle=<F2>
 set clipboard=unnamed
 
+" fzf - fuzzy finder
+set rtp+=/usr/local/opt/fzf
 
 " Mouse and backspace
 "" set mouse=a  " on OSX press ALT and click
@@ -224,6 +225,23 @@ endfunction
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+" Set .vimrc configuration for Powerline
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
+" Set configuration for MacVim
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Inconsolata\ for\ Powerline:h15
+   endif
+endif
 
 
 " Python folding
